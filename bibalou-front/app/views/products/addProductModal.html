@@ -1,0 +1,103 @@
+<form name="editForm" role="form" novalidate data-ng-submit="save()">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            data-ng-click="clear()">&times;</button>
+    <h2 class="modal-title" id="myProductLabel">Create a new Product</h2>
+  </div>
+  <div class="modal-body">
+    <div class="well well-sm">
+
+      <div class="row">
+        <div class="col-md-5" data-ng-class="{ 'has-error' : editForm.title.$invalid && !editForm.title.$pristine }">
+          <div class="form-group">
+            <label class="control-label" for="field_title">Title</label><i style="color: red">*</i>
+            <input type="text" class="form-control" name="title" id="field_title"
+                   data-ng-model="product.title"
+                   placeholder="ex. Summer party"
+                   required/>
+            <p data-ng-show="editForm.title.$invalid && !editForm.title.$pristine" class="help-block">A title is
+              needed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2>Content</h2>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group"
+             data-ng-class="{ 'has-error' : editForm.content.$invalid && !editForm.content.$pristine }">
+          <label class="control-label" for="field_content">content</label><i style="color: red">*</i>
+          <textarea class="form-control" name="content" id="field_content" style="height: 150px; resize: vertical"
+                    data-ng-model="product.content"
+                    placeholder="content..."
+                    required
+          ></textarea>
+        </div>
+      </div>
+    </div>
+
+    <h2>Images</h2>
+    <div class="row">
+      <div class="col-md-12">
+        <div data-flow-init data-flow-files-submitted="$flow.upload()"
+             data-flow-file-added="$flow.files.length < 3 && !!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+             data-flow-name="flow.content"
+             class="ng-scope">
+          <div class="drop" data-flow-drop="" data-ng-class="dropClass">
+          <span class="btn btn-default" data-flow-btn="">Upload Image<input
+            style="visibility: hidden; position: absolute;"
+            multiple="multiple" type="file"></span>
+            <span class="btn btn-default ng-hide" data-flow-btn="" data-flow-directory=""
+                  data-ng-show="$flow.supportDirectory">Upload Folder of Images<input
+              style="visibility: hidden; position: absolute;" multiple="multiple" data-webkitdirectory="webkitdirectory"
+              type="file"></span>
+            <b>OR</b>
+            Drag And Drop your images here
+          </div>
+          <br>
+          <div>
+            <div data-ng-repeat="file in $flow.files" class="gallery-box ng-scope">
+              <span class="title ng-binding">{{file.name}}</span>
+              <div class="thumbnail" data-ng-show="$flow.files.length">
+                <img data-flow-img="file" src="" style="max-height: 115px">
+              </div>
+              <div class="progress progress-striped" data-ng-class="{active: file.isUploading()}"
+                   data-ng-if="file.isUploading()">
+                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                     data-ng-style="{width: (file.progress() * 100) + '%'}" style="width: 100%;">
+                  <span class="sr-only ng-binding">1% Complete</span>
+                </div>
+              </div>
+              <div class="btn-group">
+                <a class="btn btn-xs btn-danger" data-ng-click="file.cancel()">
+                  Remove
+                </a>
+              </div>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="clear()">
+      <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+    </button>
+    <button type="submit" novalidate data-ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+      <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Create</span>
+    </button>
+  </div>
+</form>
+<!--
+<div class="row">
+  <input type="file" nv-file-select uploader="uploader"/><br/>
+  <ul>
+    <li ng-repeat="item in uploader.queue">
+      Name: <span ng-bind="item.file.name"></span><br/>
+      <button ng-click="item.upload()">upload</button>
+    </li>
+  </ul>
+</div>-->
