@@ -13,7 +13,8 @@ angular.module('BibalouApp')
     $scope.register = function () {
       console.log("register", $scope.name, $scope.email, $scope.password);
       $scope.data = {
-        login: $scope.email,
+        name: $scope.name,
+        email: $scope.email,
         password: $scope.password
       };
 
