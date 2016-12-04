@@ -18,7 +18,7 @@ angular.module('BibalouApp')
     // Service logic
     // ...
 
-    var api_url = 'localhost:8080/api';
+    var api_url = 'http://localhost:3000';
 
     // Public API here
     return {
