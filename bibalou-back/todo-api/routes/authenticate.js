@@ -4,16 +4,9 @@ var mongoose = require('mongoose');
 var Auth = require('../models/Authenticate.js');
 
 router.post('/', function(req, res, next) {
-/*
-  var collection = mongoose.collection('documents');
-    // Find some documents
-    collection.find({}).toArray(function(err, docs) {
-      assert.equal(err, null);
-      console.log("Found the following records");
-      console.log(docs)
-      callback(docs);
-    });
-*/
+
+//{ name: 'azertyu', email: 'vuc.gg@mggd.fr', password: 'zert' }
+// or { name: 'azertyu', password: 'zert' }
   console.log(req.body);
   var test = {};
   test.success = true;

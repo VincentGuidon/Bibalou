@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+var user = require('./routes/user');
 var todos = require('./routes/todos');
 var auth = require('./routes/authenticate');
 var market = require('./routes/marketPlaces');
@@ -46,7 +46,7 @@ app.use(function (req, res, next)
   });
 
   app.use('/', index);
-  app.use('/users', users);
+  app.use('/user', user);
   app.use('/todos', todos);
   app.use('/authenticate', auth);
   app.use('/marketPlaces', market);
