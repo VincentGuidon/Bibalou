@@ -9,6 +9,9 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var todos = require('./routes/todos');
 var auth = require('./routes/authenticate');
+var market = require('./routes/marketPlaces');
+var products = require('./routes/products');
+var register = require('./routes/register');
 
 var app = express();
 
@@ -26,19 +29,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 module.exports = app;
 
-// load mongoose package
 var mongoose = require('mongoose');
-// Use native Node promises
 mongoose.Promise = global.Promise;
-// connect to MongoDB
-mongoose.connect('mongodb://localhost/todo-api')
+mongoose.connect('mongodb://localhost/bibalou')
   .then(() =>  console.log('connection succesful'))
   .catch((err) => console.error(err));
 
 app.use(function (req, res, next)
 {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:9000');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+    /* OPTIONS, PUT, PATCH, DELETE'*/
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
@@ -48,7 +49,9 @@ app.use(function (req, res, next)
   app.use('/users', users);
   app.use('/todos', todos);
   app.use('/authenticate', auth);
-
+  app.use('/marketPlaces', market);
+  app.use('/products', products);
+  app.use('/register', register);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
