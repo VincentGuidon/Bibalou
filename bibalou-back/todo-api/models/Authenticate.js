@@ -1,8 +1,12 @@
 var mongoose = require('mongoose');
-var AuthSchema = new mongoose.Schema({
-  token: String,
-  success: Boolean,
-  note: String,
-  updated_at: { type: Date, default: Date.now },
+var Schema = mongoose.Schema;
+
+var userSchema = new Schema({
+  name: String,
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  admin: Number
 });
-module.exports = mongoose.model('Authenticate', AuthSchema);
+
+var User = mongoose.model('User', userSchema);
+module.exports = User;

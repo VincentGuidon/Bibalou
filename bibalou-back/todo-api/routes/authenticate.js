@@ -1,13 +1,23 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
-var Auth = require('../models/Authenticate.js');
+
+var User = require('../models/Authenticate.js');
 
 router.post('/', function(req, res, next) {
 
 //{ name: 'azertyu', email: 'vuc.gg@mggd.fr', password: 'zert' }
 // or { name: 'azertyu', password: 'zert' }
-  console.log(req.body);
+  var nUser = new User({
+    email : req.body.login,
+    password : req.body.password
+  })
+
+  nUser.save(function(err) {
+    if (err) throw err;
+
+    console.log('User saved successfully!');
+  });
+
   var test = {};
   test.success = true;
   test.token = "azerty";
