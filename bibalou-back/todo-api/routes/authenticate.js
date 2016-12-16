@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var User = require('../models/Authenticate.js');
+var User = require('../models/Users.js');
 
 router.post('/', function(req, res, next) {
 
@@ -10,7 +10,7 @@ router.post('/', function(req, res, next) {
   var nUser = new User({
     email : req.body.login,
     password : req.body.password
-  })
+  });
 
   nUser.save(function(err) {
     if (err) throw err;
