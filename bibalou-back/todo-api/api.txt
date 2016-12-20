@@ -1,0 +1,82 @@
+List of all the api
+
+To connect a user :
+  /authenticate/auth
+  req : POST
+    login : 'aa.bb@cc.dd'
+    password : 'pwd'
+  res :
+    Success :
+      success : true,
+      token : 'String'
+    Fail :
+      {
+        success : false,
+        message : "User does not exist or wrong password",
+        errcode : 2
+      }
+
+To register new User with basic rigth
+  /authenticate/newUser
+  req : POST
+    login : 'aa.bb@cc.dd'
+    password : 'pwd'
+  res :
+    Success :
+      {
+        success : true;
+        token : 'String'
+      }
+    Fail :
+    {
+      success : false,
+      message : 'Email already use',
+      errcode : 1
+    }
+
+To get all the products
+    /products/all
+    req : GET
+      NONE
+    res :
+      Success :
+      [
+        {
+          "_id": "585400c47d39232884415ab1",
+          "name": "Chateau de sable",
+          "description": "Magnifique chateau de sale, non remboursable",
+          "price": 150.5,
+          "stock": 2,
+          "available": true,
+          "image": "https://tse2.mm.bing.net/th?id=OIP.Mb785127452812aa0655920a1cdd1dc50o0&pid=15.1",
+          "__v": 0
+        },
+        {...},{...}
+      ]
+      Fail :
+      {
+        success : false,
+        message : 'Internal Error',
+        errcode : 0
+      }
+
+To register a products
+  /products/register
+  req: post
+      name : 'String',
+      description : 'String',
+      price : Number,
+
+      stock : Number,
+      available : Bool,
+      image : 'String',
+      type : 'String'
+  res :
+    Success :
+      {
+        Success:true
+      }
+    Fail :
+      {
+        Success:false
+      }

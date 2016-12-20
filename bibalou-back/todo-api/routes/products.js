@@ -7,14 +7,15 @@ var Product = require('../models/Products.js');
 
 router.get('/all', function(req, res, next) {
   Product.find(function (err, todos) {
-    if (err) return next(err);
+    if (err)
+    {
+        res.send({success : false, message : 'Internal Error',errcode : 0});
+    }
     res.json(todos);
   });
 });
 
 router.post('/register', function(req, res, next) {
-
-  console.log(req.body.name);
 
   var nProduct = new Product({
     name : req.body.name,
@@ -31,8 +32,7 @@ router.post('/register', function(req, res, next) {
     if (err)
     {
       res.send({Success:false});
-      throw err
-    };
+    }
     console.log('Product saved successfully!');
   });
 

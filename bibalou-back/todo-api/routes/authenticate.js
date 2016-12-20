@@ -1,29 +1,59 @@
 var express = require('express');
 var router = express.Router();
+var randomToken = require('../scripts/randomToken.js');
 
 var User = require('../models/Users.js');
 
-router.post('/', function(req, res, next) {
+router.post('/newUser', function(req, res, next) {
 
-//{ name: 'azertyu', email: 'vuc.gg@mggd.fr', password: 'zert' }
-// or { name: 'azertyu', password: 'zert' }
+  var ret = {};
+
   var nUser = new User({
     email : req.body.login,
     password : req.body.password
   });
 
   nUser.save(function(err) {
-    if (err) throw err;
-
-    console.log('User saved successfully!');
+    if (err)
+    {
+      ret.success = false;
+      ret.message = "Email already use";
+      ret.errcode = 1;
+      console.log('User already exist!');
+    }
+    else
+    {
+      var token = randomToken.genRandomToken(20);
+      ret.success = true;
+      ret.token = token;
+      console.log('User saved successfully!');
+    }
+    res.send(ret);
   });
+});
 
-  var test = {};
-  test.success = true;
-  test.token = "azerty";
-  test.id = "azety";
+router.post('/auth', function(req, res, next) {
 
-  res.send(test);
+  var ret = {};
+
+  User.find({email : req.body.login}, function(err, user) {
+    if (err || user.length == 0 || user[0].password != req.body.password)
+    {
+      ret.success = false;
+      ret.message = "User does not exist or wrong password!";
+      ret.errcode = 2;
+      res.send(ret);
+    }
+    else
+    {
+        var token = randomToken.genRandomToken(20);
+        ret.success = true;
+        ret.token = token;
+        res.send(ret);
+    }
+  });
+  //      ret.connect = randomToken.connectUser;
+
 });
 
 module.exports = router;
