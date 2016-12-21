@@ -10,6 +10,14 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.put('/:id', function(req, res, next) {
+
+  Todo.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
 /* POST /todos */
 router.post('/', function(req, res, next) {
   Todo.create(req.body, function (err, post) {
@@ -24,12 +32,14 @@ router.get('/:id', function(req, res, next) {
     res.json(post);
   });
 });
-
-router.put('/:id', function(req, res, next) {
-  Todo.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+//localhost:3000/todos?name=azer
+router.get('/:name', function(req, res, next) {
+  Todo.findById(req.params.id, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
+
+
 
 module.exports = router;

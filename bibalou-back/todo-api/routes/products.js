@@ -5,6 +5,11 @@ var mongoose = require('mongoose');
 var Product = require('../models/Products.js');
 //var Auth = require('../models/Authenticate.js');
 
+/*
+  get - /buyMarketId
+  get - /typeId
+*/
+
 router.get('/all', function(req, res, next) {
   Product.find(function (err, todos) {
     if (err)

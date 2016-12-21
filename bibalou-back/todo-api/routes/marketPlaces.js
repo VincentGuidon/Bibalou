@@ -1,17 +1,17 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
-//var Auth = require('../models/Authenticate.js');
+var Market = require('../models/Markets.js');
+var randomToken = require('../scripts/randomToken.js');
 
-router.get('/', function(req, res, next) {
-  //token=azerty
-  console.log(req.params);
-  var test = {};
-  test.success = true;
-  test.token = "azerty";
-  test.id = "azety";
+/*
 
-  res.send(test);
+*/
+
+router.post('/newMarket', function(req, res, next) {
+
+  randomToken.findUserConnected();
+
+  res.send("");
 });
 
 module.exports = router;

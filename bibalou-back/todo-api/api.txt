@@ -35,7 +35,7 @@ To register new User with basic rigth
     }
 
 To get all the products
-    /products/all
+    /products
     req : GET
       NONE
     res :

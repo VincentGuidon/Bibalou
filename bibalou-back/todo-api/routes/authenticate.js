@@ -23,9 +23,7 @@ router.post('/newUser', function(req, res, next) {
     }
     else
     {
-      var token = randomToken.genRandomToken(20);
       ret.success = true;
-      ret.token = token;
       console.log('User saved successfully!');
     }
     res.send(ret);
@@ -46,14 +44,12 @@ router.post('/auth', function(req, res, next) {
     }
     else
     {
-        var token = randomToken.genRandomToken(20);
+        var token = randomToken.genRandomToken(20, req.body.login);
         ret.success = true;
         ret.token = token;
         res.send(ret);
     }
   });
-  //      ret.connect = randomToken.connectUser;
-
 });
 
 module.exports = router;

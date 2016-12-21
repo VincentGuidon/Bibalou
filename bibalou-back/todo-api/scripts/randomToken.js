@@ -3,10 +3,21 @@ var base64url = require('base64url');
 
 var connectUser = [];
 
-exports.genRandomToken = function(size) {
+exports.genRandomToken = function(size, mail) {
   var token = base64url(crypto.randomBytes(size));
-  connectUser.push({'token' : token, rigth : 0});
+  connectUser.push({'token' : token, 'mail' : mail, rigth : 0});
   return token;
 }
 
-exports.connectUser = connectUser;
+exports.findUserConnected = function(token) {
+
+  var allConnected = Object.keys(connectUser);
+  allConnected.forEach(function(connected) {
+    
+
+  });
+
+//process(['foo', 'bar', 'help']);
+}
+
+//exports.connectUser = connectUser;
