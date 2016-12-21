@@ -9,6 +9,49 @@ var randomToken = require('../scripts/randomToken.js');
   put /
 */
 
+router.get('/byName', function(req, res, next) {
+
+  var ret = {};
+
+  Market.find({name : req.query.name}, function(err, market){
+      if (err)
+      {
+        ret.success = false;
+        ret.message = "Market Place unknow";
+        ret.errcode = 4;
+        console.log('Can\'t find the MarketPlace');
+      }
+      else
+      {
+        ret.success = true;
+        ret.market = market[0];
+        res.send(ret);
+      }
+  });
+});
+
+
+router.get('/byOwner', function(req, res, next) {
+
+  var ret = {};
+
+  Market.find({owner : req.query.id}, function(err, market){
+      if (err)
+      {
+        ret.success = false;
+        ret.message = "Market Place unknow";
+        ret.errcode = 4;
+        console.log('Can\'t find the MarketPlace');
+      }
+      else
+      {
+        ret.success = true;
+        ret.market = market[0];
+        res.send(ret);
+      }
+  });
+});
+//ajouter marketplace dans le user
 router.post('/', function(req, res, next) {
 
   var ret = {};

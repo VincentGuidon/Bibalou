@@ -8,6 +8,8 @@ var productSchema = new Product({
   stock : Number,
   available : Boolean,
   image : String,
+  type : String,
+  reduction : String,
   type : String
 });
 

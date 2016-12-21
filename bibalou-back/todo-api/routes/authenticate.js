@@ -47,6 +47,7 @@ router.post('/auth', function(req, res, next) {
         var token = randomToken.genRandomToken(20, req.body.login, user[0]._id);
         ret.success = true;
         ret.token = token;
+        ret.id = user[0]._id;
         res.send(ret);
     }
   });

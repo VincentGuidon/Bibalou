@@ -1,3 +1,4 @@
 Safety
 encode password
 check if user already connected
+errcode request;

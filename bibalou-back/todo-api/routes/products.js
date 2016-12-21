@@ -8,6 +8,9 @@ var Product = require('../models/Products.js');
 /*
   get - /byMarketId
   get - /byName
+  ajotuer nom marketPlaces
+  ajouter reduction
+  ajouter productType
 */
 
 router.get('/', function(req, res, next) {
