@@ -12,6 +12,7 @@ angular.module('BibalouApp')
 
     $scope.userCtrl = User;
     $scope.data = {};
+    $scope.isBusy = false;
 
     $scope.loginPageLocation = function () {
       return $location.path() == "/login";
@@ -19,11 +20,15 @@ angular.module('BibalouApp')
 
     $scope.doLogin = function () {
       console.log("login: ", $scope.data.login, $scope.data.password);
-      RequestAPI.POST("/authenticate", $scope.data,
+      $scope.isBusy = true;
+      RequestAPI.POST("/authenticate/auth", $scope.data,
         SubmitResult.submitSuccess(function (response) {
           User.connect(response.data.token, response.data.id);
           $location.path("/");
+          $scope.isBusy = false;
         }, "Connected"),
-        SubmitResult.submitFailure("Connexion Failed"));
+        SubmitResult.submitFailure(function(response) {
+          $scope.isBusy = false;
+        }, "Connexion Failed"));
     };
   });

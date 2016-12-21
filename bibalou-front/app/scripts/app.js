@@ -22,7 +22,8 @@ angular
     'ui.bootstrap',
     'flow',
     'toaster',
-    'angularFileUpload'
+    'angularFileUpload',
+    'selector'
   ])
   .config(function ($routeProvider) {
     $routeProvider

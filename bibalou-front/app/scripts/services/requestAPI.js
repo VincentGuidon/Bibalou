@@ -14,7 +14,7 @@ angular.module('BibalouApp')
     $httpProvider.defaults.headers.put = {};
     $httpProvider.defaults.headers.patch = {};
   }])
-  .factory('RequestAPI', function ($http) {
+  .factory('RequestAPI', function ($http, TokenManager) {
     // Service logic
     // ...
 
@@ -23,9 +23,12 @@ angular.module('BibalouApp')
     // Public API here
     return {
       POST: function (url, data, success, failure, token) {
+        if (token) {
+          TokenManager.put(token);
+        }
         $http({
           method: 'POST',
-          url: api_url + url + (token != null ? "?token=" + token : ""),
+          url:  api_url + url + (token != null ? "?token=" + token : ""),
           data: data,
           transformRequest: function(obj) {
             var str = [];
@@ -52,6 +55,9 @@ angular.module('BibalouApp')
         );
       },
       GET: function (url, success, failure, token) {
+        if (token) {
+          TokenManager.put(token);
+        }
         $http({
           method: 'GET',
           url: api_url + url + (token != null ? "?token=" + token : ""),
