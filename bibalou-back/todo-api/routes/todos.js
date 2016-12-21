@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.put('/:id', function(req, res, next) {
-
+  console.log(req.params.id);
   Todo.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
@@ -34,9 +34,10 @@ router.get('/:id', function(req, res, next) {
 });
 //localhost:3000/todos?name=azer
 router.get('/:name', function(req, res, next) {
-  Todo.findById(req.params.id, function (err, post) {
+  var name = req.params.name;
+  Todo.find(name, function (err, post) {
     if (err) return next(err);
-    res.json(post);
+    res.json(post[0]);
   });
 });
 

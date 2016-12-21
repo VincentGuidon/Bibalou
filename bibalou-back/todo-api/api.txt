@@ -17,7 +17,7 @@ To connect a user :
       }
 
 To register new User with basic rigth
-  /authenticate/newUser
+  /authenticate/register
   req : POST
     login : 'aa.bb@cc.dd'
     password : 'pwd'

@@ -4,7 +4,7 @@ var randomToken = require('../scripts/randomToken.js');
 
 var User = require('../models/Users.js');
 
-router.post('/newUser', function(req, res, next) {
+router.post('/register', function(req, res, next) {
 
   var ret = {};
 
@@ -44,7 +44,7 @@ router.post('/auth', function(req, res, next) {
     }
     else
     {
-        var token = randomToken.genRandomToken(20, req.body.login);
+        var token = randomToken.genRandomToken(20, req.body.login, user[0]._id);
         ret.success = true;
         ret.token = token;
         res.send(ret);

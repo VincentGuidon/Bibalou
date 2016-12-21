@@ -6,11 +6,11 @@ var Product = require('../models/Products.js');
 //var Auth = require('../models/Authenticate.js');
 
 /*
-  get - /buyMarketId
-  get - /typeId
+  get - /byMarketId
+  get - /byName
 */
 
-router.get('/all', function(req, res, next) {
+router.get('/', function(req, res, next) {
   Product.find(function (err, todos) {
     if (err)
     {
@@ -20,7 +20,7 @@ router.get('/all', function(req, res, next) {
   });
 });
 
-router.post('/register', function(req, res, next) {
+router.post('/', function(req, res, next) {
 
   var nProduct = new Product({
     name : req.body.name,
