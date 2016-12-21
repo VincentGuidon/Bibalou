@@ -19,9 +19,11 @@ angular.module('BibalouApp')
         return $cookies.get(id);
       },
       put: function(value) {
+        $cookies.put(id, value);
+        /*
         $cookies.put(id, value,  {
           expires: DateTools.addMinutesToCurrentDate(timeOut)
-        });
+        });*/
       },
       remove: function() {
         $cookies.remove(id);

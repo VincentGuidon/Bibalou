@@ -6,9 +6,9 @@
     <div class="col-md-3">
       <div class="text-center">
         <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
-        <h6>Upload a different photo...</h6>
+        <h6>Upload a different photo..</h6>
 
-        <input class="form-control" type="file">
+        <input data-ng-model="image" type="file">
       </div>
     </div>
 
@@ -23,27 +23,27 @@
 
       <form class="form-horizontal" role="form">
         <div class="form-group">
-          <label class="col-lg-3 control-label">Full name:</label>
-          <div class="col-lg-8">
-            <input class="form-control" data-ng-model="change.full_name" type="text">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-3 control-label">Email:</label>
-          <div class="col-lg-8">
-            <input class="form-control" data-ng-model="change.login" type="text">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-3 control-label">Password:</label>
+          <label class="col-md-3 control-label" for="field_name">Full name:</label>
           <div class="col-md-8">
-            <input class="form-control" data-ng-model="change.password" type="password">
+            <input class="form-control" data-ng-model="change.name" type="text" id="field_name">
           </div>
         </div>
         <div class="form-group">
-          <label class="col-md-3 control-label">Confirm password:</label>
+          <label class="col-md-3 control-label" for="field_email">Email:</label>
           <div class="col-md-8">
-            <input class="form-control" data-ng-model="change.passwordVerif" type="password">
+            <input class="form-control" data-ng-model="change.login" type="text" id="field_email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label" for="field_password">Password:</label>
+          <div class="col-md-8">
+            <input class="form-control" data-ng-model="change.password" type="password" id="field_password">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label" for="field_password2">Confirm password:</label>
+          <div class="col-md-8">
+            <input class="form-control" data-ng-model="change.passwordVerif" type="password" id="field_password2">
           </div>
         </div>
         <div class="form-group">

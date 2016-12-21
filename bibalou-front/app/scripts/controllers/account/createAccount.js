@@ -10,6 +10,8 @@
 angular.module('BibalouApp')
   .controller('CreateAccountCtrl', function ($scope, $location, toaster, User, RequestAPI, SubmitResult) {
 
+    $scope.isBusy = false;
+
     $scope.register = function () {
       console.log("register", $scope.name, $scope.email, $scope.password);
       $scope.data = {
@@ -19,16 +21,20 @@ angular.module('BibalouApp')
       };
 
       // Create account
-      RequestAPI.POST("/register", $scope.data,
+      $scope.isBusy = true;
+      RequestAPI.POST("/authenticate/register", $scope.data,
         SubmitResult.submitSuccess(function (response) {
           // Connexion
-          RequestAPI.POST("/authenticate", $scope.data,
+          RequestAPI.POST("/authenticate/auth", $scope.data,
             SubmitResult.submitSuccess(function (response) {
               User.connect(response.data.token);
               $location.path("/");
+              $scope.isBusy = false;
             }, "Connected"),
             SubmitResult.submitFailure("Connexion Failed"));
         }),
-        SubmitResult.submitFailure());
+        SubmitResult.submitFailure(function(response) {
+          $scope.isBusy = false;
+        }));
     };
   });

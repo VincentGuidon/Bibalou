@@ -1,3 +1,79 @@
-<div ng-repeat="product in products">
-	<a href="#/product/{{product.id}}">Check product {{product.title}}</a>
+<div>
+  <h2 translate="jwebApp.allProducts.home.title">All Products</h2>
+  <jh-alert></jh-alert>
+
+  <div class="form-group">
+    <div class="col-md-2">
+      <select name="selectType" id="selectType" class="form-control"
+              data-ng-options="type as type.name for type in types"
+              data-ng-model="type"
+              data-ng-change="parseProducts()">
+      </select>
+    </div>
+    <div class="col-md-3">
+      <input type="text" name="path"
+             value="" data-ng-model="searchProduct">
+    </div>
+  </div>
+  <br>
+
+  <div class="modal-body">
+    <table class="table" id="allProducts">
+      <tbody>
+      <tr data-ng-repeat="product in products">
+        <td class="product">
+          <div class="item">
+            <h4>
+              <a href="#/product/{{product.id}}"><span style="font-size: 130%;">{{product.baseProduct.name}}</span></a>
+
+              <div class="price">
+                                <span
+                                  data-ng-if="product.promotion.percent == 0 && product.promotion.brut == 0">
+                                    {{product.price | currency}}
+                                </span>
+                <span
+                  data-ng-if="product.promotion.percent != 0 || product.promotion.brut != 0">
+                                    <del>{{product.price | currency}}</del>
+                                    <ins>{{product.price - product.promotion.brut -
+                                        product.price * product.promotion.percent / 100 | currency}}
+                                    </ins>
+                                    <br/>
+                                    <span data-ng-if="product.promotion.brut != 0">-{{product.promotion.brut | currency}}</span>
+                                    <span data-ng-if="product.promotion.percent != 0">-{{product.promotion.percent}}%</span>
+                                </span>
+              </div>
+            </h4>
+            <h4>
+              <br>
+              <div class="price pull-right">
+                <span>Stock: {{product.stock}}</span>
+              </div>
+            </h4>
+            <hr/>
+            <div class="row">
+              <div class="col-md-3 text-center">
+                <a href="#/product/{{product.id}}"><img class="img-responsive"
+                                                               src="{{product.image}}"/></a>
+              </div>
+              <div class="col-md-6">
+                <div class="description">{{product.baseProduct.description}}</div>
+              </div>
+            </div>
+            <br>
+          </div>
+          <div class="col-md-8">
+            <a href="#/product/{{product.id}}/list">
+              <div class="sellers">Sold by: {{product.numberSame}} market place</div>
+            </a>
+          </div>
+          <div class="addToCart">
+            <button class="btn btn-primary" ui-sref="allProducts.addToCart({id:product.id, nbr:1})">
+              <span class="glyphicon glyphicon-plus-sign"></span> Add
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

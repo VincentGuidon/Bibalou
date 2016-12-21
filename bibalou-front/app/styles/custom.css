@@ -82,3 +82,112 @@
 .register .left { float: left; }
 
 .register .right { float: right; }
+
+/* ==========================================================================
+Product list in a Cart
+========================================================================== */
+
+.productContainer .price {
+  float: right;
+}
+
+.cartContainer .productContainer {
+  border: 1px solid #333;
+  border-radius: 10px;
+  background-color: #fafafa;
+  padding: 10px;
+  margin: 2px;
+}
+
+.productContainer .price {
+  float: right;
+}
+
+.productContainer .quantity {
+  float: right;
+}
+
+.productContainer img {
+  margin: auto;
+  text-align: center;
+  height: 150px !important;
+}
+
+/* ==========================================================================
+Product list
+========================================================================== */
+
+#allProducts .productList .item {
+  border: 1px inset #333;
+  border-radius: 10px;
+  background-color: #fafafa;
+  padding: 10px;
+  margin: 2px;
+}
+
+#allProducts .productList .item .description {
+}
+
+#allProducts .productList .item .price {
+  float: right;
+}
+
+#allProducts .productList .addToCart {
+  float: right;
+}
+
+#allProducts .productList img {
+  margin: auto;
+  text-align: center;
+  height: 150px !important;
+}
+
+
+/* ==========================================================================
+Stars
+========================================================================== */
+
+.rating > span.stars, span.stars span {
+  display: block;
+  background: url("../images/product_stars.png") 0 -16px repeat-x;
+  width: 80px;
+  height: 16px;
+}
+
+.rating > span.stars span {
+  background-position: 0 0;
+}
+
+/* ==========================================================================
+Product
+========================================================================== */
+
+table#products td,
+table#products th {
+  vertical-align: middle;
+}
+
+/* ==========================================================================
+Delivery
+========================================================================== */
+
+.payment img {
+  margin: auto;
+  text-align: center;
+  height: 100px !important;
+}
+
+/* ==========================================================================
+NEWS
+========================================================================== */
+.news .news {
+  border: 1px solid #333;
+  border-radius: 10px;
+  background-color: #fafafa;
+  padding: 10px;
+  margin: 2px;
+}
+
+.news .news .date {
+  float: right;
+}

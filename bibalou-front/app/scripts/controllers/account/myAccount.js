@@ -24,7 +24,7 @@ angular.module('BibalouApp')
         SubmitResult.submitFailure(), TokenManager.get());
     };
 
-    var checkChanges = function() {
+    var checkChanges = function () {
 
       //check password
       if ($scope.change.password != $scope.change.passwordVerif) {
@@ -50,7 +50,7 @@ angular.module('BibalouApp')
         SubmitResult.submitFailure(), TokenManager.get());
     };
 
-    $scope.cancelChanges = function() {
+    $scope.cancelChanges = function () {
       $scope.initChanges();
     };
 
