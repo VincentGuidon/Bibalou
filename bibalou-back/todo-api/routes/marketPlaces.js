@@ -3,6 +3,20 @@ var router = express.Router();
 var Market = require('../models/Markets.js');
 var randomToken = require('../scripts/randomToken.js');
 
+router.delete('/:name', function(req, res, next) {
+  Market.findOneAndRemove(req.params.name, function(err, promo)
+    {
+      if (err)
+      {
+        res.send({success : false, message : 'Internal error',errcode : 7});
+      }
+      else
+      {
+        res.send({sucees : true});
+      }
+    });
+});
+
 router.put('/:id', function(req, res, next) {
   var body = req.body;
   delete body.token;
@@ -81,7 +95,6 @@ router.post('/', function(req, res, next) {
       ret.message = "Market already created";
       ret.errcode = 3;
       console.log('Market already exist!');
-      console.log(market);
     }
     else
     {

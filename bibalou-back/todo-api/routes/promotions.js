@@ -6,6 +6,20 @@ var Promotion = require('../models/Promotions.js');
 var Market = require('../models/Markets.js');
 var Product = require('../models/Products.js');
 
+router.delete('/:id', function(req, res, next) {
+  Promotion.findByIdAndRemove(req.params.id, function(err, promo)
+    {
+      if (err)
+      {
+        res.send({success : false, message : 'Internal error',errcode : 7});
+      }
+      else
+      {
+        res.send({sucees : true});
+      }
+    });
+});
+
 router.put('/product', function(req, res, next) {
   var update = req.body;
 //  delete update.token;
@@ -15,7 +29,8 @@ router.put('/product', function(req, res, next) {
     {
       res.send({success : false, message : 'Internal error',errcode : 7});
     }
-    else {
+    else
+    {
       res.send({success : true});
     }
   });

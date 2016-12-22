@@ -5,13 +5,33 @@ var mongoose = require('mongoose');
 var Product = require('../models/Products.js');
 var Market = require('../models/Markets.js');
 
-/*
-  get - /byMarketId
-  get - /byName
-  ajotuer nom marketPlaces
-  ajouter reduction
-  ajouter productType
-*/
+router.delete('/:id', function(req, res, next) {
+  Product.findByIdAndRemove(req.params.id, function(err, promo)
+    {
+      if (err)
+      {
+        res.send({success : false, message : 'Internal error',errcode : 7});
+      }
+      else
+      {
+        res.send({sucees : true});
+      }
+    });
+});
+
+router.put('/:id', function(req, res, next) {
+  var body = req.body;
+  delete body.token;
+  Product.findByIdAndUpdate(req.params.id, body, function (err) {
+    if (err)
+    {
+      res.send({success : false, message : 'No marketPlace with that name', errcode : 4});
+    }
+    else {
+        res.send({success:true});
+    }
+  });
+});
 
 router.get('/', function(req, res, next) {
   Product.find(function (err, todos) {

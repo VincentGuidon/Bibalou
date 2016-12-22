@@ -7,7 +7,7 @@ var User = require('../models/Users.js');
 router.post('/register', function(req, res, next) {
 
   var ret = {};
-
+  console.log(req.body);
   var nUser = new User({
     email : req.body.login,
     password : req.body.password
