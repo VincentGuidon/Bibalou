@@ -12,7 +12,6 @@ var productSchema = new Product({
   promotion : String,
   type : String,
   marketPlace : String,
-  reduction : String
 });
 
 var Product = mongoose.model('Product', productSchema);

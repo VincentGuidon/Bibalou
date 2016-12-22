@@ -3,11 +3,19 @@ var router = express.Router();
 var Market = require('../models/Markets.js');
 var randomToken = require('../scripts/randomToken.js');
 
-/*
-  get / - name=name
-  post / - token=token
-  put /
-*/
+router.put('/:id', function(req, res, next) {
+  var body = req.body;
+  delete body.token;
+  Market.findOneAndUpdate({name : req.params.id}, body, function (err) {
+    if (err)
+    {
+      res.send({success : false, message : 'No marketPlace with that name', errcode : 4});
+    }
+    else {
+        res.send({success:true});
+    }
+  });
+});
 
 router.get('/byName', function(req, res, next) {
 

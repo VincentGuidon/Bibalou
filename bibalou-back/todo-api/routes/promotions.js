@@ -4,6 +4,22 @@ var mongoose = require('mongoose');
 
 var Promotion = require('../models/Promotions.js');
 var Market = require('../models/Markets.js');
+var Product = require('../models/Products.js');
+
+router.put('/product', function(req, res, next) {
+  var update = req.body;
+//  delete update.token;
+  console.log(req.query.id);
+  Product.findByIdAndUpdate(req.query.id, {promotion : update.promotion }, function(err) {
+    if (err)
+    {
+      res.send({success : false, message : 'Internal error',errcode : 7});
+    }
+    else {
+      res.send({success : true});
+    }
+  });
+});
 
 router.get('/byName', function(req, res, next) {
   Promotion.find({name : req.query.name}, function(err, promo) {
@@ -33,6 +49,22 @@ router.get('/byMarket', function(req, res, next) {
       ret.success = true;
       ret.promotions = promo;
       res.send(ret);
+    }
+  });
+});
+
+router.put('/', function(req, res, next) {
+  var update = req.body;
+  delete update.token;
+
+  Promotion.findByIdAndUpdate(req.query.id, update, function(err) {
+    if (err)
+    {
+      res.send({success : false, message : 'Internal error',errcode : 7});
+    }
+    else
+    {
+      res.send({success:true});
     }
   });
 });
