@@ -23,6 +23,22 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/byName', function(req, res, next) {
+  Product.find({name : req.query.name}, function(err, products) {
+    if (err)
+    {
+      res.send({success : false, message : 'No product with that name',errcode : 6});
+    }
+    else
+    {
+      var ret ={};
+      ret.success = true;
+      ret.products = products
+      res.send(ret);
+    }
+  });
+});
+
 router.get('/byMarketId', function(req, res,next) {
   Product.find({marketPlace : req.query.marketId}, function(err, products) {
     if (err)
@@ -58,17 +74,17 @@ router.post('/', function(req, res, next) {
   nProduct.save(function(err, newProduct) {
     if (err)
     {
-      res.send({Success:false});
+      res.send({success:false});
     }
     Market.findOne({name : marketPlaceName}, function(err, market) {
       if (err)
       {
-        res.send({success : false, message : 'No marketPlace with that ID',errcode : 5});
+        res.send({success : false, message : 'No marketPlace with that ID', errcode : 5});
       }
       else
       {
       market.productList.push(newProduct.id);
-      Market.findOneAndUpdate({name : marketPlaceName},market, function(err) {
+      Market.findOneAndUpdate({name : marketPlaceName}, market, function(err) {
         if (err)
           {
             res.send({success : false, message : 'Couldn\'t save the product', errcode : 5});

@@ -11,7 +11,8 @@ var productSchema = new Product({
   type : String,
   reduction : String,
   type : String,
-  marketPlace : String
+  marketPlace : String,
+  reduction : String
 });
 
 var Product = mongoose.model('Product', productSchema);
