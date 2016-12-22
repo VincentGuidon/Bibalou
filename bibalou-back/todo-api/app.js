@@ -13,7 +13,7 @@ var market = require('./routes/marketPlaces');
 var products = require('./routes/products');
 var register = require('./routes/register');
 var promotions = require('./routes/promotions');
-
+var types = require('./routes/types');
 var app = express();
 
 process.setMaxListeners(0);
@@ -56,6 +56,7 @@ app.use(function (req, res, next)
   app.use('/products', products);
   app.use('/register', register);
   app.use('/promotions', promotions);
+  app.use('/types', types);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
