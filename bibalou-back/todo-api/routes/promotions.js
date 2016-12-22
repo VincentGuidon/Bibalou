@@ -5,8 +5,36 @@ var mongoose = require('mongoose');
 var Promotion = require('../models/Promotions.js');
 var Market = require('../models/Markets.js');
 
-router.get('/byMarket', function(req, res, next) {
+router.get('/byName', function(req, res, next) {
+  Promotion.find({name : req.query.name}, function(err, promo) {
+    var ret = {};
+    if (err)
+    {
+      res.send({success : false, message : 'Internal error',errcode : 7});
+    }
+    else
+    {
+      ret.success = true;
+      ret.promotions = promo;
+      res.send(ret);
+    }
+  });
+});
 
+router.get('/byMarket', function(req, res, next) {
+  Promotion.findOne({marketPlace : req.query.marketPlace}, function(err, promo) {
+    var ret = {};
+    if (err)
+    {
+      res.send({success : false, message : 'Internal error',errcode : 7});
+    }
+    else
+    {
+      ret.success = true;
+      ret.promotions = promo;
+      res.send(ret);
+    }
+  });
 });
 
 router.post('/', function(req, res, next) {
@@ -30,7 +58,8 @@ router.post('/', function(req, res, next) {
           {
             res.send({success : false, message : 'Internal error', errcode : 7})
           }
-          else {
+          else
+          {
             res.send({success : true});
           }
       });
