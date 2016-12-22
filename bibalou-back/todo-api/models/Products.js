@@ -9,7 +9,7 @@ var productSchema = new Product({
   available : Boolean,
   image : String,
   type : String,
-  reduction : String,
+  promotion : String,
   type : String,
   marketPlace : String,
   reduction : String

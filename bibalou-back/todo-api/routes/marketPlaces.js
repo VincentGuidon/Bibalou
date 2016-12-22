@@ -66,13 +66,14 @@ router.post('/', function(req, res, next) {
     image : req.body.image
   });
 
-  newMarket.save(function(err) {
+  newMarket.save(function(err, market) {
     if (err)
     {
       ret.success = false;
       ret.message = "Market already created";
       ret.errcode = 3;
       console.log('Market already exist!');
+      console.log(market);
     }
     else
     {

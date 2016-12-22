@@ -8,6 +8,7 @@ var marketSchema = new Schema({
   productList : [String],
   owner : { type: String, required: true },
   order : [String],
+  promotions : [String],
   image : String,
 });
 
