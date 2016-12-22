@@ -10,7 +10,8 @@ var productSchema = new Product({
   image : String,
   type : String,
   reduction : String,
-  type : String
+  type : String,
+  marketPlace : String
 });
 
 var Product = mongoose.model('Product', productSchema);

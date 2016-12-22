@@ -5,7 +5,7 @@ var Product = require('../models/Products.js');
 var marketSchema = new Schema({
   name: { type: String, required: true, unique: true },
   desription: String,
-  productList : [Number],
+  productList : [String],
   owner : { type: String, required: true },
   order : [String],
   image : String,
