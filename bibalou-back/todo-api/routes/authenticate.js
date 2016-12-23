@@ -33,7 +33,6 @@ router.post('/register', function(req, res, next) {
 router.post('/auth', function(req, res, next) {
 
   var ret = {};
-
   User.find({email : req.body.email}, function(err, user) {
     if (err || user.length == 0 || user[0].password != req.body.password)
     {
@@ -44,7 +43,7 @@ router.post('/auth', function(req, res, next) {
     }
     else
     {
-        var token = randomToken.genRandomToken(20, req.body.login, user[0]._id);
+        var token = randomToken.genRandomToken(20, req.body.email, user[0]._id);
         ret.success = true;
         ret.token = token;
         ret.id = user[0]._id;

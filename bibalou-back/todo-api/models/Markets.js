@@ -10,7 +10,8 @@ var marketSchema = new Schema({
   owner : { type: String, required: true },
   order : [Schema.Types.Mixed],
   promotions : [Schema.Types.Mixed],
-  image : String,
+  news : [String],
+  image : String
 });
 
 var Market = mongoose.model('Market', marketSchema);

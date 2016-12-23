@@ -1,4 +1,4 @@
-var express = require('express');
+  var express = require('express');
 var router = express.Router();
 
 var Market = require('../models/Markets.js');
@@ -6,6 +6,25 @@ var Product = require('../models/Products.js');
 var Promotion = require('../models/Promotions.js');
 
 var randomToken = require('../scripts/randomToken.js');
+
+router.put('/addNews', function(req, res, next) {
+//id
+//value
+//{$push : {promotions : newPromo.id }},
+  var id = req.body.id;
+  var val = req.body.value;
+  Market.findByIdAndUpdate(id, {$push : {news : val }}, function(err, market) {
+      if (err)
+      {
+        res.send({success : false, message : 'Internal error', errcode : 7})
+      }
+      else
+      {
+        console.log(id + ' ' + val);
+        res.send({success : true});
+      }
+  });
+});
 
 router.delete('/:name', function(req, res, next) {
   Market.findOneAndRemove(req.params.name, function(err, promo)
