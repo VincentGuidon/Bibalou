@@ -22,12 +22,12 @@ angular.module('BibalouApp')
       $location.path("/myAccount");
     };
 
-    $scope.myProducts = function() {
-      $location.path("/myProducts");
+    $scope.myDeliveries = function() {
+      $location.path("/myDeliveries");
     };
 
-    $scope.MyMarketPlace = function() {
-      $location.path("/MyMarketPlace");
+    $scope.myMarketPlace = function() {
+      $location.path("/myMarketPlace");
     };
 
     $scope.disconnect = function() {

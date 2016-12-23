@@ -1,0 +1,96 @@
+<form name="editForm" role="form" novalidate data-ng-submit="create()">
+  <div class="modal-header">
+    <h2 class="modal-title" id="myMarketPlaceLabel">Create my MarketPlace</h2>
+  </div>
+  <div class="modal-body" style="display: flex">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="well well-sm" style="display:flex;">
+            <div class="col-md-8" data-ng-class="{ 'has-error' : editForm.name.$invalid && !editForm.name.$pristine }">
+              <div class="form-group">
+                <label class="control-label" for="field_name">Name</label><i style="color: red">*</i>
+                <input type="text" class="form-control" name="name" id="field_name"
+                       data-ng-model="marketPlace.name"
+                       placeholder="ex. Summer party"
+                       required/>
+                <p data-ng-show="editForm.name.$invalid && !editForm.name.$pristine" class="help-block">A name is
+                  needed.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-5">
+          <div data-flow-init data-flow-files-submitted="$flow.upload()"
+               data-flow-file-added="$flow.files.length < 1 && !!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+               data-flow-files-added="limitFiles($files, 1)"
+               data-flow-name="flow.content"
+               class="ng-scope">
+
+            <div class="drop" data-flow-drop data-ng-class="dropClass">
+              <span class="btn btn-default" data-flow-btn="">Upload Image
+                <input style="visibility: hidden; position: absolute;" max="1" type="file">
+              </span>
+              <span class="btn btn-default ng-hide" data-flow-btn="" data-flow-directory=""
+                    data-ng-show="$flow.supportDirectory">Upload Folder of Images
+                <input style="visibility: hidden; position: absolute;" data-webkitdirectory="webkitdirectory"
+                       type="file">
+              </span>
+              <b>OR</b> Drag And Drop your image here
+            </div>
+            <br>
+            <div>
+              <div data-ng-repeat="file in $flow.files" class="gallery-box ng-scope">
+                <span class="title ng-binding">{{file.name}}</span>
+                <div class="thumbnail" data-ng-show="$flow.files.length">
+                  <img data-flow-img="file" src="" style="max-height: 115px">
+                </div>
+                <div class="progress progress-striped" data-ng-class="{active: file.isUploading()}"
+                     data-ng-if="file.isUploading()">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+                       aria-valuemax="100"
+                       data-ng-style="{width: (file.progress() * 100) + '%'}" style="width: 100%;">
+                    <span class="sr-only ng-binding">1% Complete</span>
+                  </div>
+                </div>
+                <div class="btn-group">
+                  <a class="btn btn-xs btn-danger" data-ng-click="file.cancel()">
+                    Remove
+                  </a>
+                </div>
+              </div>
+              <div class="clear"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>Description<i style="color: red">*</i></h2>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group"
+               data-ng-class="{ 'has-error' : editForm.description.$invalid && !editForm.description.$pristine }">
+            <label class="control-label" for="field_description"></label>
+            <textarea class="form-control" name="description" id="field_description"
+                      style="height: 150px; resize: vertical"
+                      data-ng-model="marketPlace.description"
+                      placeholder="description.."
+                      required
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-disabled="isBusy"
+            data-ng-click="clear()">
+      <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+    </button>
+    <button type="submit" formnovalidate data-ng-disabled="editForm.$invalid || isBusy" class="btn btn-primary">
+      <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Create</span>
+    </button>
+  </div>
+</form>

@@ -8,7 +8,7 @@
  * Controller of the BibalouApp
  */
 angular.module('BibalouApp')
-  .controller('MyAccountCtrl', function ($scope, toaster, User, SubmitResult, RequestAPI, TokenManager, CloneUtilsCustom) {
+  .controller('MyAccountCtrl', function ($scope, toaster, User, SubmitResult, RequestAPI, CloneUtilsCustom) {
     $scope.change = {};
 
     $scope.initChanges = function () {
@@ -21,7 +21,7 @@ angular.module('BibalouApp')
           $scope.user = response.data;
           $scope.initChanges();
         }),
-        SubmitResult.submitFailure(), {"token" : TokenManager.get()});
+        SubmitResult.submitFailure(), {token : User.getToken(), id: User.getId()});
     };
 
     var checkChanges = function () {
@@ -47,7 +47,7 @@ angular.module('BibalouApp')
       RequestAPI.POST("/user", $scope.user, SubmitResult.submitSuccess(function (response) {
           $scope.initChanges();
         }, "Profile updated !"),
-        SubmitResult.submitFailure(), {"token" : TokenManager.get()});
+        SubmitResult.submitFailure(), {token: User.getToken()});
     };
 
     $scope.cancelChanges = function () {

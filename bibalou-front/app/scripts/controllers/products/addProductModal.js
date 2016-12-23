@@ -8,7 +8,7 @@
  * Controller of the BibalouApp
  */
 angular.module('BibalouApp')
-  .controller('AddProductModalCtrl', function ($scope, $uibModalInstance, RequestAPI, SubmitResult, TokenManager, FileUploader) {
+  .controller('AddProductModalCtrl', function ($scope, $uibModalInstance, RequestAPI, SubmitResult, User, FileUploader) {
     $scope.flow = {};
 
     $scope.save = function () {
@@ -23,7 +23,7 @@ angular.module('BibalouApp')
        $scope.init();
        $scope.clear();
        }, "Product created"),
-       SubmitResult.submitFailure(), {"token" : TokenManager.get()});
+       SubmitResult.submitFailure(), {token: User.getToken()});
     };
 
     $scope.uploader = new FileUploader();

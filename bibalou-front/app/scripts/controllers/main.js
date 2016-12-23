@@ -8,7 +8,7 @@
  * Controller of the BibalouApp
  */
 angular.module('BibalouApp')
-  .controller('MainCtrl', function ($scope, TokenManager) {
+  .controller('MainCtrl', function ($scope, User) {
 
-    console.log("Salut: ", TokenManager.get());
+    console.log("Salut: ", User.getToken());
   });

@@ -8,7 +8,7 @@
  * Controller of the BibalouApp
  */
 angular.module('BibalouApp')
-  .controller('AllProductsCtrl', function ($scope, $timeout, toaster, SubmitResult, RequestAPI, TokenManager, CloneUtilsCustom) {
+  .controller('AllProductsCtrl', function ($scope, $timeout, toaster, SubmitResult, RequestAPI, User, CloneUtilsCustom) {
 
     /** UTILS**/
     var filterUnparsedProducts = function () {
@@ -129,7 +129,7 @@ angular.module('BibalouApp')
           $scope.unparsedProducts = response.data;
           $scope.parseUnparsedProducts();
         }),
-        SubmitResult.submitFailure(), {"token" : TokenManager.get()});
+        SubmitResult.submitFailure(), {token: User.getToken()});
     };
 
     $scope.loadParser = function () {
@@ -142,7 +142,7 @@ angular.module('BibalouApp')
           $scope.types.splice(0, 0, {name: "All", id: -1});
           $scope.type = $scope.types[0];
         }),
-        SubmitResult.submitFailure(), {"token" : TokenManager.get()});
+        SubmitResult.submitFailure(), {token: User.getToken()});
     };
 
     $scope.init = function () {

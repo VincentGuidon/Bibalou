@@ -8,7 +8,7 @@
  * Controller of the BibalouApp
  */
 angular.module('BibalouApp')
-  .controller('ProductCtrl', function ($scope, $routeParams, RequestAPI, SubmitResult, TokenManager) {
+  .controller('ProductCtrl', function ($scope, $routeParams, RequestAPI, SubmitResult, User) {
     $scope.id = $routeParams.id;
     $scope.comment = {};
 
@@ -18,9 +18,9 @@ angular.module('BibalouApp')
           RequestAPI.GET("/product/" + $scope.product.id + "/comments", SubmitResult.submitSuccess(function (response) {
               $scope.comments = response.data;
             }),
-            SubmitResult.submitFailure(), {"token" : TokenManager.get()});
+            SubmitResult.submitFailure(), {token: User.getToken()});
         }),
-        SubmitResult.submitFailure(), {"token" : TokenManager.get()});
+        SubmitResult.submitFailure(), {token: User.getToken()});
     };
 
     $scope.closeReply = function() {
@@ -38,7 +38,7 @@ angular.module('BibalouApp')
     $scope.sendReply = function() {
       console.log("comment: ", $scope.comment);
       RequestAPI.POST("/product/" + $scope.product.id + "/comment", $scope.comment, SubmitResult.submitSuccess("comment send"),
-        SubmitResult.submitFailure(), {"token" : TokenManager.get()});
+        SubmitResult.submitFailure(), {token: User.getToken()});
     };
     $scope.init();
   });

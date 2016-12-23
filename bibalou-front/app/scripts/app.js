@@ -68,12 +68,17 @@ angular
         controllerAs: 'allMarketPlaces'
       })
       .when('/myMarketPlace', {
-        templateUrl: 'views/marketPlaces/myMarketPlace.html',
+        templateUrl: 'views/marketPlaces/myMarketPlace/myMarketPlace.html',
         controller: 'MyMarketPlaceCtrl',
         controllerAs: 'myMarketPlace'
       })
+      .when('/myMarketPlace/create', {
+        templateUrl: 'views/marketPlaces/myMarketPlace/createMarketPlace.html',
+        controller: 'CreateMarketPlaceCtrl',
+        controllerAs: 'createMarketPlace'
+      })
       .when('/marketPlace/:id', {
-        templateUrl: 'views/marketPlaces/marketPlace.html',
+        templateUrl: 'views/marketPlaces/marketPlace/marketPlace.html',
         controller: 'MarketPlaceCtrl',
         controllerAs: 'marketPlace'
       })
