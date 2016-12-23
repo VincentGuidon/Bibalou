@@ -13,7 +13,7 @@ angular.module('BibalouApp')
     var idUserCo = "userConnected";
     var idUserId = "userId";
     var idToken = "token";
-    var timeOut = 30;
+    var timeOut = 360;
 
     var init = function() {
       var token = TokenManager.get();

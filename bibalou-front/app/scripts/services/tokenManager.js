@@ -11,7 +11,7 @@ angular.module('BibalouApp')
   .factory('TokenManager', function ($cookies, DateTools) {
     // Service logic
     var id = "token";
-    var timeOut = 30;
+    var timeOut = 360;
 
     // Public API here
     return {
@@ -19,11 +19,9 @@ angular.module('BibalouApp')
         return $cookies.get(id);
       },
       put: function(value) {
-        $cookies.put(id, value);
-        /*
         $cookies.put(id, value,  {
           expires: DateTools.addMinutesToCurrentDate(timeOut)
-        });*/
+        });
       },
       remove: function() {
         $cookies.remove(id);

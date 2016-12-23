@@ -18,9 +18,9 @@ angular.module('BibalouApp')
           RequestAPI.GET("/product/" + $scope.product.id + "/comments", SubmitResult.submitSuccess(function (response) {
               $scope.comments = response.data;
             }),
-            SubmitResult.submitFailure(), TokenManager.get());
+            SubmitResult.submitFailure(), {"token" : TokenManager.get()});
         }),
-        SubmitResult.submitFailure(), TokenManager.get());
+        SubmitResult.submitFailure(), {"token" : TokenManager.get()});
     };
 
     $scope.closeReply = function() {
@@ -38,7 +38,7 @@ angular.module('BibalouApp')
     $scope.sendReply = function() {
       console.log("comment: ", $scope.comment);
       RequestAPI.POST("/product/" + $scope.product.id + "/comment", $scope.comment, SubmitResult.submitSuccess("comment send"),
-        SubmitResult.submitFailure(), TokenManager.get());
+        SubmitResult.submitFailure(), {"token" : TokenManager.get()});
     };
     $scope.init();
   });

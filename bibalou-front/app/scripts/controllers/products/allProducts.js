@@ -13,40 +13,40 @@ angular.module('BibalouApp')
     /** UTILS**/
     var filterUnparsedProducts = function () {
       if ($scope.filter.bestPrice) {
-        for (var i = 0; i < $scope.parsedProducts.length; ++i) {
-          for (var i2 = i + 1; i2 < $scope.parsedProducts.length; ++i2) {
-            if ($scope.parsedProducts[i].name == $scope.parsedProducts[i2].name) {
+        for (var i = 0; i < $scope.products.length; ++i) {
+          for (var i2 = i + 1; i2 < $scope.products.length; ++i2) {
+            if ($scope.products[i].name == $scope.products[i2].name) {
 
-              if ($scope.parsedProducts[i].stock == 0) {
-                if ($scope.parsedProducts[i].numberSame > $scope.parsedProducts[i2]) {
-                  $scope.parsedProducts[i2].numberSame = $scope.parsedProducts[i];
+              if ($scope.products[i].stock == 0) {
+                if ($scope.products[i].numberSame > $scope.products[i2]) {
+                  $scope.products[i2].numberSame = $scope.products[i];
                 }
-                $scope.parsedProducts[i2].numberSame += 1;
-                $scope.parsedProducts.splice(i, 1);
+                $scope.products[i2].numberSame += 1;
+                $scope.products.splice(i, 1);
                 --i;
                 --i2;
-              } else if ($scope.parsedProducts[i2].stock == 0) {
-                if ($scope.parsedProducts[i].numberSame < $scope.parsedProducts[i2]) {
-                  $scope.parsedProducts[i].numberSame = $scope.parsedProducts[i2];
+              } else if ($scope.products[i2].stock == 0) {
+                if ($scope.products[i].numberSame < $scope.products[i2]) {
+                  $scope.products[i].numberSame = $scope.products[i2];
                 }
-                $scope.parsedProducts[i].numberSame += 1;
-                $scope.parsedProducts.splice(i2, 1);
+                $scope.products[i].numberSame += 1;
+                $scope.products.splice(i2, 1);
                 --i2;
               }
-              if ($scope.parsedProducts[i].price > $scope.parsedProducts[i2].price) {
-                if ($scope.parsedProducts[i].numberSame > $scope.parsedProducts[i2]) {
-                  $scope.parsedProducts[i2].numberSame = $scope.parsedProducts[i];
+              if ($scope.products[i].price > $scope.products[i2].price) {
+                if ($scope.products[i].numberSame > $scope.products[i2]) {
+                  $scope.products[i2].numberSame = $scope.products[i];
                 }
-                $scope.parsedProducts[i2].numberSame += 1;
-                $scope.parsedProducts.splice(i, 1);
+                $scope.products[i2].numberSame += 1;
+                $scope.products.splice(i, 1);
                 --i;
                 --i2;
               } else {
-                if ($scope.parsedProducts[i].numberSame < $scope.parsedProducts[i2]) {
-                  $scope.parsedProducts[i].numberSame = $scope.parsedProducts[i2];
+                if ($scope.products[i].numberSame < $scope.products[i2]) {
+                  $scope.products[i].numberSame = $scope.products[i2];
                 }
-                $scope.parsedProducts[i].numberSame += 1;
-                $scope.parsedProducts.splice(i2, 1);
+                $scope.products[i].numberSame += 1;
+                $scope.products.splice(i2, 1);
                 --i2;
               }
             }
@@ -57,9 +57,9 @@ angular.module('BibalouApp')
 
     var parseByType = function () {
       if ($scope.type.name != "All") {
-        for (var i = 0; i < $scope.parsedProducts.length; ++i) {
-          if ($scope.parsedProducts[i].type.name != $scope.type.name) {
-            $scope.parsedProducts.splice(i, 1);
+        for (var i = 0; i < $scope.products.length; ++i) {
+          if ($scope.products[i].type.name != $scope.type.name) {
+            $scope.products.splice(i, 1);
             --i;
           }
         }
@@ -68,9 +68,9 @@ angular.module('BibalouApp')
 
     var parseByName = function () {
       if ($scope.searchProduct && $scope.searchProduct != "") {
-        for (var i = 0; i < $scope.parsedProducts.length; ++i) {
-          if (!$scope.parsedProducts[i].name.includes($scope.searchProduct)) {
-            $scope.parsedProducts.splice(i, 1);
+        for (var i = 0; i < $scope.products.length; ++i) {
+          if (!$scope.products[i].name.includes($scope.searchProduct)) {
+            $scope.products.splice(i, 1);
             --i;
           }
         }
@@ -78,10 +78,10 @@ angular.module('BibalouApp')
     };
 
     $scope.parseUnparsedProducts = function () {
-      $scope.parsedProducts = CloneUtilsCustom.cloneArray($scope.unparsedProducts);
+      $scope.products = CloneUtilsCustom.cloneArray($scope.unparsedProducts);
 
-      for (var i = 0; i < $scope.parsedProducts.length; ++i) {
-        $scope.parsedProducts[i].numberSame = 0;
+      for (var i = 0; i < $scope.products.length; ++i) {
+        $scope.products[i].numberSame = 0;
       }
       filterUnparsedProducts();
       parseByType();
@@ -95,6 +95,7 @@ angular.module('BibalouApp')
       else
         return 1;
     }
+
     function compareProductsPriceDown(a, b) {
       if (a.price < b.price)
         return 1;
@@ -102,14 +103,21 @@ angular.module('BibalouApp')
         return -1;
     }
 
+    function compareName(a, b) {
+      if (a.name < b.name)
+        return 1;
+      else
+        return -1;
+    }
+
     $scope.sortParsedProducts = function () {
       if ($scope.filter.price == "UP") {
-        $scope.parsedProducts.sort(compareProductsPriceUp);
+        $scope.products.sort(compareProductsPriceUp);
       } else {
-        $scope.parsedProducts.sort(compareProductsPriceDown);
+        $scope.products.sort(compareProductsPriceDown);
       }
       if ($scope.filter.name) {
-        $scope.parsedProducts.sort();
+        $scope.products.sort(compareName);
       }
     };
 
@@ -121,7 +129,7 @@ angular.module('BibalouApp')
           $scope.unparsedProducts = response.data;
           $scope.parseUnparsedProducts();
         }),
-        SubmitResult.submitFailure(), TokenManager.get());
+        SubmitResult.submitFailure(), {"token" : TokenManager.get()});
     };
 
     $scope.loadParser = function () {
@@ -134,7 +142,7 @@ angular.module('BibalouApp')
           $scope.types.splice(0, 0, {name: "All", id: -1});
           $scope.type = $scope.types[0];
         }),
-        SubmitResult.submitFailure(), TokenManager.get());
+        SubmitResult.submitFailure(), {"token" : TokenManager.get()});
     };
 
     $scope.init = function () {

@@ -23,7 +23,7 @@ angular.module('BibalouApp')
        $scope.init();
        $scope.clear();
        }, "Product created"),
-       SubmitResult.submitFailure(), TokenManager.get());
+       SubmitResult.submitFailure(), {"token" : TokenManager.get()});
     };
 
     $scope.uploader = new FileUploader();
