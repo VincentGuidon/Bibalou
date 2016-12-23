@@ -37,12 +37,12 @@ router.put('/:id', function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
-  Product.find(function (err, todos) {
+  Product.find(function (err, allProducts) {
     if (err)
     {
         res.send({success : false, message : 'Internal Error',errcode : 0});
     }
-    res.json(todos);
+    res.send({success : true, products : allProducts});
   });
 });
 
