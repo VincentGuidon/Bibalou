@@ -1,14 +1,15 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Product = require('../models/Products.js');
+var Promotion = require('../models/Promotions.js');
 
 var marketSchema = new Schema({
   name: { type: String, required: true, unique: true },
   description: String,
-  productList : [String],
+  productList : [Schema.Types.Mixed],
   owner : { type: String, required: true },
-  order : [String],
-  promotions : [String],
+  order : [Schema.Types.Mixed],
+  promotions : [Schema.Types.Mixed],
   image : String,
 });
 

@@ -9,7 +9,7 @@ var productSchema = new Product({
   available : Boolean,
   image : String,
   type : String,
-  promotion : String,
+  promotion : Schema.Types.Mixed,
   type : String,
   marketPlace : String,
 });

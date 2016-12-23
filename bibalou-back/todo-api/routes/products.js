@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var async = require("async");
 
 var Product = require('../models/Products.js');
 var Market = require('../models/Markets.js');
+var Promotion = require('../models/Promotions.js');
 
 router.delete('/:id', function(req, res, next) {
   Product.findByIdAndRemove(req.params.id, function(err, promo)
@@ -22,10 +24,11 @@ router.delete('/:id', function(req, res, next) {
 router.put('/:id', function(req, res, next) {
   var body = req.body;
   delete body.token;
+  console.log(body);
   Product.findByIdAndUpdate(req.params.id, body, function (err) {
     if (err)
     {
-      res.send({success : false, message : 'No marketPlace with that name', errcode : 4});
+      res.send({success : false, message : 'No product with that name', errcode : 4});
     }
     else {
         res.send({success:true});
@@ -51,9 +54,10 @@ router.get('/byName', function(req, res, next) {
     }
     else
     {
-      var ret ={};
+      var ret = {};
+
       ret.success = true;
-      ret.products = products
+      ret.products = products;
       res.send(ret);
     }
   });
@@ -118,8 +122,6 @@ router.post('/', function(req, res, next) {
     });
     console.log('Product saved successfully!');
   });
-
-//  res.send({Success:true});
 });
 
 module.exports = router;

@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
+
 var Market = require('../models/Markets.js');
+var Product = require('../models/Products.js');
+var Promotion = require('../models/Promotions.js');
+
 var randomToken = require('../scripts/randomToken.js');
 
 router.delete('/:name', function(req, res, next) {
@@ -31,6 +35,32 @@ router.put('/:id', function(req, res, next) {
   });
 });
 
+function getAllMarket(ret, res, market)
+{
+  Product.find({ _id : { $in : market[0].productList}}, function(err, products) {
+    if (err)
+    {
+        res.send({success : false, message : 'No marketPlace with that name', errcode : 4});
+    }
+    else
+    {
+
+      ret.market.productList = products;
+      Promotion.find({ _id : { $in : market[0].promotions}}, function(err, promo) {
+          if (err)
+          {
+            res.send({success : false, message : 'No marketPlace with that name', errcode : 4});
+          }
+          else
+          {
+            ret.market.promotions = promo;
+            res.send(ret);
+          }
+      });
+    }
+  })
+}
+
 router.get('/byName', function(req, res, next) {
 
   var ret = {};
@@ -47,7 +77,8 @@ router.get('/byName', function(req, res, next) {
       {
         ret.success = true;
         ret.market = market[0];
-        res.send(ret);
+//market, ret, res
+        getAllMarket(ret, res, market);
       }
   });
 });
@@ -56,7 +87,6 @@ router.get('/byName', function(req, res, next) {
 router.get('/byOwner', function(req, res, next) {
 
   var ret = {};
-
   Market.find({owner : req.query.id}, function(err, market){
       if (err)
       {
@@ -69,7 +99,7 @@ router.get('/byOwner', function(req, res, next) {
       {
         ret.success = true;
         ret.market = market[0];
-        res.send(ret);
+        getAllMarket(ret, res, market);
       }
   });
 });
