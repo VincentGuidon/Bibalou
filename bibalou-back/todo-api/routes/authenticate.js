@@ -7,9 +7,9 @@ var User = require('../models/Users.js');
 router.post('/register', function(req, res, next) {
 
   var ret = {};
-  console.log(req.body);
   var nUser = new User({
-    email : req.body.login,
+    name : req.body.name,
+    email : req.body.email,
     password : req.body.password
   });
 
@@ -34,7 +34,7 @@ router.post('/auth', function(req, res, next) {
 
   var ret = {};
 
-  User.find({email : req.body.login}, function(err, user) {
+  User.find({email : req.body.email}, function(err, user) {
     if (err || user.length == 0 || user[0].password != req.body.password)
     {
       ret.success = false;
