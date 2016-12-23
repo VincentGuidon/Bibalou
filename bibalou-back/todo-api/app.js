@@ -5,15 +5,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var user = require('./routes/user');
 var todos = require('./routes/todos');
 var auth = require('./routes/authenticate');
 var market = require('./routes/marketPlaces');
 var products = require('./routes/products');
 var register = require('./routes/register');
-
+var promotions = require('./routes/promotions');
+var types = require('./routes/types');
 var app = express();
+
+process.setMaxListeners(0);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,20 +39,20 @@ mongoose.connect('mongodb://localhost/bibalou')
 app.use(function (req, res, next)
 {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:9000');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     /* OPTIONS, PUT, PATCH, DELETE'*/
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
   });
 
-  app.use('/', index);
-  app.use('/user', user);
   app.use('/todos', todos);
   app.use('/authenticate', auth);
   app.use('/marketPlaces', market);
   app.use('/products', products);
   app.use('/register', register);
+  app.use('/promotions', promotions);
+  app.use('/types', types);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

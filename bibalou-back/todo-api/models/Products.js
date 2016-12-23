@@ -9,9 +9,9 @@ var productSchema = new Product({
   available : Boolean,
   image : String,
   type : String,
-  reduction : String,
+  promotion : String,
   type : String,
-  marketPlace : String
+  marketPlace : String,
 });
 
 var Product = mongoose.model('Product', productSchema);

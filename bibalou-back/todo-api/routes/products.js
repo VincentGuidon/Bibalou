@@ -5,13 +5,33 @@ var mongoose = require('mongoose');
 var Product = require('../models/Products.js');
 var Market = require('../models/Markets.js');
 
-/*
-  get - /byMarketId
-  get - /byName
-  ajotuer nom marketPlaces
-  ajouter reduction
-  ajouter productType
-*/
+router.delete('/:id', function(req, res, next) {
+  Product.findByIdAndRemove(req.params.id, function(err, promo)
+    {
+      if (err)
+      {
+        res.send({success : false, message : 'Internal error',errcode : 7});
+      }
+      else
+      {
+        res.send({sucees : true});
+      }
+    });
+});
+
+router.put('/:id', function(req, res, next) {
+  var body = req.body;
+  delete body.token;
+  Product.findByIdAndUpdate(req.params.id, body, function (err) {
+    if (err)
+    {
+      res.send({success : false, message : 'No marketPlace with that name', errcode : 4});
+    }
+    else {
+        res.send({success:true});
+    }
+  });
+});
 
 router.get('/', function(req, res, next) {
   Product.find(function (err, todos) {
@@ -20,6 +40,22 @@ router.get('/', function(req, res, next) {
         res.send({success : false, message : 'Internal Error',errcode : 0});
     }
     res.json(todos);
+  });
+});
+
+router.get('/byName', function(req, res, next) {
+  Product.find({name : req.query.name}, function(err, products) {
+    if (err)
+    {
+      res.send({success : false, message : 'No product with that name',errcode : 6});
+    }
+    else
+    {
+      var ret ={};
+      ret.success = true;
+      ret.products = products
+      res.send(ret);
+    }
   });
 });
 
@@ -58,17 +94,17 @@ router.post('/', function(req, res, next) {
   nProduct.save(function(err, newProduct) {
     if (err)
     {
-      res.send({Success:false});
+      res.send({success:false});
     }
     Market.findOne({name : marketPlaceName}, function(err, market) {
       if (err)
       {
-        res.send({success : false, message : 'No marketPlace with that ID',errcode : 5});
+        res.send({success : false, message : 'No marketPlace with that ID', errcode : 5});
       }
       else
       {
       market.productList.push(newProduct.id);
-      Market.findOneAndUpdate({name : marketPlaceName},market, function(err) {
+      Market.findOneAndUpdate({name : marketPlaceName}, market, function(err) {
         if (err)
           {
             res.send({success : false, message : 'Couldn\'t save the product', errcode : 5});

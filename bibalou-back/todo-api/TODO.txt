@@ -3,3 +3,4 @@ encode password
 check if user already connected
 errcode request;
 check if user got right
+ADD COMMENT TO EXPLAIN
