@@ -37,14 +37,40 @@ router.put('/:id', function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
-  Product.find(function (err, allProducts) {
+  Product.find(function (err, allProducts)
+  {
     if (err)
     {
         res.send({success : false, message : 'Internal Error',errcode : 0});
     }
-    res.send({success : true, products : allProducts});
+    var ret = {};
+    var i = 0;
+    var max = allProducts.length;
+    async.eachSeries(allProducts, function (product, callback)
+    {
+      if (product.promotion)
+      {
+        Promotion.findById(product.promotion, function(err, promo) {
+          if (err)
+            res.send({success : false, message : 'Internal Error',errcode : 0});
+            product.promotion = promo;
+          i = i + 1;
+          if (i == max)
+          {
+            ret.success = true;
+            ret.products = allProducts;
+            res.send(ret);
+          }
+        });
+      }
+      else {
+        i = i + 1;
+      }
+      callback(); // Alternatively: callback(new Error());
+    });
   });
 });
+
 
 router.get('/byName', function(req, res, next) {
   Product.find({name : req.query.name}, function(err, products) {
