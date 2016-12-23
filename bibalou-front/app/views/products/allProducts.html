@@ -4,15 +4,17 @@
 
   <div class="form-group">
     <div class="col-md-2">
+      <label class="sr-only" for="selectType"></label>
       <select name="selectType" id="selectType" class="form-control"
               data-ng-options="type as type.name for type in types"
               data-ng-model="type"
               data-ng-change="parseProducts()">
       </select>
     </div>
-    <div class="col-md-3">
-      <input type="text" name="path"
-             value="" data-ng-model="searchProduct">
+    <div class="col-md-4">
+      <label class="sr-only" for="searchProduct">Search: </label>
+      <input type="text" class="form-control" id="searchProduct" placeholder="name"
+             data-ng-model="searchProduct">
     </div>
   </div>
   <br>

@@ -21,7 +21,7 @@ angular.module('BibalouApp')
           $scope.user = response.data;
           $scope.initChanges();
         }),
-        SubmitResult.submitFailure(), TokenManager.get());
+        SubmitResult.submitFailure(), {"token" : TokenManager.get()});
     };
 
     var checkChanges = function () {
@@ -47,7 +47,7 @@ angular.module('BibalouApp')
       RequestAPI.POST("/user", $scope.user, SubmitResult.submitSuccess(function (response) {
           $scope.initChanges();
         }, "Profile updated !"),
-        SubmitResult.submitFailure(), TokenManager.get());
+        SubmitResult.submitFailure(), {"token" : TokenManager.get()});
     };
 
     $scope.cancelChanges = function () {

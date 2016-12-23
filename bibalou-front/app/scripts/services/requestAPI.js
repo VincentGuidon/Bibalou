@@ -8,7 +8,7 @@
  * Factory in the BibalouApp.
  */
 angular.module('BibalouApp')
-  .config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
+  .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
     $httpProvider.defaults.headers.common = {};
     $httpProvider.defaults.headers.post = {};
     $httpProvider.defaults.headers.put = {};
@@ -20,19 +20,40 @@ angular.module('BibalouApp')
 
     var api_url = 'http://localhost:3000';
 
+    function createParametersUrl(parameters) {
+      var url = "";
+
+      if (parameters != null && Array.isArray(parameters)) {
+        url += "?";
+        var passed = false;
+
+        for (var i = 0; i < parameters.length; ++i) {
+          if (parameters[i].name && parameters[i].value) {
+            if (passed) {
+              url += "&";
+            }
+            url += parameters[i].name + "=" + parameters[i].value
+            passed = true;
+          }
+        }
+      }
+
+      return url;
+    }
+
     // Public API here
     return {
-      POST: function (url, data, success, failure, token) {
+      POST: function (url, data, success, failure, parameters) {
         if (token) {
           TokenManager.put(token);
         }
         $http({
           method: 'POST',
-          url:  api_url + url + (token != null ? "?token=" + token : ""),
+          url: api_url + url + createParametersUrl(parameters),
           data: data,
-          transformRequest: function(obj) {
+          transformRequest: function (obj) {
             var str = [];
-            for(var p in obj)
+            for (var p in obj)
               str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
             return str.join("&");
           },
@@ -54,13 +75,13 @@ angular.module('BibalouApp')
           }
         );
       },
-      GET: function (url, success, failure, token) {
+      GET: function (url, success, failure, parameters) {
         if (token) {
           TokenManager.put(token);
         }
         $http({
           method: 'GET',
-          url: api_url + url + (token != null ? "?token=" + token : ""),
+          url: api_url + url + createParametersUrl(parameters),
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
