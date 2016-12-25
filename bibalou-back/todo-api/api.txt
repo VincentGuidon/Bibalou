@@ -1,3 +1,9 @@
+/**** REMEMBER ****/
+
+req.query : /user?id=..
+red.params : /user/:id
+
+
 List of all the api
 
 To connect a user :

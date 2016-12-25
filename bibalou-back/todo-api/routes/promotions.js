@@ -36,6 +36,22 @@ router.put('/product', function(req, res, next) {
   });
 });
 
+router.get('/:id', function(req, res, next) {
+  Promotion.findById(req.params.id, function(err, promo) {
+    var ret = {};
+    if (err)
+    {
+      res.send({success : false, message : 'Internal error',errcode : 7});
+    }
+    else
+    {
+      ret.success = true;
+      ret.promotions = promo;
+      res.send(ret);
+    }
+  });
+});
+
 router.get('/byName', function(req, res, next) {
   Promotion.find({name : req.query.name}, function(err, promo) {
     var ret = {};
@@ -85,13 +101,13 @@ router.put('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    var market = req.body.marketPlace;
+    var marketName = req.body.marketPlace;
     var promo = new Promotion({
     name : req.body.name,
     description : req.body.description,
     percent : req.body.percent,
     brut : req.body.brut,
-    marketPlace : market
+    marketPlace : marketName
   });
   promo.save(function(err, newPromo) {
     if (err)
@@ -100,7 +116,7 @@ router.post('/', function(req, res, next) {
     }
     else
     {
-      Market.findOneAndUpdate({name : market}, {$push : {promotions : newPromo.id }}, function(err) {
+      Market.findOneAndUpdate({name : marketName}, {$push : {promotions : newPromo.id }}, function(err) {
           if (err)
           {
             res.send({success : false, message : 'Internal error', errcode : 7})

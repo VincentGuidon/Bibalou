@@ -13,7 +13,7 @@ angular.module('BibalouApp')
 
     $scope.init = function () {
       RequestAPI.GET("/marketPlaces/byOwner", SubmitResult.submitSuccess(function (response) {
-          $scope.marketPlace = response.data;
+          $scope.marketPlace = response.data.marketPlace;
         /* GET NEWS*/
           $scope.busy = false;
         }),

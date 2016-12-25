@@ -13,16 +13,16 @@ angular.module('BibalouApp')
 
     $scope.initChanges = function () {
       CloneUtilsCustom.copyObject($scope.user, $scope.change);
-      $scope.change.passwordVerif = $scope.change.password;
+      $scope.change.passwordVerif = "";
     };
 
     $scope.init = function () {
-      RequestAPI.GET("/user", SubmitResult.submitSuccess(function (response) {
-          $scope.user = response.data;
+      RequestAPI.GET("/user/" + User.getId(), SubmitResult.submitSuccess(function (response) {
+          $scope.user = response.data.user;
         console.log($scope.user);
           $scope.initChanges();
         }),
-        SubmitResult.submitFailure(), {token : User.getToken(), id: User.getId()});
+        SubmitResult.submitFailure(), {token : User.getToken()});
     };
 
     var checkChanges = function () {

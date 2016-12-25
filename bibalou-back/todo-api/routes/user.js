@@ -4,6 +4,7 @@ var router = express.Router();
 var User = require('../models/Users.js');
 
 router.post('/', function(req, res, next) {
+  console.log(req.body)
   User.findByIdAndUpdate(req.body.id, req.body, function(err) {
     if (err)
       res.send({success : false, message : 'Internal error',errcode : 7});
@@ -13,8 +14,8 @@ router.post('/', function(req, res, next) {
 });
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  User.findById(req.query.id, function(err, user) {
+router.get('/:id', function(req, res, next) {
+  User.findById(req.params.id, function(err, user) {
     if (err)
       res.send({success : false, message : 'Internal error',errcode : 7});
     res.send({success : true, 'user' : user});

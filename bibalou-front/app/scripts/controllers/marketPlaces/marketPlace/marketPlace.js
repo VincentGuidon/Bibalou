@@ -13,11 +13,7 @@ angular.module('BibalouApp')
 
     $scope.init = function() {
       RequestAPI.GET("/marketPlace/" + $scope.id, SubmitResult.submitSuccess(function (response) {
-          $scope.marketPlace = response.data;
-          RequestAPI.GET("/marketPlace/" + $scope.marketPlace.id + "/comments", SubmitResult.submitSuccess(function (response) {
-              $scope.comments = response.data;
-            }),
-            SubmitResult.submitFailure(), {token: User.getToken()});
+          $scope.marketPlace = response.data.marketPlace;
         }),
         SubmitResult.submitFailure(), {token: User.getToken()});
     };

@@ -15,10 +15,6 @@ angular.module('BibalouApp')
     $scope.init = function () {
       RequestAPI.GET("/product/" + $scope.id, SubmitResult.submitSuccess(function (response) {
           $scope.product = response.data;
-          RequestAPI.GET("/product/" + $scope.product.id + "/comments", SubmitResult.submitSuccess(function (response) {
-              $scope.comments = response.data;
-            }),
-            SubmitResult.submitFailure(), {token: User.getToken()});
         }),
         SubmitResult.submitFailure(), {token: User.getToken()});
     };

@@ -69,6 +69,23 @@ router.get('/', function(req, res, next) {
 });
 
 
+router.get('/:id', function(req, res, next) {
+  Product.findById(req.params.id, function(err, product) {
+    if (err)
+    {
+      res.send({success : false, message : 'No product find',errcode : 6});
+    }
+    else
+    {
+      var ret = {};
+
+      ret.success = true;
+      ret.product = product;
+      res.send(ret);
+    }
+  });
+});
+
 router.get('/byName', function(req, res, next) {
   Product.find({name : req.query.name}, function(err, products) {
     if (err)
