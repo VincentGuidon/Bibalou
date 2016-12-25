@@ -1,67 +1,69 @@
 <div data-ng-show="!busy">
-    <div class="modal-header">
-        <div class="col-md-3 text-center">
-            <img class="img-responsive" src="{{marketPlace.image}}"/>
-        </div>
+  <div class="modal-header">
+    <div class="row col-md-12">
+      <div class="col-md-3 text-center">
+        <img class="img-responsive" src="http://www.jds.fr/medias/image/le-marchand-de-sable-12394-1200-630.jpg"/>
+      </div>
 
-        <h1><a href="#/marketPlaces/{{marketPlace.id}}">{{marketPlace.name}}</a></h1>
+      <h1 style="padding-top: 20px"><a href="#/marketPlaces/{{marketPlace.id}}">{{marketPlace.name}}</a></h1>
 
 
-        <p class="lead text-align">Welcome to your Marketplace</p>
-        <hr style="border-color:#E6E6E6;">
-
-        <div class="rating pull-right">
-            <span class="stars hidden" title="{{marketPlace.rating}}">{{marketPlace.rating}}</span>
-        </div>
-        <div class="pull-right">
-            <span>Rating :</span>
-        </div>
-
-        <button class="btn btn-primary" ui-sref="myMarketPlace.products">
-            <span>Manage Products&nbsp;</span>
-        </button>
-        <button class="btn btn-primary" ui-sref="myMarketPlace.news">
-            <span>Manage News&nbsp;</span>
-        </button>
-        <button class="btn btn-primary" ui-sref="myMarketPlace.stock">
-            <span>Your Stock&nbsp;</span>
-        </button>
-        <button class="btn btn-primary" ui-sref="myMarketPlace.promotions">
-            <span>Your Promotions&nbsp;</span>
-        </button>
-
+      <p class="lead text-align">Welcome to your Marketplace</p>
+      <hr style="border-color:#E6E6E6;">
     </div>
+    <div class="row col-md-12">
+      <div class="rating pull-right">
+        <span class="stars hidden" title="{{marketPlace.rating}}">{{marketPlace.rating}}</span>
+      </div>
+      <div class="pull-right">
+        <span>Rating :</span>
+      </div>
 
-
-    <div class="modal-body">
-        <h3>Description :</h3>
-        <br>
-        <span>{{marketPlace.description}}</span>
-
-        <button class="btn btn-primary pull-right" data-ng-click="edit()">
-            <span class="glyphicon glyphicon-pencil"></span>
-            <span>Edit&nbsp;</span>
-        </button>
-
-        <br>
-        <br>
-
-        <div class="modal-footer">
-        </div>
+      <button class="btn btn-primary" ui-sref="myMarketPlace.products">
+        <span>Manage Products&nbsp;</span>
+      </button>
+      <button class="btn btn-primary" ui-sref="myMarketPlace.news">
+        <span>Manage News&nbsp;</span>
+      </button>
+      <button class="btn btn-primary" ui-sref="myMarketPlace.stock">
+        <span>Your Stock&nbsp;</span>
+      </button>
+      <button class="btn btn-primary" ui-sref="myMarketPlace.promotions">
+        <span>Your Promotions&nbsp;</span>
+      </button>
     </div>
-    <script type="text/javascript">
-        $.fn.stars = function() {
-            return $(this).each(function() {
-                $(this).html($('<span />').width(Math.max(0, (Math.min(5, parseFloat($(this).html())))) * 16));
-            });
-        };
+  </div>
 
-        $(function() {
-            window.setTimeout(function(){
-                $('span.stars').stars().removeClass('hidden');
-            }, 500);
-        });
-    </script>
+
+  <div class="modal-body">
+    <h3>Description :</h3>
+    <br>
+    <span>{{marketPlace.description}}</span>
+
+    <button class="btn btn-primary pull-right" data-ng-click="edit()">
+      <span class="glyphicon glyphicon-pencil"></span>
+      <span>Edit&nbsp;</span>
+    </button>
+
+    <br>
+    <br>
+
+    <div class="modal-footer">
+    </div>
+  </div>
+  <script type="text/javascript">
+    $.fn.stars = function () {
+      return $(this).each(function () {
+        $(this).html($('<span />').width(Math.max(0, (Math.min(5, parseFloat($(this).html())))) * 16));
+      });
+    };
+
+    $(function () {
+      window.setTimeout(function () {
+        $('span.stars').stars().removeClass('hidden');
+      }, 500);
+    });
+  </script>
 </div>
 
 
