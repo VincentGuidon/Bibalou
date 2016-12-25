@@ -14,7 +14,7 @@ router.post('/', function(req, res, next) {
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  User.findOne({email : req.query.email}, function(err, user) {
+  User.findById(req.query.id, function(err, user) {
     if (err)
       res.send({success : false, message : 'Internal error',errcode : 7});
     res.send({success : true, 'user' : user});

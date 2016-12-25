@@ -4,10 +4,11 @@ var router = express.Router();
 var types = [
   'book',
   'game',
-  'cook',
-  'CD & Vinyl',
-  'clothing',
   'movie',
+  'cooking',
+  'CD & Vinyl',
+  'clothes',
+  'jewellery',
   'other'
 ];
 

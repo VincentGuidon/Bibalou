@@ -7,8 +7,8 @@ var Product = require('../models/Products.js');
 var Market = require('../models/Markets.js');
 var Promotion = require('../models/Promotions.js');
 
-router.delete('/:id', function(req, res, next) {
-  Product.findByIdAndRemove(req.params.id, function(err, promo)
+router.delete('/', function(req, res, next) {
+  Product.findByIdAndRemove(req.query.id, function(err, promo)
     {
       if (err)
       {
@@ -21,11 +21,8 @@ router.delete('/:id', function(req, res, next) {
     });
 });
 
-router.put('/:id', function(req, res, next) {
-  var body = req.body;
-  delete body.token;
-  console.log(body);
-  Product.findByIdAndUpdate(req.params.id, body, function (err) {
+router.put('/', function(req, res, next) {
+  Product.findByIdAndUpdate(req.query.id, req.body, function (err) {
     if (err)
     {
       res.send({success : false, message : 'No product with that name', errcode : 4});

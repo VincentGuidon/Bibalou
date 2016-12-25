@@ -19,6 +19,7 @@ angular.module('BibalouApp')
     $scope.init = function () {
       RequestAPI.GET("/user", SubmitResult.submitSuccess(function (response) {
           $scope.user = response.data;
+        console.log($scope.user);
           $scope.initChanges();
         }),
         SubmitResult.submitFailure(), {token : User.getToken(), id: User.getId()});

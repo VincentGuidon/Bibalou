@@ -26,6 +26,7 @@ router.put('/addNews', function(req, res, next) {
   });
 });
 
+/*
 router.delete('/:name', function(req, res, next) {
   Market.findOneAndRemove(req.params.name, function(err, promo)
     {
@@ -38,12 +39,10 @@ router.delete('/:name', function(req, res, next) {
         res.send({sucees : true});
       }
     });
-});
+});*/
 
-router.put('/:id', function(req, res, next) {
-  var body = req.body;
-  delete body.token;
-  Market.findOneAndUpdate({name : req.params.id}, body, function (err) {
+router.put('/', function(req, res, next) {
+  Market.findByIdAndUpdate(req.query.id, req.body, function (err) {
     if (err)
     {
       res.send({success : false, message : 'No marketPlace with that name', errcode : 4});

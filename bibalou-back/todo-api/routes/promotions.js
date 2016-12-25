@@ -6,8 +6,8 @@ var Promotion = require('../models/Promotions.js');
 var Market = require('../models/Markets.js');
 var Product = require('../models/Products.js');
 
-router.delete('/:id', function(req, res, next) {
-  Promotion.findByIdAndRemove(req.params.id, function(err, promo)
+router.delete('/', function(req, res, next) {
+  Promotion.findByIdAndRemove(req.query.id, function(err, promo)
     {
       if (err)
       {
