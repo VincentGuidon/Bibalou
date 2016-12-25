@@ -1,6 +1,6 @@
-<form name="editForm" role="form" novalidate data-ng-submit="create()">
+<form name="editForm" role="form" novalidate data-ng-submit="mode[current].btnValid.action()">
   <div class="modal-header">
-    <h2 class="modal-title" id="myMarketPlaceLabel">Create my MarketPlace</h2>
+    <h2 class="modal-title" id="myMarketPlaceLabel">{{mode[current].title}}</h2>
   </div>
   <div class="modal-body" style="display: flex">
     <div class="col-md-12">
@@ -86,11 +86,11 @@
 
   <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-disabled="isBusy"
-            data-ng-click="clear()">
-      <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+            data-ng-click="mode[current].btnCancel.action()">
+      <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>{{mode[current].btnCancel.title}}</span>
     </button>
     <button type="submit" formnovalidate data-ng-disabled="editForm.$invalid || isBusy" class="btn btn-primary">
-      <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Create</span>
+      <span class="glyphicon glyphicon-save"></span>&nbsp;<span>{{mode[current].btnValid.title}}</span>
     </button>
   </div>
 </form>

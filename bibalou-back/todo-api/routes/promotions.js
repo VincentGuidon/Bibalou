@@ -36,8 +36,8 @@ router.put('/product', function(req, res, next) {
   });
 });
 
-router.get('/:id', function(req, res, next) {
-  Promotion.findById(req.params.id, function(err, promo) {
+router.get('/byId', function(req, res, next) {
+  Promotion.findById(req.query.id, function(err, promo) {
     var ret = {};
     if (err)
     {

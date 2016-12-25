@@ -134,13 +134,13 @@ angular.module('BibalouApp')
 
     $scope.loadParser = function () {
       $scope.types = [];
-      $scope.type = {id: -1, name: "All"};
+      $scope.type = "All";
       $scope.filter = {"price": "UP", "bestPrice": true, "name": true};
 
       RequestAPI.GET("/types", SubmitResult.submitSuccess(function (response) {
-          $scope.types = response.data;
-          $scope.types.splice(0, 0, {name: "All", id: -1});
-          $scope.type = $scope.types[0];
+          $scope.types = response.data.types;
+          $scope.types.splice(0, 0, "All");
+        console.log($scope.types);
         }),
         SubmitResult.submitFailure(), {token: User.getToken()});
     };

@@ -18,8 +18,12 @@ angular.module('BibalouApp')
           $scope.busy = false;
         }),
         SubmitResult.submitFailure(function() {
-          $location.url("/myMarketPlace/create");
-        }), {token: User.getToken(), owner: User.getToken()});
+          $location.url("/myMarketPlace/edit");
+        }), {token: User.getToken(), owner: User.getId()});
+    };
+
+    $scope.edit = function() {
+      $location.url("/myMarketPlace/edit");
     };
 
     $scope.refresh = function () {

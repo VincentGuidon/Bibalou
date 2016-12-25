@@ -40,7 +40,8 @@ router.put('/addNews', function (req, res, next) {
  });*/
 
 router.put('/', function (req, res, next) {
-    Market.findByIdAndUpdate(req.query.id, req.body, function (err) {
+    console.log(req.body)
+    Market.findByIdAndUpdate(req.body._id, req.body, function (err) {
         if (err) {
             res.send({success: false, message: 'No marketPlace with that name', errcode: 4});
         }
@@ -56,7 +57,6 @@ function getAllMarket(ret, res, market) {
             res.send({success: false, message: 'No marketPlace with that name', errcode: 4});
         }
         else {
-
             ret.marketPlace.productList = products;
             Promotion.find({_id: {$in: market[0].promotions}}, function (err, promo) {
                 if (err) {
@@ -79,6 +79,7 @@ router.get('/', function (req, res, next) {
             ret.success = false;
             ret.message = "No marketPlace available";
             ret.errcode = 4;
+            res.send(ret);
         }
         else {
             ret.success = true;
@@ -97,7 +98,13 @@ router.get('/byName', function (req, res, next) {
             ret.success = false;
             ret.message = "Market Place unknow";
             ret.errcode = 4;
-            console.log('Can\'t find the MarketPlace');
+            res.send(ret);
+        }
+        else if (market.size  == 0) {
+            ret.success = false;
+            ret.message = "No MarketPlace found";
+            ret.errcode = 4;
+            res.send(ret);
         }
         else {
             ret.success = true;
@@ -108,15 +115,21 @@ router.get('/byName', function (req, res, next) {
     });
 });
 
-router.get('/:id', function (req, res, next) {
+router.get('/byId', function (req, res, next) {
 
     var ret = {};
-    Market.findById(req.params.id, function (err, market) {
+    Market.findById(req.query.id, function (err, market) {
         if (err) {
             ret.success = false;
             ret.message = "Market Place unknow";
             ret.errcode = 4;
-            console.log('Can\'t find the MarketPlace');
+            res.send(ret);
+        }
+        else if (market.size  == 0) {
+            ret.success = false;
+            ret.message = "No MarketPlace found";
+            ret.errcode = 4;
+            res.send(ret);
         }
         else {
             ret.success = true;
@@ -129,16 +142,22 @@ router.get('/:id', function (req, res, next) {
 router.get('/byOwner', function (req, res, next) {
 
     var ret = {};
-    Market.find({owner: req.query.id}, function (err, market) {
+    Market.find({owner: req.query.owner}, function (err, market) {
         if (err) {
             ret.success = false;
             ret.message = "Market Place unknow";
             ret.errcode = 4;
-            console.log('Can\'t find the MarketPlace');
+            res.send(ret);
+        }
+        else if (market.size  == 0) {
+            ret.success = false;
+            ret.message = "No MarketPlace found";
+            ret.errcode = 4;
+            res.send(ret);
         }
         else {
             ret.success = true;
-            ret.market = market[0];
+            ret.marketPlace = market[0];
             getAllMarket(ret, res, market);
         }
     });
@@ -147,13 +166,13 @@ router.get('/byOwner', function (req, res, next) {
 router.post('/', function (req, res, next) {
 
     var ret = {};
-    var user = randomToken.findUserConnected(req.body.token);
+    //var user = randomToken.findUserConnected(req.body.token);
 
     var newMarket = new Market({
         name: req.body.name,
         description: req.body.description,
         productList: [],
-        owner: user.id,
+        owner: req.body.owner,
         order: [],
         image: req.body.image
     });

@@ -72,10 +72,10 @@ angular
         controller: 'MyMarketPlaceCtrl',
         controllerAs: 'myMarketPlace'
       })
-      .when('/myMarketPlace/create', {
-        templateUrl: 'views/marketPlaces/myMarketPlace/createMarketPlace.html',
-        controller: 'CreateMarketPlaceCtrl',
-        controllerAs: 'createMarketPlace'
+      .when('/myMarketPlace/edit', {
+        templateUrl: 'views/marketPlaces/myMarketPlace/editMarketPlace.html',
+        controller: 'EditMarketPlaceCtrl',
+        controllerAs: 'editMarketPlace'
       })
       .when('/marketPlace/:id', {
         templateUrl: 'views/marketPlaces/marketPlace/marketPlace.html',

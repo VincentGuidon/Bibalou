@@ -17,12 +17,12 @@ angular.module('BibalouApp')
     };
 
     $scope.init = function () {
-      RequestAPI.GET("/user/" + User.getId(), SubmitResult.submitSuccess(function (response) {
+      RequestAPI.GET("/user", SubmitResult.submitSuccess(function (response) {
           $scope.user = response.data.user;
         console.log($scope.user);
           $scope.initChanges();
         }),
-        SubmitResult.submitFailure(), {token : User.getToken()});
+        SubmitResult.submitFailure(), {token : User.getToken(), id: User.getId()});
     };
 
     var checkChanges = function () {

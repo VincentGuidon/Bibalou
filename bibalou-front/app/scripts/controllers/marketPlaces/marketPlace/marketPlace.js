@@ -12,10 +12,10 @@ angular.module('BibalouApp')
     $scope.id = $routeParams.id;
 
     $scope.init = function() {
-      RequestAPI.GET("/marketPlace/" + $scope.id, SubmitResult.submitSuccess(function (response) {
+      RequestAPI.GET("/marketPlace", SubmitResult.submitSuccess(function (response) {
           $scope.marketPlace = response.data.marketPlace;
         }),
-        SubmitResult.submitFailure(), {token: User.getToken()});
+        SubmitResult.submitFailure(), {token: User.getToken(), id: $scope.id});
     };
 
     $scope.init();

@@ -6,9 +6,9 @@
     <div class="col-md-2">
       <label class="sr-only" for="selectType"></label>
       <select name="selectType" id="selectType" class="form-control"
-              data-ng-options="type as type.name for type in types"
+              data-ng-options="type as type for type in types"
               data-ng-model="type"
-              data-ng-change="parseProducts()">
+              data-ng-change=parseUnparsedProducts()">
       </select>
     </div>
     <div class="col-md-4">

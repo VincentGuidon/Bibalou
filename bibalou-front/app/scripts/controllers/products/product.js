@@ -13,28 +13,11 @@ angular.module('BibalouApp')
     $scope.comment = {};
 
     $scope.init = function () {
-      RequestAPI.GET("/product/" + $scope.id, SubmitResult.submitSuccess(function (response) {
+      RequestAPI.GET("/product", SubmitResult.submitSuccess(function (response) {
           $scope.product = response.data;
         }),
-        SubmitResult.submitFailure(), {token: User.getToken()});
+        SubmitResult.submitFailure(), {token: User.getToken(), id: $scope.id});
     };
 
-    $scope.closeReply = function() {
-      $scope.isReplyingToProduct = false;
-    };
-
-    $scope.replyToPeople = function() {
-
-    };
-
-    $scope.replyToProduct = function() {
-      $scope.isReplyingToProduct = true;
-    };
-
-    $scope.sendReply = function() {
-      console.log("comment: ", $scope.comment);
-      RequestAPI.POST("/product/" + $scope.product.id + "/comment", $scope.comment, SubmitResult.submitSuccess("comment send"),
-        SubmitResult.submitFailure(), {token: User.getToken()});
-    };
     $scope.init();
   });
