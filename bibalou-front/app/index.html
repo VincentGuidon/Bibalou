@@ -1,137 +1,156 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css" />
-    <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css" />
-    <link rel="stylesheet" href="bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="bower_components/angular-selector/dist/angular-selector.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/custom.css">
-    <link rel="stylesheet" href="styles/comments.css">
-    <!-- endbuild -->
-  </head>
-  <body ng-app="BibalouApp">
-    <!--[if lte IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+  <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css"/>
+  <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css"/>
+  <link rel="stylesheet" href="bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.css"/>
+  <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css"/>
+  <link rel="stylesheet" href="bower_components/angular-selector/dist/angular-selector.css"/>
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/custom.css">
+  <link rel="stylesheet" href="styles/comments.css">
+  <!-- endbuild -->
+</head>
+<body ng-app="BibalouApp">
+<!--[if lte IE 8]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> to improve your experience.</p>
+<![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div class="header" style="border-bottom: none">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container container-head">
-          <div class="navbar-header">
+<!-- Add your site or application content here -->
+<div class="header" style="border-bottom: none">
+  <div class="navbar navbar-default" role="navigation">
+    <div class="container container-head">
+      <div class="navbar-header">
 
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
 
-            <a class="navbar-brand" href="#/" left>Bibalou</a>
-          </div>
+        <a class="navbar-brand" href="#/" left>Bibalou</a>
+      </div>
 
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
+      <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
-            <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav">
 
-            </ul>
+        </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-              <li><a ng-href="#/allProducts"><b>Products</b></a></li>
-              <li><a ng-href="#/allMarketPlaces"><b>MarketPlaces</b></a></li>
-              <li><div login-navbar-widget> </div></li>
-              <li><div account-navbar-widget> </div></li>
-            </ul>
-          </div>
-        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a ng-href="#/allProducts"><b>Products</b></a></li>
+          <li><a ng-href="#/allMarketPlaces"><b>MarketPlaces</b></a></li>
+          <li>
+            <div login-navbar-widget></div>
+          </li>
+          <li>
+            <div account-navbar-widget></div>
+          </li>
+        </ul>
       </div>
     </div>
+  </div>
+</div>
 
-    <toaster-container toaster-options="
+<toaster-container toaster-options="
     {'close-button':{ 'toast-warning': true, 'toast-error': false } }">
-    </toaster-container>
+</toaster-container>
 
-    <div class="container">
-      <div class="well" ng-view="content"></div>
-    </div>
+<div class="container">
+  <div class="well" ng-view="content"></div>
+</div>
 
-    <div class="footer">
-      <div class="container container-head">
-        <a class="pull-right" ng-href="#/about">About</a>
-      </div>
-    </div>
+<div class="footer">
+  <div class="container container-head">
+    <a class="pull-right" ng-href="#/about">About</a>
+  </div>
+</div>
 
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+<script>
+  !function (A, n, g, u, l, a, r) {
+    A.GoogleAnalyticsObject = l, A[l] = A[l] || function () {
+        (A[l].q = A[l].q || []).push(arguments)
+      }, A[l].l = +new Date, a = n.createElement(g),
+      r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
+  }(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
+  ga('create', 'UA-XXXXX-X');
+  ga('send', 'pageview');
+</script>
 
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-aria/angular-aria.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-messages/angular-messages.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.js"></script>
-    <script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
-    <script src="bower_components/flow.js/dist/flow.js"></script>
-    <script src="bower_components/ng-flow/dist/ng-flow.js"></script>
-    <script src="bower_components/angular-selector/dist/angular-selector.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-messages/angular-messages.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-touch/angular-touch.js"></script>
+<script src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/AngularJS-Toaster/toaster.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.js"></script>
+<script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+<script src="bower_components/flow.js/dist/flow.js"></script>
+<script src="bower_components/ng-flow/dist/ng-flow.js"></script>
+<script src="bower_components/angular-selector/dist/angular-selector.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <script src="scripts/controllers/login/login.js"></script>
-        <script src="scripts/controllers/account/createAccount.js"></script>
-        <script src="scripts/directives/loginNavbarWidget.js"></script>
-        <script src="scripts/services/dateTools.js"></script>
-        <script src="scripts/controllers/products/allProducts.js"></script>
-        <script src="scripts/controllers/account/myAccount.js"></script>
-        <script src="scripts/services/user.js"></script>
-        <script src="scripts/services/requestAPI.js"></script>
-        <script src="scripts/directives/accountNavbarWidget.js"></script>
-        <script src="scripts/controllers/marketPlaces/myMarketPlace/myMarketPlace.js"></script>
-        <script src="scripts/controllers/marketPlaces/allMarketPlaces.js"></script>
-        <script src="scripts/controllers/products/product.js"></script>
-        <script src="scripts/controllers/marketPlaces/marketPlace/marketPlace.js"></script>
-        <script src="scripts/services/submitResult.js"></script>
-        <script src="scripts/services/toolsUtils.js"></script>
-        <script src="scripts/controllers/products/addProductModal.js"></script>
-        <script src="scripts/controllers/marketPlaces/myMarketPlace/editMarketPlace.js"></script>
-        <!-- endbuild -->
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+
+<script src="scripts/services/dateTools.js"></script>
+<script src="scripts/services/user.js"></script>
+<script src="scripts/services/requestAPI.js"></script>
+<script src="scripts/services/submitResult.js"></script>
+<script src="scripts/services/toolsUtils.js"></script>
+
+<script src="scripts/directives/loginNavbarWidget.js"></script>
+<script src="scripts/directives/accountNavbarWidget.js"></script>
+<script src="scripts/directives/manageMp/manageMpProductsWidget.js"></script>
+<script src="scripts/directives/manageMp/manageMpPromotionsWidget.js"></script>
+<script src="scripts/directives/manageMp/manageMpNewsWidget.js"></script>
+<script src="scripts/directives/manageMp/manageMpStockWidget.js"></script>
+
+<script src="scripts/controllers/main.js"></script>
+<script src="scripts/controllers/about.js"></script>
+<script src="scripts/controllers/login/login.js"></script>
+<script src="scripts/controllers/account/createAccount.js"></script>
+<script src="scripts/controllers/products/allProducts.js"></script>
+<script src="scripts/controllers/account/myAccount.js"></script>
+<script src="scripts/controllers/marketPlaces/myMarketPlace/myMarketPlace.js"></script>
+<script src="scripts/controllers/marketPlaces/allMarketPlaces.js"></script>
+<script src="scripts/controllers/products/product.js"></script>
+<script src="scripts/controllers/marketPlaces/marketPlace/marketPlace.js"></script>
+<script src="scripts/controllers/products/addProductModal.js"></script>
+<script src="scripts/controllers/marketPlaces/myMarketPlace/editMarketPlace.js"></script>
+<script src="scripts/controllers/marketPlaces/myMarketPlace/widget/manageMpProducts.js"></script>
+<script src="scripts/controllers/marketPlaces/myMarketPlace/widget/manageMpPromotions.js"></script>
+<script src="scripts/controllers/marketPlaces/myMarketPlace/widget/manageMpNews.js"></script>
+<script src="scripts/controllers/marketPlaces/myMarketPlace/widget/manageMpStock.js"></script>
+
+<!-- endbuild -->
 </body>
 </html>
