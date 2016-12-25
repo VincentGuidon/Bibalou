@@ -1,16 +1,7 @@
-<div class="row">
-<span> API status :
-  <span data-ng-if="status" style="color:limegreen">SUCCESS</span>
-  <span data-ng-if="!status" style="color:red">FAILURE</span>
-  </span>
-</div>
-<div class="row">
-  <span> Token: {{token}}</span>
-</div>
 <div class="register">
   <div class="container">
     <div class="row">
-      <div class="panel">
+      <div class="panel" style="background-color: inherit">
         <div class="panel-body">
           <form data-ng-submit="register()" role="form">
             <div class="form-group">
@@ -37,7 +28,7 @@
                 data-ng-model="checkPassword">
             </div>
             <div class="form-group">
-              <button id="signupSubmit" type="submit" class="btn btn-info btn-block" data-ng-disabled="isBusy">Create your account</button>
+              <button id="signupSubmit" type="submit" class="btn btn-primary btn-block data-ng-disabled="isBusy">Create your account</button>
             </div>
             <p class="form-group">By creating an account, you agree to our <a href="">Terms of Use</a> and our <a
               href="">Privacy Policy</a>.</p>
