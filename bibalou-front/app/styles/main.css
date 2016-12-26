@@ -166,6 +166,11 @@ body {
   color: #777;
 }
 
+.row-fix {
+  margin-left: -19px;
+  margin-right: -19px;
+}
+
 .mb5 {
   margin-bottom: 5px !important;
 }
@@ -253,4 +258,20 @@ body {
 
 .bold {
   font-weight: bold;
+}
+
+.borders-grey {
+  border-top: 1px solid #e3e3e3;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+@media screen and (max-width: 992px) {
+  .resp-block-border-grey {
+    border-bottom: 1px solid #e3e3e3;
+  }
+}
+@media screen and (min-width: 992px) {
+  .resp-block-border-grey {
+    border-right: 1px solid #e3e3e3;
+  }
 }

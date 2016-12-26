@@ -31,7 +31,7 @@ angular.module('BibalouApp')
       if ($scope.change.password != $scope.change.passwordVerif) {
         swal({
           title: "Error!",
-          text: "password are not equals",
+          text: "The passwords do not match.",
           type: "error",
           confirmButtonText: "OK"
         });
@@ -47,7 +47,7 @@ angular.module('BibalouApp')
       CloneUtilsCustom.copyObject($scope.change, $scope.user);
       RequestAPI.PUT("/user", $scope.user, SubmitResult.submitSuccess(function (response) {
           $scope.initChanges();
-        }, "Profile updated !"),
+        }, "Profile updated!"),
         SubmitResult.submitFailure(), {token: User.getToken()});
     };
 
