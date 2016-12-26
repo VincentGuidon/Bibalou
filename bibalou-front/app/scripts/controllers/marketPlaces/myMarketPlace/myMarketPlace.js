@@ -12,21 +12,32 @@ angular.module('BibalouApp')
     $scope.busy = true;
     $scope.mode = 1;
 
-    $scope.changeMode = function(value) {
+    $scope.changeMode = function (value) {
       $scope.mode = value;
     };
 
+    $scope.parseNews = function () {
+      var newNews = [];
+      for (var i = 0; i < $scope.marketPlace.news.length; ++i) {
+        newNews.push(JSON.parse($scope.marketPlace.news[i]));
+      }
+      $scope.marketPlace.news = newNews;
+      console.log($scope.marketPlace.news);
+    };
+
     $scope.init = function () {
+      console.log("init");
       RequestAPI.GET("/marketPlaces/byOwner", SubmitResult.submitSuccess(function (response) {
           $scope.marketPlace = response.data.marketPlace;
+          $scope.parseNews();
           $scope.busy = false;
         }),
-        SubmitResult.submitFailure(function() {
+        SubmitResult.submitFailure(function () {
           $location.url("/myMarketPlace/edit");
         }), {token: User.getToken(), owner: User.getId()});
     };
 
-    $scope.edit = function() {
+    $scope.edit = function () {
       $location.url("/myMarketPlace/edit");
     };
 

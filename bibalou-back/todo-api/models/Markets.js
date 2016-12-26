@@ -10,7 +10,7 @@ var marketSchema = new Schema({
   owner : { type: String, required: true },
   order : [Schema.Types.Mixed],
   promotions : [Schema.Types.Mixed],
-  news : [String],
+  news : [String], //{id: String, title: String, content: String, date: Date}]
   image : String
 });
 

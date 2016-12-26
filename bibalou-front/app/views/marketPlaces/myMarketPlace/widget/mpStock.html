@@ -3,10 +3,10 @@
 
   <div class="form-group">
     <div class="col-md-2">
-      <label class="sr-only" for="selectStatus"></label>
-      <select name="selectStatus" id="selectStatus" class="form-control"
-              data-data-ng-options="current as current.name for current in states"
-              data-data-ng-model="currentStates"
+      <label class="sr-only" for="selectStates"></label>
+      <select name="selectStates" id="selectStates" class="form-control"
+              data-data-ng-options="state as state for state in states"
+              data-data-ng-model="state"
               data-data-ng-change="parseUnparsedProducts()">
       </select>
     </div>

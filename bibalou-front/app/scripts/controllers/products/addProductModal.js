@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc function
- * @name BibalouApp.controller:AddproductmodalCtrl
+ * @name BibalouApp.controller:AddProductModalCtrl
  * @description
- * # AddproductmodalCtrl
+ * # AddProductModalCtrl
  * Controller of the BibalouApp
  */
 angular.module('BibalouApp')

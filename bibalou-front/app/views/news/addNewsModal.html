@@ -1,0 +1,58 @@
+<form name="editForm" role="form" novalidate><!-- data-ng-submit="mode[current].btnValid.action()">-->
+  <div class="modal-header">
+    <h2 class="modal-title" id="myProductLabel">{{mode[current].title}}</h2>
+  </div>
+  <div class="modal-body" style="display: flex">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="well well-sm" style="display:flex;">
+            <div class="col-md-8" data-ng-class="{ 'has-error' : editForm.title.$invalid && !editForm.title.$pristine }">
+              <div class="form-group">
+                <label class="control-label" for="field_title">Title</label><i style="color: red">*</i>
+                <input type="text" class="form-control" name="title" id="field_title"
+                       data-ng-disabled="current == 0"
+                       data-ng-model="news.title"
+                       placeholder="ex. Summer party"
+                       required/>
+                <p data-ng-show="editForm.title.$invalid && !editForm.title.$pristine" class="help-block">A title is
+                  needed.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2 style="padding-top:2%">Content<i style="color: red">*</i></h2>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group"
+               data-ng-class="{ 'has-error' : editForm.content.$invalid && !editForm.content.$pristine }">
+            <label class="control-label" for="field_content"></label>
+            <textarea class="form-control" name="content" id="field_content"
+                      style="height: 150px; resize: vertical"
+                      data-ng-model="news.content"
+                      placeholder="content.."
+                      required
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default pull-left" data-dismiss="modal" data-ng-disabled="isBusy"
+            data-ng-click="quit()" data-ng-if="current == 0">
+      <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>Back</span>
+    </button>
+    <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-disabled="isBusy"
+            data-ng-click="mode[current].btnCancel.action()">
+      <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>{{mode[current].btnCancel.title}}</span>
+    </button>
+    <button type="submit" formnovalidate data-ng-disabled="editForm.$invalid || isBusy" class="btn btn-primary"
+            data-ng-click="mode[current].btnValid.action()">
+      <span class="glyphicon glyphicon-save"></span>&nbsp;<span>{{mode[current].btnValid.title}}</span>
+    </button>
+  </div>
+</form>

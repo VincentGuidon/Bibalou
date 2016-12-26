@@ -26,7 +26,7 @@ angular.module('BibalouApp')
     };
 
     var parseByStatus = function () {
-      if ($scope.currentStatus != "All") {
+      if ($scope.currentStatus.id != -1) {
         for (var i = 0; i < $scope.products.length; ++i) {
           if (!$scope.isState($scope.products[i], $scope.currentStatus)) {
             $scope.products.splice(i, 1);
@@ -68,11 +68,11 @@ angular.module('BibalouApp')
 
     function getState(param){
       if (param.stock == 0) {
-        return $scope.states[2];
+        return $scope.states[3];
       } else if (param.stock <= param.sill) {
-        return $scope.states[1];
+        return $scope.states[2];
       } else {
-        return $scope.states[0];
+        return $scope.states[1];
       }
     }
 
@@ -133,6 +133,7 @@ angular.module('BibalouApp')
     };
 
     $scope.loadParser = function () {
+      console.log("init types: ", $scope.types);
       $scope.types = [];
       $scope.type = "All";
       $scope.currentStatus = $scope.states[0];
@@ -141,7 +142,6 @@ angular.module('BibalouApp')
       RequestAPI.GET("/types", SubmitResult.submitSuccess(function (response) {
           $scope.types = response.data.types;
           $scope.types.splice(0, 0, "All");
-          console.log($scope.types);
         }),
         SubmitResult.submitFailure(), {token: User.getToken()});
     };
@@ -174,7 +174,8 @@ angular.module('BibalouApp')
       }
       tempFilterText = val;
       filterTextTimeout = $timeout(function () {
-        if (!$scope.searchProduct && $scope.searchProduct != "") {
+        console.log("check product search")
+        if (!$scope.searchProduct) {
           return;
         }
         $scope.parseUnparsedProducts();

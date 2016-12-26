@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var uuid = require('node-uuid');
 
 var Market = require('../models/Markets.js');
 var Product = require('../models/Products.js');
@@ -8,21 +9,76 @@ var Promotion = require('../models/Promotions.js');
 var randomToken = require('../scripts/randomToken.js');
 
 router.put('/addNews', function (req, res, next) {
-//id
-//value
-//{$push : {promotions : newPromo.id }},
-    var id = req.body.id;
     var val = req.body.value;
-    Market.findByIdAndUpdate(id, {$push: {news: val}}, function (err, market) {
+    Market.findByIdAndUpdate(req.body.idMarket, {$push: {news: val}}, function (err, market) {
         if (err) {
             res.send({success: false, message: 'Internal error', errcode: 7})
         }
         else {
-            console.log(id + ' ' + val);
             res.send({success: true});
         }
     });
 });
+/*
+router.put('/editNews', function (req, res, next) {
+    var val = req.body.value;
+    console.log(val);
+    Market.findById(req.body.idMarket, function (err, market) {
+        if (err) {
+            ret.success = false;
+            ret.message = "Market Place unknow";
+            ret.errcode = 4;
+            res.send(ret);
+        }
+        else if (market.length == 0) {
+            ret.success = false;
+            ret.message = "No MarketPlace found";
+            ret.errcode = 4;
+            res.send(ret);
+        }
+        else {
+            ret.success = true;
+
+            for (var i = 0; i < market[0].news.length; ++i) {
+                if (market[0].news[i].id == val.id) {
+                    market[0].news[i] = val;
+                    Market.findByIdAndUpdate(market[0]._id, market[0]);
+                    break;
+                }
+            }
+            res.send(ret);
+        }
+    });
+});
+
+router.put('/removeNews', function (req, res, next) {
+    Market.findById(req.body.idMarket, function (err, market) {
+        if (err) {
+            ret.success = false;
+            ret.message = "Market Place unknow";
+            ret.errcode = 4;
+            res.send(ret);
+        }
+        else if (market.length == 0) {
+            ret.success = false;
+            ret.message = "No MarketPlace found";
+            ret.errcode = 4;
+            res.send(ret);
+        }
+        else {
+            ret.success = true;
+
+            for (var i = 0; i < market[0].news.length; ++i) {
+                if (market[0].news[i].id == req.body.idNews) {
+                    market[0].news.splice(i, 1);
+                    Market.findByIdAndUpdate(market[0]._id, market[0]);
+                    break;
+                }
+            }
+            res.send(ret);
+        }
+    });
+});*/
 
 /*
  router.delete('/:name', function(req, res, next) {
@@ -100,7 +156,7 @@ router.get('/byName', function (req, res, next) {
             ret.errcode = 4;
             res.send(ret);
         }
-        else if (market.size  == 0) {
+        else if (market.length == 0) {
             ret.success = false;
             ret.message = "No MarketPlace found";
             ret.errcode = 4;
@@ -125,7 +181,7 @@ router.get('/byId', function (req, res, next) {
             ret.errcode = 4;
             res.send(ret);
         }
-        else if (market.size  == 0) {
+        else if (market.length == 0) {
             ret.success = false;
             ret.message = "No MarketPlace found";
             ret.errcode = 4;
@@ -133,8 +189,32 @@ router.get('/byId', function (req, res, next) {
         }
         else {
             ret.success = true;
-            ret.market = market[0];
+            ret.market = market;
             getAllMarket(ret, res, market);
+        }
+    });
+});
+
+router.get('/byId/news', function (req, res, next) {
+
+    var ret = {};
+    Market.findById(req.query.id, function (err, market) {
+        if (err) {
+            ret.success = false;
+            ret.message = "Market Place unknow";
+            ret.errcode = 4;
+            res.send(ret);
+        }
+        else if (market.length == 0) {
+            ret.success = false;
+            ret.message = "No MarketPlace found";
+            ret.errcode = 4;
+            res.send(ret);
+        }
+        else {
+            ret.success = true;
+            ret.news = market.news;
+            res.send(ret);
         }
     });
 });
@@ -149,7 +229,7 @@ router.get('/byOwner', function (req, res, next) {
             ret.errcode = 4;
             res.send(ret);
         }
-        else if (market.size  == 0) {
+        else if (market.length == 0) {
             ret.success = false;
             ret.message = "No MarketPlace found";
             ret.errcode = 4;
@@ -166,7 +246,7 @@ router.get('/byOwner', function (req, res, next) {
 router.post('/', function (req, res, next) {
 
     if (req.body._id) {
-        res.send({success : false, message : 'The marketPlace already exist', errcode : 5});
+        res.send({success: false, message: 'The marketPlace already exist', errcode: 5});
         return;
     }
     var ret = {};

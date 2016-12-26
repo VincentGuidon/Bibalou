@@ -23,7 +23,8 @@ angular
     'flow',
     'toaster',
     'angularFileUpload',
-    'selector'
+    'selector',
+    'angularMoment'
   ])
   .config(function ($routeProvider) {
     $routeProvider
