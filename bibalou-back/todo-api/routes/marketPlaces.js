@@ -10,8 +10,6 @@ var randomToken = require('../scripts/randomToken.js');
 
 router.put('/addNews', function (req, res, next) {
     var val = req.body.value;
-    val.date = new Date();
-    val.id = uuid.v1();
     Market.findByIdAndUpdate(req.body.idMarket, {$push: {news: val}}, function (err, market) {
         if (err) {
             res.send({success: false, message: 'Internal error', errcode: 7})
@@ -21,7 +19,7 @@ router.put('/addNews', function (req, res, next) {
         }
     });
 });
-
+/*
 router.put('/editNews', function (req, res, next) {
     var val = req.body.value;
     console.log(val);
@@ -80,7 +78,7 @@ router.put('/removeNews', function (req, res, next) {
             res.send(ret);
         }
     });
-});
+});*/
 
 /*
  router.delete('/:name', function(req, res, next) {
@@ -191,7 +189,7 @@ router.get('/byId', function (req, res, next) {
         }
         else {
             ret.success = true;
-            ret.market = market[0];
+            ret.market = market;
             getAllMarket(ret, res, market);
         }
     });
@@ -215,7 +213,7 @@ router.get('/byId/news', function (req, res, next) {
         }
         else {
             ret.success = true;
-            ret.news = market[0].news;
+            ret.news = market.news;
             res.send(ret);
         }
     });

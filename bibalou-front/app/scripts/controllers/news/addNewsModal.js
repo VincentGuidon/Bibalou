@@ -8,7 +8,7 @@
  * Controller of the BibalouApp
  */
 angular.module('BibalouApp')
-  .controller('AddNewsModalCtrl', function ($scope, $uibModalInstance, RequestAPI, SubmitResult, User, Parent) {
+  .controller('AddNewsModalCtrl', function ($scope, moment, $uibModalInstance, RequestAPI, SubmitResult, User, Parent) {
 
     $scope.isBusy = false;
     $scope.current = 1;
@@ -22,7 +22,7 @@ angular.module('BibalouApp')
     ];
     $scope.news = {
       title: "",
-      description: ""
+      content: ""
     };
 
     function clear() {
@@ -46,7 +46,8 @@ angular.module('BibalouApp')
 
     function create() {
       $scope.isBusy = true;
-      RequestAPI.PUT("/marketPlaces/addNews", {idMarket: Parent.marketPlace._id, value: $scope.news}, SubmitResult.submitSuccess(function (response) {
+      $scope.news.date = moment().format('YYYY-MM-DD');
+      RequestAPI.PUT("/marketPlaces/addNews", {idMarket: Parent.marketPlace._id, value: JSON.stringify($scope.news)}, SubmitResult.submitSuccess(function (response) {
           $scope.isBusy = false;
           $scope.quit();
         }),

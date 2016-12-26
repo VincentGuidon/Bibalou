@@ -7,15 +7,15 @@
       <div class="row">
         <div class="col-md-5">
           <div class="well well-sm" style="display:flex;">
-            <div class="col-md-8" data-ng-class="{ 'has-error' : editForm.name.$invalid && !editForm.name.$pristine }">
+            <div class="col-md-8" data-ng-class="{ 'has-error' : editForm.title.$invalid && !editForm.title.$pristine }">
               <div class="form-group">
-                <label class="control-label" for="field_name">Name</label><i style="color: red">*</i>
-                <input type="text" class="form-control" name="name" id="field_name"
+                <label class="control-label" for="field_title">Title</label><i style="color: red">*</i>
+                <input type="text" class="form-control" name="title" id="field_title"
                        data-ng-disabled="current == 0"
-                       data-ng-model="news.name"
+                       data-ng-model="news.title"
                        placeholder="ex. Summer party"
                        required/>
-                <p data-ng-show="editForm.name.$invalid && !editForm.name.$pristine" class="help-block">A name is
+                <p data-ng-show="editForm.title.$invalid && !editForm.title.$pristine" class="help-block">A title is
                   needed.</p>
               </div>
             </div>

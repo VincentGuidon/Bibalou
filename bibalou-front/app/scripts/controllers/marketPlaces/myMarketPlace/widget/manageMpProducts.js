@@ -159,7 +159,7 @@ angular.module('BibalouApp')
       }
       tempFilterText = val;
       filterTextTimeout = $timeout(function () {
-        if (!$scope.searchProduct && $scope.searchProduct != "") {
+        if (!$scope.searchProduct) {
           return;
         }
         $scope.parseUnparsedProducts();

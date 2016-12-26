@@ -19,12 +19,24 @@ angular.module('BibalouApp')
       $scope.datePickerForDate.status.opened = true;
     };
 
-    function compareDate(a, b) {
+    var compareDate = function(a, b) {
       return (a.date < b.date);
-    }
+    };
 
-    function parseByDate() {
-      if ($scope.date !== "") {
+    var parseByTitle = function() {
+      if ($scope.searchNews && $scope.searchNews != "") {
+        console.log("parse: ", $scope.searchNews);
+        for (var i = 0; i < $scope.news.length; ++i) {
+          if (!$scope.news[i].title.includes($scope.searchNews)) {
+            $scope.news.splice(i, 1);
+            --i;
+          }
+        }
+      }
+    };
+
+    var parseByDate = function() {
+      if ($scope.date && $scope.date != "") {
         for (var i = 0; i < $scope.news.length; ++i) {
           var current = new Date($scope.news[i].date.toString());
           if ($scope.date.toString().substring(0, 11) !== current.toString().substring(0, 11)) {
@@ -33,13 +45,14 @@ angular.module('BibalouApp')
           }
         }
       }
-    }
+    };
 
     $scope.parseUnparsedNews = function () {
       $scope.news = CloneUtilsCustom.cloneArray($scope.marketPlace.news);
       console.log($scope.news);
 
 
+      parseByTitle();
       parseByDate();
       $scope.sortParsedNews();
     };
@@ -63,7 +76,7 @@ angular.module('BibalouApp')
       });
     };
 
-    $scope.editNews = function (news) {
+    $scope.editNews = function (news) {/*
       var modalInstance = $uibModal.open({
         templateUrl: 'views/news/addNewsModal.html',
         controller: 'AddNewsModalCtrl',
@@ -73,14 +86,14 @@ angular.module('BibalouApp')
             return {news: news, marketPlace: $scope.marketPlace, finishAction: $scope.reloadNews};
           }
         }
-      });
+      });*/
     };
 
-    $scope.delete = function (id) {
+    $scope.delete = function (id) {/*
       RequestAPI.DELETE("/marketPlaces/removeNews", {idMarket: $scope.marketPlace._id, idNews: id}, SubmitResult.submitSuccess(function (response) {
           $scope.reloadNews();
         }),
-        SubmitResult.submitFailure(), {token: User.getToken(), id: id});
+        SubmitResult.submitFailure(), {token: User.getToken(), id: id});*/
     };
 
     /** LOAD **/
@@ -91,6 +104,7 @@ angular.module('BibalouApp')
     $scope.reloadNews = function () {
       RequestAPI.GET("/marketPlaces/byId/news", SubmitResult.submitSuccess(function (response) {
           $scope.marketPlace.news = response.data.news;
+          $scope.parseNews();
           $scope.busy = false;
           $scope.loadNews();
         }),
@@ -115,7 +129,8 @@ angular.module('BibalouApp')
       }
       tempFilterText = val;
       filterTextTimeout = $timeout(function () {
-        if (!$scope.searchNews && $scope.searchNews != "") {
+        console.log("toto");
+        if (!$scope.searchNews) {
           return;
         }
         $scope.parseUnparsedNews();
