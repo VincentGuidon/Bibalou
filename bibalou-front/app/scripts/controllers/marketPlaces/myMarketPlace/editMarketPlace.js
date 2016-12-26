@@ -18,8 +18,26 @@ angular.module('BibalouApp')
       image: ""
     };
 
+    $scope.mode = [
+      {title: "Edit your MarketPlace", btnCancel: {title: "Clear", action: clear}, btnValid: {title: "Save", action: edit}},
+      {title: "Create your MarketPlace", btnCancel: {title: "Cancel", action: exit}, btnValid: {title: "Create", action: create}}
+    ];
 
-    function cancel() {
+    /** FLOW **/
+
+    $scope.successLoad = function($file, $message, $flow) {
+      console.log($file);
+      console.log($flow);
+    };
+
+
+    /** TOOLS **/
+
+    $scope.back = function() {
+      $location.url("/myMarketPlace");
+    };
+
+    function clear() {
       fillMarket();
     }
 
@@ -31,7 +49,7 @@ angular.module('BibalouApp')
       $scope.isBusy = true;
       RequestAPI.PUT("/marketPlaces", $scope.marketPlace, SubmitResult.submitSuccess(function (response) {
           $scope.isBusy = false;
-          $location.url("/myMarketPlace");
+          $scope.back();
         }),
         SubmitResult.submitFailure(function (response) {
           $scope.isBusy = false;
@@ -42,17 +60,12 @@ angular.module('BibalouApp')
       $scope.isBusy = true;
       RequestAPI.POST("/marketPlaces", $scope.marketPlace, SubmitResult.submitSuccess(function (response) {
           $scope.isBusy = false;
-          $location.url("/myMarketPlace");
+          $scope.back();
         }),
         SubmitResult.submitFailure(function (response) {
           $scope.isBusy = false;
         }, {token: User.getToken()}));
     }
-
-    $scope.mode = [
-      {title: "Edit your MarketPlace", btnCancel: {title: "Cancel", action: cancel}, btnValid: {title: "Save", action: edit}},
-      {title: "Create your MarketPlace", btnCancel: {title: "Cancel", action: exit}, btnValid: {title: "Create", action: create}}
-    ];
 
     $scope.limitFiles = function ($files, max) {
       if ($files.length > max) {

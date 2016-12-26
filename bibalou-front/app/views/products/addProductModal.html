@@ -1,49 +1,134 @@
-<form name="editForm" role="form" novalidate data-ng-submit="save()">
+<form name="editForm" role="form" novalidate><!-- data-ng-submit="mode[current].btnValid.action()">-->
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-            data-ng-click="clear()">&times;</button>
-    <h2 class="modal-title" id="myProductLabel">Create a new Product</h2>
+    <h2 class="modal-title" id="myProductLabel">{{mode[current].title}}</h2>
   </div>
-  <div class="modal-body">
-    <div class="well well-sm">
-
+  <div class="modal-body" style="display: flex">
+    <div class="col-md-12">
       <div class="row">
-        <div class="col-md-5" data-ng-class="{ 'has-error' : editForm.title.$invalid && !editForm.title.$pristine }">
-          <div class="form-group">
-            <label class="control-label" for="field_title">Title</label><i style="color: red">*</i>
-            <input type="text" class="form-control" name="title" id="field_title"
-                   data-ng-model="product.title"
-                   placeholder="ex. Summer party"
-                   required/>
-            <p data-ng-show="editForm.title.$invalid && !editForm.title.$pristine" class="help-block">A title is
-              needed.</p>
+        <div class="col-md-5">
+          <div class="well well-sm" style="display:flex;">
+            <div class="col-md-8" data-ng-class="{ 'has-error' : editForm.name.$invalid && !editForm.name.$pristine }">
+              <div class="form-group">
+                <label class="control-label" for="field_name">Name</label><i style="color: red">*</i>
+                <input type="text" class="form-control" name="name" id="field_name"
+                       data-ng-disabled="current == 0"
+                       data-ng-model="product.name"
+                       placeholder="ex. Summer party"
+                       required/>
+                <p data-ng-show="editForm.name.$invalid && !editForm.name.$pristine" class="help-block">A name is
+                  needed.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-5">
+          <div class="drop" data-ng-class="dropClass" style="display: inline-block;">
+            <div class="col-md-5" style="padding-left: 0">
+              <img class="img-responsive" src="{{product.image}}"/>
+            </div>
+            <div class="col-md-7">
+              <div class="row">
+            <span class="btn btn-default">Upload Image
+                <input style="visibility: hidden; position: absolute;" max="1" type="file">
+              </span>
+                <b style="padding-left:5px">OR</b>
+              </div>
+
+              <div class="row">
+                <label class="control-label" for="field_url">Url:</label>
+                <input type="text" class="form-control" name="url" id="field_url"
+                       data-ng-model="product.image"
+                       placeholder="enter url image"
+                       required/>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <h2>description</h2>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="form-group"
-             data-ng-class="{ 'has-error' : editForm.description.$invalid && !editForm.description.$pristine }">
-          <label class="control-label" for="field_description">description</label><i style="color: red">*</i>
-          <textarea class="form-control" name="description" id="field_description" style="height: 150px; resize: vertical"
-                    data-ng-model="product.description"
-                    placeholder="description..."
-                    required
-          ></textarea>
+      <h2 style="padding-top:2%">Description<i style="color: red">*</i></h2>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group"
+               data-ng-class="{ 'has-error' : editForm.description.$invalid && !editForm.description.$pristine }">
+            <label class="control-label" for="field_description"></label>
+            <textarea class="form-control" name="description" id="field_description"
+                      style="height: 150px; resize: vertical"
+                      data-ng-model="product.description"
+                      placeholder="description.."
+                      required
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <h2 style="padding:2% 0">Properties</h2>
+      <div class="row">
+        <div class="col-md-7">
+          <form class="form-horizontal" role="form">
+            <div class="row form-group">
+              <label class="col-md-5 control-label icon_level" for="field_type">Type<i
+                style="color: red">*</i></label>
+              <div class="col-md-5">
+                <select name="field_type" id="field_type" class="form-control"
+                        data-ng-options="type as type for type in types"
+                        data-ng-model="product.type"
+                        required>
+                </select>
+              </div>
+            </div>
+            <div class="row form-group"
+                 data-ng-class="{ 'has-error' : editForm.stock.$invalid && !editForm.stock.$pristine }"
+                 data-ng-if="current == 1">
+              <label class="col-md-5 control-label icon_stock" for="field_stock">Stock<i
+                style="color: red">*</i></label>
+              <div class="col-md-5">
+                <input class="form-control" name="stock" data-ng-model="product.stock"
+                       type="number"
+                       data-ng-min="0"
+                       id="field_stock" required>
+              </div>
+            </div>
+            <div class="row form-group"
+                 data-ng-class="{ 'has-error' : editForm.sill.$invalid && !editForm.sill.$pristine }">
+              <label class="col-md-5 control-label icon_sill" for="field_sill">Sill<i
+                style="color: red">*</i></label>
+              <div class="col-md-5">
+                <input class="form-control" name="sill" data-ng-model="product.sill"
+                       type="number"
+                       data-ng-min="0"
+                       id="field_sill" required>
+              </div>
+            </div>
+            <div class="row form-group"
+                 data-ng-class="{ 'has-error' : editForm.price.$invalid && !editForm.price.$pristine }">
+              <label class="col-md-5 control-label icon_price" for="field_price">Price<i
+                style="color: red">*</i></label>
+              <div class="col-md-5">
+                <input class="form-control" name="price" data-ng-model="product.price" type="number"
+                       data-ng-min="0"
+                       id="field_price" required>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="clear()">
-      <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+    <button type="button" class="btn btn-default pull-left" data-dismiss="modal" data-ng-disabled="isBusy"
+            data-ng-click="quit()" data-ng-if="current == 0">
+      <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>Back</span>
     </button>
-    <button type="submit" novalidate data-ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
-      <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Create</span>
+    <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-disabled="isBusy"
+            data-ng-click="mode[current].btnCancel.action()">
+      <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>{{mode[current].btnCancel.title}}</span>
+    </button>
+    <button type="submit" formnovalidate data-ng-disabled="editForm.$invalid || isBusy" class="btn btn-primary"
+            data-ng-click="mode[current].btnValid.action()">
+      <span class="glyphicon glyphicon-save"></span>&nbsp;<span>{{mode[current].btnValid.title}}</span>
     </button>
   </div>
 </form>

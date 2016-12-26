@@ -165,6 +165,10 @@ router.get('/byOwner', function (req, res, next) {
 //ajouter marketplace dans le user
 router.post('/', function (req, res, next) {
 
+    if (req.body._id) {
+        res.send({success : false, message : 'The marketPlace already exist', errcode : 5});
+        return;
+    }
     var ret = {};
     //var user = randomToken.findUserConnected(req.body.token);
 

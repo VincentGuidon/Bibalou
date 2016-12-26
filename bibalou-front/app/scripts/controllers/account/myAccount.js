@@ -45,7 +45,7 @@ angular.module('BibalouApp')
         return;
       }
       CloneUtilsCustom.copyObject($scope.change, $scope.user);
-      RequestAPI.POST("/user", $scope.user, SubmitResult.submitSuccess(function (response) {
+      RequestAPI.PUT("/user", $scope.user, SubmitResult.submitSuccess(function (response) {
           $scope.initChanges();
         }, "Profile updated !"),
         SubmitResult.submitFailure(), {token: User.getToken()});

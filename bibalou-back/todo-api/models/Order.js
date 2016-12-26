@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var orderSchema = new Schema({
   date : { type : Date, default : Date.now},
-  products : [String],
+  products : [Schema.Types.Mixed],
   payment : String,
   owner : String,
   market : String,
