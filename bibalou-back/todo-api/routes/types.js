@@ -2,14 +2,14 @@ var express = require('express');
 var router = express.Router();
 
 var types = [
-  'book',
-  'game',
-  'movie',
-  'cooking',
-  'CD & Vinyl',
-  'clothes',
-  'jewellery',
-  'other'
+  'Books',
+  'Games',
+  'Movies',
+  'Cooking',
+  'CD & Vinyls',
+  'Clothes',
+  'Jewellery',
+  'Other'
 ];
 
 router.get('/', function(req, res, next) {
