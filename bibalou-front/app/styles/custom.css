@@ -243,23 +243,75 @@ Product list in a Cart
 Product list
 ========================================================================== */
 
+#allProducts .productList {
+  position: relative;
+}
+
 #allProducts .productList .item {
-  border: 1px inset #333;
+  border: 1px solid #888;
   border-radius: 10px;
   background-color: #fafafa;
   padding: 10px;
-  margin: 2px;
+  margin: 12px;
+  height: 250px;
+  width: 200px;
+  float: left;
+  text-align: center;
+  position: relative;
+}
+
+#allProducts .productList .item .product-name {
+  background-color: rgba(0, 0, 0, 0.12);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 16%;
+  padding: 12px;
+  color: white;
 }
 
 #allProducts .productList .item .description {
 }
 
-#allProducts .productList .item .price {
-  float: right;
+#allProducts .productList .item .product-price {
+  position: absolute;
+  bottom: 26px; left: 6px;
+  font-size: 22px;
+  color: black;
+}
+
+#allProducts .productList .item .product-sellers {
+  background: -webkit-gradient(linear, bottom, top, from(rgba(0,0,0,0.32)), to(transparent));
+  background: linear-gradient(top, rgba(0, 0, 0, 0.32), transparent);
+
+  background:-moz-linear-gradient(bottom, rgba(0,0,0,0.32), transparent);
+  background:-webkit-gradient(linear, 0 50%, 100% 50%, from(rgba(0,0,0,0.32)), to(transparent));
+  background:-webkit-linear-gradient(bottom, rgba(0,0,0,0.32), transparent);
+  background:-o-linear-gradient(bottom, rgba(0,0,0,0.32), transparent);
+
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  height: 12%;
+  padding: 6px;
+  color: white;
+}
+
+#allProducts .productList .item .product-stock {
+  position: absolute;
+  bottom: 62px; right: 8px;
+  font-size: 14px;
+  color: black;
 }
 
 #allProducts .productList .addToCart {
-  float: right;
+  position: absolute;
+  right: 6px;
+  bottom: 26px;
 }
 
 #allProducts .productList img {
@@ -268,10 +320,60 @@ Product list
   height: 150px !important;
 }
 
+#allProducts .productList .item .product-link,
+#allProducts .productList .item .product-link:before{
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  display: block;
+  opacity: 0;
+  -webkit-transition: all 0.32s;
+  -moz-transition: all 0.32s;
+  -ms-transition: all 0.32s;
+  -o-transition: all 0.32s;
+  transition: all 0.32s;
+}
 
-/* ==========================================================================
-Stars
-========================================================================== */
+  #allProducts .productList .item .product-link:before {
+    background-image: url('../images/view.png');
+    background-size: 50px 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    content: '';
+  }
+
+  #allProducts .productList .item .product-link {
+    background-color: transparent;
+    -webkit-transition: all 0.32s;
+    -moz-transition: all 0.32s;
+    -ms-transition: all 0.32s;
+    -o-transition: all 0.32s;
+    transition: all 0.32s;
+  }
+
+  #allProducts .productList .item .product-link:hover {
+    background-color: rgba(0, 0, 0, 0.16);
+    opacity: 1;
+    -webkit-transition: all 0.32s;
+    -moz-transition: all 0.32s;
+    -ms-transition: all 0.32s;
+    -o-transition: all 0.32s;
+    transition: all 0.32s;
+  }
+
+  #allProducts .productList .item .product-link:hover:before {
+    opacity: 0.75;
+    -webkit-transition: all 0.32s;
+    -moz-transition: all 0.32s;
+    -ms-transition: all 0.32s;
+    -o-transition: all 0.32s;
+    transition: all 0.32s;
+  }
+
+
+  /* ==========================================================================
+  Stars
+  ========================================================================== */
 
 .rating > span.stars, span.stars span {
   display: block;

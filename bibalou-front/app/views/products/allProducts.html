@@ -1,5 +1,5 @@
 <div>
-  <h2 translate="jwebApp.allProducts.home.title">All Products</h2>
+  <h2>All Products</h2>
   <jh-alert></jh-alert>
 
   <div class="form-group">
@@ -24,66 +24,46 @@
       </div>
     </div>
   </div>
-  <br>
+
+  <div class="clearfix"></div>
+
+  <hr />
 
   <div class="modal-body">
-    <table class="table" id="allProducts">
-      <tbody>
-      <tr data-ng-repeat="product in products">
-        <td class="product">
-          <div class="item">
-            <h4>
-              <a href="#/product/{{product.id}}"><span style="font-size: 130%;">{{product.name}}</span></a>
+    <ul id="allProducts" ng-if="products.length > 0">
+      <li data-ng-repeat="product in products" class="productList">
+        <div class="item" style="background: url({{product.image}}); background-size: cover;">
+          <h4 class="product-name">{{product.name}} </h4>
 
-              <div class="price">
-                                <span
-                                  data-ng-if="product.promotion.percent == 0 && product.promotion.brut == 0">
-                                    {{product.price | currency}}
-                                </span>
-                <span
-                  data-ng-if="product.promotion.percent != 0 || product.promotion.brut != 0">
-                                    <del>{{product.price | currency}}</del>
-                                    <ins>{{product.price - product.promotion.brut -
-                                        product.price * product.promotion.percent / 100 | currency}}
-                                    </ins>
-                                    <br/>
-                                    <span data-ng-if="product.promotion.brut != 0">-{{product.promotion.brut | currency}}</span>
-                                    <span
-                                      data-ng-if="product.promotion.percent != 0">-{{product.promotion.percent}}%</span>
-                                </span>
-              </div>
-            </h4>
-            <h4>
-              <br>
-              <div class="price pull-right">
-                <span>Stock: {{product.stock}}</span>
-              </div>
-            </h4>
-            <hr/>
-            <div class="row">
-              <div class="col-md-3 text-center">
-                <a href="#/product/{{product.id}}"><img class="img-responsive"
-                                                        src="{{product.image}}"/></a>
-              </div>
-              <div class="col-md-6">
-                <div class="description">{{product.baseProduct.description}}</div>
-              </div>
-            </div>
-            <br>
+          <div class="product-price">
+            <span data-ng-if="!product.promotion || (product.promotion.percent == 0 && product.promotion.brut == 0)">{{product.price | currency}}</span>
+            <span data-ng-if="product.promotion && (product.promotion.percent != 0 || product.promotion.brut != 0)">
+              <del>{{product.price | currency}}</del>
+              <ins>{{product.price - product.promotion.brut - product.price * product.promotion.percent / 100 | currency}}</ins>
+              <span data-ng-if="product.promotion.brut != 0">-{{product.promotion.brut | currency}}</span>
+              <span data-ng-if="product.promotion.percent != 0">-{{product.promotion.percent}}%</span>
+            </span>
           </div>
-          <div class="col-md-8">
-            <a href="#/product/{{product.id}}/list">
-              <div class="sellers">Sold by: {{product.numberSame}} market place</div>
-            </a>
+
+          <div class="product-stock">
+            <span>Stock: {{product.stock}}</span>
           </div>
+
+
+          <a href="#/product/{{product.id}}" class="product-link"></a>
+
           <div class="addToCart">
             <button class="btn btn-primary" data-ng-click="addToCart(product, 1)">
               <span class="glyphicon glyphicon-plus-sign"></span> Add
             </button>
           </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+
+          <a href="#/product/{{product.id}}/list" class="product-sellers">
+            <span>Sold by: {{product.numberSame}} marketplaces</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="clearfix"></div>
   </div>
 </div>
