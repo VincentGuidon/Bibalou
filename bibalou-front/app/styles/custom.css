@@ -1,3 +1,129 @@
+.text-box {
+  padding: 22px;
+  background-color: #eee;
+  text-align: center;
+}
+
+  .text-box * {
+    margin: 6px 0 6px;
+  }
+
+  .text-box .text-box-title,
+  .categories-showoff .categories-showoff-title {
+    margin-bottom: 24px;
+    font-size: 26px;
+  }
+
+  .text-box .text-box-highlight {
+    margin: 60px 0 60px;
+  }
+
+  .text-box-bottom {
+    position: absolute;
+    bottom: 22px;
+    left: 0;
+    margin: auto;
+    width: 100%;
+  }
+
+  .text-box-homepage {
+    min-height: 320px;
+  }
+
+.categories-showoff {
+  padding: 22px;
+  background-color: #fafafa;
+}
+
+  .categories-showoff .categories-showoff-title {
+  }
+
+  .categories-showoff .categories {
+    text-align: center;
+  }
+
+    .categories-showoff .categories .category {
+      display: inline-block;
+      margin: auto;
+      position: relative;
+      width: 150px;
+    }
+
+      .categories-showoff .categories .category .category-link {
+        text-decoration: none;
+        position: relative;
+        display: block;
+      }
+
+      .categories-showoff .categories .category .category-title {
+        font-size: 18px;
+        color: #aeaeae;
+        -webkit-transition: all 0.32s;
+        -moz-transition: all 0.32s;
+        -ms-transition: all 0.32s;
+        -o-transition: all 0.32s;
+        transition: all 0.32s;
+      }
+
+        .categories-showoff .categories .category .category-link:hover .category-title {
+          color: #333;
+          -webkit-transition: all 0.32s;
+          -moz-transition: all 0.32s;
+          -ms-transition: all 0.32s;
+          -o-transition: all 0.32s;
+          transition: all 0.32s;
+        }
+
+        .categories-showoff .categories .category .category-link:hover:before {
+          opacity: 0.32;
+          -webkit-transition: all 0.32s;
+          -moz-transition: all 0.32s;
+          -ms-transition: all 0.32s;
+          -o-transition: all 0.32s;
+          transition: all 0.32s;
+        }
+
+        .categories-showoff .categories .category .category-link:before {
+          background-color: #fafafa;
+          opacity: 0;
+          content: "";
+          position: absolute;
+          top: 0; bottom: 0;
+          left: 0; right: 0;
+          -webkit-transition: all 0.32s;
+          -moz-transition: all 0.32s;
+          -ms-transition: all 0.32s;
+          -o-transition: all 0.32s;
+          transition: all 0.32s;
+        }
+
+        .categories-showoff .categories .category .category-link .category-browse {
+          position: absolute;
+          opacity: 0;
+          bottom: -15px;
+          left: 0;
+          width: 100%;
+          border-bottom: 1px solid white;
+          font-weight: 300;
+          color: white;
+          -webkit-transition: all 0.32s;
+          -moz-transition: all 0.32s;
+          -ms-transition: all 0.32s;
+          -o-transition: all 0.32s;
+          transition: all 0.32s;
+          text-shadow: 1px 1px 1px #333, -1px -1px 1px #333, -1px 1px 1px #333, 1px -1px 1px #333;
+        }
+
+        .categories-showoff .categories .category .category-link:hover .category-browse {
+          opacity: 1;
+          -webkit-transition: all 0.32s;
+          -moz-transition: all 0.32s;
+          -ms-transition: all 0.32s;
+          -o-transition: all 0.32s;
+          transition: all 0.32s;
+          bottom: 50px;
+        }
+
 #login-dp{
   min-width: 250px;
   padding: 14px 14px 0;
