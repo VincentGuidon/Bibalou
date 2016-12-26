@@ -20,7 +20,6 @@ angular.module('BibalouApp')
 
 
     function cancel() {
-      console.log("cancel")
       fillMarket();
     }
 
@@ -31,8 +30,8 @@ angular.module('BibalouApp')
     function edit() {
       $scope.isBusy = true;
       RequestAPI.PUT("/marketPlaces", $scope.marketPlace, SubmitResult.submitSuccess(function (response) {
-          $location.url("/myMarketPlace");
           $scope.isBusy = false;
+          $location.url("/myMarketPlace");
         }),
         SubmitResult.submitFailure(function (response) {
           $scope.isBusy = false;
@@ -42,8 +41,8 @@ angular.module('BibalouApp')
     function create () {
       $scope.isBusy = true;
       RequestAPI.POST("/marketPlaces", $scope.marketPlace, SubmitResult.submitSuccess(function (response) {
-          $location.url("/myMarketPlace");
           $scope.isBusy = false;
+          $location.url("/myMarketPlace");
         }),
         SubmitResult.submitFailure(function (response) {
           $scope.isBusy = false;

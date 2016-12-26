@@ -114,7 +114,7 @@ angular.module('BibalouApp')
       },
       DELETE: function (url, data, success, failure, parameters) {
         updateUser(parameters);
-        withData("DELETE", url, data, success, failure, parameters);
+        noData("DELETE", url, success, failure, parameters);
       }
     };
   });

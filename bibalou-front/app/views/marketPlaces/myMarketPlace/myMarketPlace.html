@@ -19,16 +19,19 @@
         <span>Rating :</span>
       </div>
 
-      <button class="btn btn-primary" ui-sref="myMarketPlace.products">
-        <span>Manage Products&nbsp;</span>
+      <button class="btn btn-primary" data-ng-click="changeMode(1)">
+        <span>Details&nbsp;</span>
       </button>
-      <button class="btn btn-primary" ui-sref="myMarketPlace.news">
+      <button class="btn btn-primary" data-ng-click="changeMode(2)">
+      <span>Manage Products&nbsp;</span>
+    </button>
+      <button class="btn btn-primary" data-ng-click="changeMode(3)">
         <span>Manage News&nbsp;</span>
       </button>
-      <button class="btn btn-primary" ui-sref="myMarketPlace.stock">
+      <button class="btn btn-primary" data-ng-click="changeMode(4)">
         <span>Your Stock&nbsp;</span>
       </button>
-      <button class="btn btn-primary" ui-sref="myMarketPlace.promotions">
+      <button class="btn btn-primary" data-ng-click="changeMode(5)">
         <span>Your Promotions&nbsp;</span>
       </button>
     </div>
@@ -36,21 +39,36 @@
 
 
   <div class="modal-body">
-    <h3>Description :</h3>
-    <br>
-    <span>{{marketPlace.description}}</span>
+    <div data-ng-if="mode == 1">
+      <h3>Description :</h3>
+      <br>
+      <span>{{marketPlace.description}}</span>
 
-    <button class="btn btn-primary pull-right" data-ng-click="edit()">
-      <span class="glyphicon glyphicon-pencil"></span>
-      <span>Edit&nbsp;</span>
-    </button>
+      <button class="btn btn-primary pull-right" data-ng-click="edit()">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span>Edit&nbsp;</span>
+      </button>
 
-    <br>
-    <br>
+      <br>
+      <br>
+    </div>
+    <div data-ng-if="mode == 2">
+      <div manage-mp-products-widget></div>
+    </div>
+    <div data-ng-if="mode == 3">
+      <div manage-mp-news-widget></div>
+    </div>
+    <div data-ng-if="mode == 4">
+      <div manage-mp-stock-widget></div>
+    </div>
+    <div data-ng-if="mode == 5">
+      <div manage-mp-promotions-widget></div>
+    </div>
 
     <div class="modal-footer">
     </div>
   </div>
+
   <script type="text/javascript">
     $.fn.stars = function () {
       return $(this).each(function () {

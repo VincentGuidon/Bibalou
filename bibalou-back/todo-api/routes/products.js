@@ -22,7 +22,7 @@ router.delete('/', function(req, res, next) {
 });
 
 router.put('/', function(req, res, next) {
-  Product.findByIdAndUpdate(req.query.id, req.body, function (err) {
+  Product.findByIdAndUpdate(req.body._id, req.body, function (err) {
     if (err)
     {
       res.send({success : false, message : 'No product with that name', errcode : 4});
