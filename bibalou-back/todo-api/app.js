@@ -13,6 +13,7 @@ var products = require('./routes/products');
 var promotions = require('./routes/promotions');
 var types = require('./routes/types');
 var orders = require('./routes/orders');
+var payments = require('./routes/payments');
 var app = express();
 
 process.setMaxListeners(0);
@@ -55,6 +56,7 @@ app.use(function (req, res, next)
   app.use('/promotions', promotions);
   app.use('/types', types);
   app.use('/orders', orders);
+  app.use('/payments', payments);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
