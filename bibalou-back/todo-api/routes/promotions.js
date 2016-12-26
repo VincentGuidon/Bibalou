@@ -88,7 +88,7 @@ router.put('/', function(req, res, next) {
   var update = req.body;
   delete update.token;
 
-  Promotion.findByIdAndUpdate(req.query.id, update, function(err) {
+  Promotion.findByIdAndUpdate(req.body._id, update, function(err) {
     if (err)
     {
       res.send({success : false, message : 'Internal error',errcode : 7});
