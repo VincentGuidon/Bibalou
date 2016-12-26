@@ -71,7 +71,7 @@ angular.module('BibalouApp')
 
     $scope.addProduct = function () {
       var modalInstance = $uibModal.open({
-        templateUrl: 'views/products/AddProductModal.html',
+        templateUrl: 'views/products/addProductModal.html',
         controller: 'AddProductModalCtrl',
         size: 'lg',
         resolve: {
@@ -84,7 +84,7 @@ angular.module('BibalouApp')
 
     $scope.editProduct = function (product) {
       var modalInstance = $uibModal.open({
-        templateUrl: 'views/products/AddProductModal.html',
+        templateUrl: 'views/products/addProductModal.html',
         controller: 'AddProductModalCtrl',
         size: 'lg',
         resolve: {
@@ -127,7 +127,6 @@ angular.module('BibalouApp')
       RequestAPI.GET("/types", SubmitResult.submitSuccess(function (response) {
           $scope.types = response.data.types;
           $scope.types.splice(0, 0, "All");
-          console.log($scope.types);
         }),
         SubmitResult.submitFailure(), {token: User.getToken()});
     };

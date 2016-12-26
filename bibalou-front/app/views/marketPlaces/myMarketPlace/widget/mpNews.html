@@ -1,3 +1,64 @@
 <div>
-  BONJOUR
+  <br>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-2">
+        <label for="field_date"></label>
+        <input id="field_date" type="text"
+               class="form-control" uib-datepicker-popup="{{dateformat}}"
+               data-ng-model="date" is-open="datePickerForDate.status.opened"
+               data-ng-change="parseUnparsedNews()"/>
+
+        <span class="input-group-btn">
+                <button type="button" class="btn btn-default" data-ng-click="datePickerForDateOpen($event)">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </button>
+            </span>
+      </div>
+      <div class="col-md-5">
+        <label for="name">Search: </label>
+        <input type="text" name="path" id="name"
+               value="" data-data-ng-model="searchNews">
+      </div>
+      <button type="submit"
+              data-ng-click="addNews()"
+              class="btn btn-primary btn-sm pull-right">
+        <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span> Add news</span>
+      </button>
+    </div>
+  </div>
+  <br>
+  <br>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Date</th>
+        <th>Title</th>
+        <th>Content</th>
+        <th class="col-md-5"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr data-ng-repeat="news in marketPlace.news track by news.id">
+        <td>{{news.date | date:'medium'}}</td>
+        <td>{{news.title}}</td>
+        <td>{{news.content}}</td>
+        <td>
+          <button type="submit"
+                  data-ng-click="editNews(news)"
+                  class="btn btn-primary btn-sm">
+            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+          </button>
+          <button type="submit"
+                  data-ng-click="delete(news._id)"
+                  class="btn btn-danger btn-sm pull-right">
+            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
