@@ -133,9 +133,7 @@ angular.module('BibalouApp')
     };
 
     $scope.reloadProducts = function () {
-      console.log("reload products")
       RequestAPI.GET("/products/byMarketName", SubmitResult.submitSuccess(function (response) {
-          console.log(response.data)
           $scope.marketPlace.productList = response.data.products;
           $scope.busy = false;
           $scope.loadProducts();

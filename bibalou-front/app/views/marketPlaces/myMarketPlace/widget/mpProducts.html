@@ -11,8 +11,8 @@
       </select>
     </div>
     <div class="col-md-2">
-      <label class="sr-only" for="selectstatus"></label>
-      <select name="selectstatus" id="selectstatus" class="form-control"
+      <label class="sr-only" for="selectStatus"></label>
+      <select name="selectStatus" id="selectStatus" class="form-control"
               data-ng-options="current as current.name for current in status"
               data-ng-model="currentStatus"
               data-ng-change="parseUnparsedProducts()">
@@ -43,7 +43,7 @@
         <th class="col-md-5"></th>
       </tr>
       </thead>
-      <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+      <tbody>
       <tr data-ng-repeat="product in products track by $index">
         <td>
           <div data-ng-if="product.available == true" style="color:#01DF01">

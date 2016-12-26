@@ -126,7 +126,7 @@ angular.module('BibalouApp')
       $scope.unparsedProducts = [];
       $scope.products = [];
       RequestAPI.GET("/products", SubmitResult.submitSuccess(function (response) {
-          $scope.unparsedProducts = response.data;
+          $scope.unparsedProducts = response.data.products;
           $scope.parseUnparsedProducts();
         }),
         SubmitResult.submitFailure(), {token: User.getToken()});
