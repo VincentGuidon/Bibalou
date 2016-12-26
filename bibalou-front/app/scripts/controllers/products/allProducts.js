@@ -8,7 +8,7 @@
  * Controller of the BibalouApp
  */
 angular.module('BibalouApp')
-  .controller('AllProductsCtrl', function ($scope, $timeout, toaster, SubmitResult, RequestAPI, User, CloneUtilsCustom) {
+  .controller('AllProductsCtrl', function ($scope, $timeout, toaster, SubmitResult, RequestAPI, User, CloneUtilsCustom, CartManager) {
 
     /** UTILS**/
     var filterUnparsedProducts = function () {
@@ -119,6 +119,10 @@ angular.module('BibalouApp')
       if ($scope.filter.name) {
         $scope.products.sort(compareName);
       }
+    };
+
+    $scope.addToCart = function(product, quantity) {
+      CartManager.addProduct(product, quantity);
     };
 
     /** LOAD **/

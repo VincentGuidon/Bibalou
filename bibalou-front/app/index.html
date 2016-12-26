@@ -44,15 +44,16 @@
         <a class="navbar-brand" href="#/" left>Bibalou</a>
       </div>
 
-      <div class="collapse navbar-collapse" id="js-navbar-collapse">
+      <div class="collapse navbar-collapse" id="js-navbar-collapse" style="width: 84%;">
 
         <ul class="nav navbar-nav">
 
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <li><a ng-href="#/allProducts"><b>Products</b></a></li>
-          <li><a ng-href="#/allMarketPlaces"><b>MarketPlaces</b></a></li>
+          <li><a ng-href="#/myCart"><i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i></a></li>
+          <li><a ng-href="#/allProducts" class="navbarItem"><span class="glyphicon glyphicon-gift"></span><b>Products</b></a></li>
+          <li><a ng-href="#/allMarketPlaces" class="navbarItem"><span class="glyphicon glyphicon-piggy-bank" style="padding-right:3px"></span><b>MarketPlaces</b></a></li>
           <li>
             <div login-navbar-widget></div>
           </li>
@@ -128,6 +129,7 @@
 <script src="scripts/services/requestAPI.js"></script>
 <script src="scripts/services/submitResult.js"></script>
 <script src="scripts/services/toolsUtils.js"></script>
+<script src="scripts/services/cartManager.js"></script>
 
 <script src="scripts/directives/loginNavbarWidget.js"></script>
 <script src="scripts/directives/accountNavbarWidget.js"></script>
@@ -157,6 +159,7 @@
 <script src="scripts/controllers/marketPlaces/myMarketPlace/widget/manageMpNews.js"></script>
 <script src="scripts/controllers/marketPlaces/myMarketPlace/widget/manageMpStock.js"></script>
 
+<script src="scripts/controllers/myCart/myCart.js"></script>
 <!-- endbuild -->
 </body>
 </html>

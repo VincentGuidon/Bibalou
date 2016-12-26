@@ -11,6 +11,7 @@
               <div class="form-group">
                 <label class="control-label" for="field_name">Name</label><i style="color: red">*</i>
                 <input type="text" class="form-control" name="name" id="field_name"
+                       data-ng-disabled="current == 0"
                        data-ng-model="marketPlace.name"
                        placeholder="ex. Summer party"
                        required/>
