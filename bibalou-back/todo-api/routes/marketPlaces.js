@@ -32,7 +32,7 @@ router.put('/editNews', function (req, res, next) {
             ret.errcode = 4;
             res.send(ret);
         }
-        else if (market.size == 0) {
+        else if (market.length == 0) {
             ret.success = false;
             ret.message = "No MarketPlace found";
             ret.errcode = 4;
@@ -61,7 +61,7 @@ router.put('/removeNews', function (req, res, next) {
             ret.errcode = 4;
             res.send(ret);
         }
-        else if (market.size == 0) {
+        else if (market.length == 0) {
             ret.success = false;
             ret.message = "No MarketPlace found";
             ret.errcode = 4;
@@ -158,7 +158,7 @@ router.get('/byName', function (req, res, next) {
             ret.errcode = 4;
             res.send(ret);
         }
-        else if (market.size == 0) {
+        else if (market.length == 0) {
             ret.success = false;
             ret.message = "No MarketPlace found";
             ret.errcode = 4;
@@ -183,7 +183,7 @@ router.get('/byId', function (req, res, next) {
             ret.errcode = 4;
             res.send(ret);
         }
-        else if (market.size == 0) {
+        else if (market.length == 0) {
             ret.success = false;
             ret.message = "No MarketPlace found";
             ret.errcode = 4;
@@ -207,7 +207,7 @@ router.get('/byId/news', function (req, res, next) {
             ret.errcode = 4;
             res.send(ret);
         }
-        else if (market.size == 0) {
+        else if (market.length == 0) {
             ret.success = false;
             ret.message = "No MarketPlace found";
             ret.errcode = 4;
@@ -231,7 +231,7 @@ router.get('/byOwner', function (req, res, next) {
             ret.errcode = 4;
             res.send(ret);
         }
-        else if (market.size == 0) {
+        else if (market.length == 0) {
             ret.success = false;
             ret.message = "No MarketPlace found";
             ret.errcode = 4;

@@ -37,6 +37,7 @@ angular.module('BibalouApp')
 
     $scope.parseUnparsedNews = function () {
       $scope.news = CloneUtilsCustom.cloneArray($scope.marketPlace.news);
+      console.log($scope.news);
 
 
       parseByDate();

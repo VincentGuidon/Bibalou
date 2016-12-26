@@ -17,6 +17,7 @@ angular.module('BibalouApp')
     };
 
     $scope.init = function () {
+      console.log("init");
       RequestAPI.GET("/marketPlaces/byOwner", SubmitResult.submitSuccess(function (response) {
           $scope.marketPlace = response.data.marketPlace;
           $scope.busy = false;

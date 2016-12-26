@@ -17,7 +17,7 @@ angular.module('BibalouApp')
     };
 
     $scope.init = function () {
-      RequestAPI.GET("/user", SubmitResult.submitSuccess(function (response) {
+      RequestAPI.GET("/user/byId", SubmitResult.submitSuccess(function (response) {
           $scope.user = response.data.user;
         console.log($scope.user);
           $scope.initChanges();
@@ -45,6 +45,7 @@ angular.module('BibalouApp')
         return;
       }
       CloneUtilsCustom.copyObject($scope.change, $scope.user);
+      delete $scope.user.passwordVerif;
       RequestAPI.PUT("/user", $scope.user, SubmitResult.submitSuccess(function (response) {
           $scope.initChanges();
         }, "Profile updated !"),
