@@ -62,6 +62,12 @@ router.get('/', function(req, res, next) {
       }
       else {
         i = i + 1;
+        if (i == max)
+        {
+          ret.success = true;
+          ret.products = allProducts;
+          res.send(ret);
+        }
       }
       callback(); // Alternatively: callback(new Error());
     });
