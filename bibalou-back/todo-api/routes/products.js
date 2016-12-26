@@ -7,6 +7,41 @@ var Product = require('../models/Products.js');
 var Market = require('../models/Markets.js');
 var Promotion = require('../models/Promotions.js');
 
+function getFullProducts(res, allProducts)
+{
+  var ret = {};
+  var i = 0;
+  var max = allProducts.length;
+  async.eachSeries(allProducts, function (product, callback)
+  {
+    if (product.promotion)
+    {
+      Promotion.findById(product.promotion, function(err, promo) {
+        if (err)
+          res.send({success : false, message : 'Internal Error',errcode : 0});
+          product.promotion = promo;
+        i = i + 1;
+        if (i == max)
+        {
+          ret.success = true;
+          ret.products = allProducts;
+          res.send(ret);
+        }
+      });
+    }
+    else {
+      i = i + 1;
+      if (i == max)
+      {
+        ret.success = true;
+        ret.products = allProducts;
+        res.send(ret);
+      }
+    }
+    callback(); // Alternatively: callback(new Error());
+  });
+}
+
 router.delete('/', function(req, res, next) {
   Product.findByIdAndRemove(req.query.id, function(err)
     {
@@ -40,37 +75,9 @@ router.get('/', function(req, res, next) {
     {
         res.send({success : false, message : 'Internal Error',errcode : 0});
     }
-    var ret = {};
-    var i = 0;
-    var max = allProducts.length;
-    async.eachSeries(allProducts, function (product, callback)
-    {
-      if (product.promotion)
-      {
-        Promotion.findById(product.promotion, function(err, promo) {
-          if (err)
-            res.send({success : false, message : 'Internal Error',errcode : 0});
-            product.promotion = promo;
-          i = i + 1;
-          if (i == max)
-          {
-            ret.success = true;
-            ret.products = allProducts;
-            res.send(ret);
-          }
-        });
-      }
-      else {
-        i = i + 1;
-        if (i == max)
-        {
-          ret.success = true;
-          ret.products = allProducts;
-          res.send(ret);
-        }
-      }
-      callback(); // Alternatively: callback(new Error());
-    });
+    else {
+      getFullProducts(res, allProducts);
+    }
   });
 });
 
@@ -83,11 +90,7 @@ router.get('/byId', function(req, res, next) {
     }
     else
     {
-      var ret = {};
-
-      ret.success = true;
-      ret.product = product;
-      res.send(ret);
+      getFullProducts(res, product);
     }
   });
 });
@@ -100,11 +103,7 @@ router.get('/byName', function(req, res, next) {
     }
     else
     {
-      var ret = {};
-
-      ret.success = true;
-      ret.products = products;
-      res.send(ret);
+      getFullProducts(res, products);
     }
   });
 });
