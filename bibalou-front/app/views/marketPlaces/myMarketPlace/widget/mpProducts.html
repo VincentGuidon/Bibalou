@@ -1,3 +1,98 @@
 <div>
-  BONJOUR
+  <br>
+
+  <div class="form-group">
+    <div class="col-md-2">
+      <label class="sr-only" for="selectType"></label>
+      <select name="selectType" id="selectType" class="form-control"
+              data-ng-options="type as type.name for type in types"
+              data-ng-model="type"
+              data-ng-change="parseType()">
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label class="sr-only" for="selectState"></label>
+      <select name="selectState" id="selectState" class="form-control"
+              data-ng-options="state as state.name for state in states"
+              data-ng-model="state"
+              data-ng-change="parseState()">
+      </select>
+    </div>
+    <div class="col-md-5">
+      <label for="name">Search: </label>
+      <input type="text" name="path" id="name"
+             value="" data-ng-model="path"
+             data-ng-change="parseName()">
+    </div>
+    <button type="submit"
+            data-ng-click="addProduct()"
+            class="btn btn-primary btn-sm pull-right">
+      <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span> Add product</span>
+    </button>
+  </div>
+  <br>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>State</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Sill</th>
+        <th>Product</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+      <tr data-ng-repeat="product in products track by product.id">
+        <td>
+          <div data-ng-if="product.valid == true" style="color:#01DF01">
+            <span>Available</span>
+          </div>
+          <div data-ng-if="product.valid == false" style="color:#DF0101">
+            <span>Unavailable</span>
+          </div>
+        </td>
+
+        <td>{{product.price}}</td>
+        <td>{{product.stock}}</td>
+        <td>{{product.sill}}</td>
+        <td>{{product.baseProduct.name}}</td>
+
+        <td>
+          <button type="submit"
+                  href="#/product/{{product.id}}"
+                  class="btn btn-info btn-sm">
+            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+          </button>
+          <button type="submit"
+                  data-ng-click="editProduct(product.id)"
+                  class="btn btn-primary btn-sm">
+            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+          </button>
+          <div data-ng-if="product.valid == false">
+            <button type="submit"
+                    data-ng-click="available(product)"
+                    class="btn btn-success btn-sm">
+              <span class="glyphicon glyphicon-ok-sign"></span>&nbsp;<span> Available</span>
+            </button>
+          </div>
+          <div data-ng-if="product.valid == true">
+            <button type="submit"
+                    data-ng-click="available(product)"
+                    class="btn btn-warning btn-sm">
+              <span class="glyphicon glyphicon-alert"></span>&nbsp;<span> Unavailable</span>
+            </button>
+          </div>
+          <button type="submit"
+                  data-ng-click="delete(product.id)"
+                  class="btn btn-danger btn-sm pull-right">
+            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
