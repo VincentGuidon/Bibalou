@@ -56,9 +56,9 @@ angular.module('BibalouApp')
     };
 
     var parseByType = function () {
-      if ($scope.type.name != "All") {
+      if ($scope.type != "All") {
         for (var i = 0; i < $scope.products.length; ++i) {
-          if ($scope.products[i].type.name != $scope.type.name) {
+          if ($scope.products[i].type != $scope.type) {
             $scope.products.splice(i, 1);
             --i;
           }
@@ -167,10 +167,10 @@ angular.module('BibalouApp')
       }
       tempFilterText = val;
       filterTextTimeout = $timeout(function () {
-        if (!$scope.searchProduct) {
+        if (!$scope.searchProduct && $scope.searchProduct != "") {
           return;
         }
-        $scope.parseProducts();
+        $scope.parseUnparsedProducts();
       }, tempo); // delay in ms
     })
   });
