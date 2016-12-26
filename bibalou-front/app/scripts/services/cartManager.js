@@ -12,35 +12,46 @@ angular.module('BibalouApp')
     // Service logic
     var products = [];
 
-    var searchInCookies = function() {
+    var searchInCookies = function () {
       var values = $cookies.get("products");
 
       if (values == null) {
-        values = [];
+        return [];
       }
-      return values;
+      return JSON.parse(values);
     };
 
-    var saveProduct = function(product, quantity) {
+    var save = function () {
+      $cookies.put("products", JSON.stringify(products));
+    };
+
+    var addProduct = function (product, quantity) {
+      for (var i = 0; i < products.length; ++i) {
+        if (products[i].product._id == product._id) {
+          products[i].quantity += quantity;
+          save();
+          return;
+        }
+      }
       products.push({quantity: quantity, product: product});
-      $cookies.put("products", products);
+      save();
     };
 
-    var removeProduct = function(id) {
+    var removeProduct = function (id) {
       for (var i = 0; i < products.length; ++i) {
         if (products[i].product._id == id) {
           products.splice(i, 1);
-          $cookies.put("products", products);
+          save();
           break;
         }
       }
     };
 
-    var editProduct = function(id, quantity) {
+    var editProduct = function (id, quantity) {
       for (var i = 0; i < products.length; ++i) {
         if (products[i].product._id == id) {
           products[i].quantity = quantity;
-          $cookies.put("products", products);
+          save();
           break;
         }
       }
@@ -48,23 +59,23 @@ angular.module('BibalouApp')
 
     // Public API here
     return {
-      getProducts: function() {
+      getProducts: function () {
         if (products.length == 0) {
           return searchInCookies();
         } else {
           return products;
         }
       },
-      addProduct: function(product, quantity) {
-        saveProduct(product, quantity);
+      addProduct: function (product, quantity) {
+        addProduct(product, quantity);
       },
-      rmProduct: function(id) {
+      rmProduct: function (id) {
         removeProduct(id);
       },
-      editProduct: function(id, quantity) {
+      editProduct: function (id, quantity) {
         editProduct(id, quantity);
       },
-      getPrice: function() {
+      getPrice: function () {
         var total = 0;
 
         for (var i = 0; i < products.length; ++i) {
@@ -77,6 +88,10 @@ angular.module('BibalouApp')
           total += (products[i].quantity * price);
         }
         return total;
+      },
+      clear: function () {
+        products.length = 0;
+        $cookies.remove("products");
       }
     };
   });

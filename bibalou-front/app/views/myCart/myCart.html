@@ -40,11 +40,11 @@
                 <input class="form-control" type="number" name="quantity" min="1"
                        step="1"
                        id="field_quantity"
-                       value="{{productContainer.quantity}}" data-ng-model="focusedQuantity"
-                       data-ng-change="changeQuantity(productContainer.product)">
+                       data-ng-model="productContainer.quantity"
+                       data-ng-change="changeQuantity(productContainer.product, productContainer.quantity)">
               </div>
               <div class="col-md-3">
-                <button data-ng-click="deleteProduct(productContainer.product)"
+                <button data-ng-click="removeProduct(productContainer.product)"
                         class="btn btn-danger btn-sm">
                   <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;
                   <span>Delete</span>
@@ -66,6 +66,9 @@
     <br>
 
     <div class="modal-footer">
+      <button class="btn btn-default pull-left" data-ng-disabled="products.length == 0" data-ng-click="clearAll()">
+        <span class="glyphicon glyphicon-ban-circle"></span> <span>Clear&nbsp;</span>
+      </button>
       <div class="buyCart">
           <button class="btn btn-primary" data-ng-disabled="products.length == 0" data-ng-click="proceedOrder()">
             <span class="glyphicon glyphicon-circle-arrow-right"></span> <span>Proceed to Order&nbsp;</span>
