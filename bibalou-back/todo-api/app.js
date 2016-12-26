@@ -10,7 +10,6 @@ var user = require('./routes/user');
 var auth = require('./routes/authenticate');
 var market = require('./routes/marketPlaces');
 var products = require('./routes/products');
-var register = require('./routes/register');
 var promotions = require('./routes/promotions');
 var types = require('./routes/types');
 var orders = require('./routes/orders');
@@ -35,7 +34,7 @@ module.exports = app;
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/bibalou')
-  .then(() =>  console.log('connection succesful'))
+    .then(() =>  console.log('connection succesful'))
   .catch((err) => console.error(err));
 
 app.use(function (req, res, next)
@@ -53,7 +52,6 @@ app.use(function (req, res, next)
   app.use('/authenticate', auth);
   app.use('/marketPlaces', market);
   app.use('/products', products);
-  app.use('/register', register);
   app.use('/promotions', promotions);
   app.use('/types', types);
   app.use('/orders', orders);

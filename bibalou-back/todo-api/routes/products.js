@@ -8,7 +8,7 @@ var Market = require('../models/Markets.js');
 var Promotion = require('../models/Promotions.js');
 
 router.delete('/', function(req, res, next) {
-  Product.findByIdAndRemove(req.query.id, function(err, promo)
+  Product.findByIdAndRemove(req.query.id, function(err)
     {
       if (err)
       {
@@ -16,7 +16,7 @@ router.delete('/', function(req, res, next) {
       }
       else
       {
-        res.send({sucees : true});
+        res.send({success : true});
       }
     });
 });
@@ -103,8 +103,8 @@ router.get('/byName', function(req, res, next) {
   });
 });
 
-router.get('/byMarketId', function(req, res,next) {
-  Product.find({marketPlace : req.query.marketId}, function(err, products) {
+router.get('/byMarketName', function(req, res,next) {
+  Product.find({marketPlace : req.query.marketName}, function(err, products) {
     if (err)
     {
       res.send({success : false, message : 'No marketPlace with that ID',errcode : 5});
@@ -122,6 +122,10 @@ router.get('/byMarketId', function(req, res,next) {
 
 router.post('/', function(req, res, next) {
 
+  if (req.body._id) {
+    res.send({success : false, message : 'The product already exist', errcode : 5});
+    return;
+  }
   var marketPlaceName = req.body.marketPlace;
   var nProduct = new Product({
     name : req.body.name,

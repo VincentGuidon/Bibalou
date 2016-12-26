@@ -11,54 +11,22 @@ angular.module('BibalouApp')
   .controller('ManageMpProductsCtrl', function ($scope, $timeout, $uibModal, toaster, SubmitResult, RequestAPI, User, CloneUtilsCustom) {
 
     /** UTILS**/
-    var filterUnparsedProducts = function () {
-      if ($scope.filter.bestPrice) {
-        for (var i = 0; i < $scope.products.length; ++i) {
-          for (var i2 = i + 1; i2 < $scope.products.length; ++i2) {
-            if ($scope.products[i].name == $scope.products[i2].name) {
 
-              if ($scope.products[i].stock == 0) {
-                if ($scope.products[i].numberSame > $scope.products[i2]) {
-                  $scope.products[i2].numberSame = $scope.products[i];
-                }
-                $scope.products[i2].numberSame += 1;
-                $scope.products.splice(i, 1);
-                --i;
-                --i2;
-              } else if ($scope.products[i2].stock == 0) {
-                if ($scope.products[i].numberSame < $scope.products[i2]) {
-                  $scope.products[i].numberSame = $scope.products[i2];
-                }
-                $scope.products[i].numberSame += 1;
-                $scope.products.splice(i2, 1);
-                --i2;
-              }
-              if ($scope.products[i].price > $scope.products[i2].price) {
-                if ($scope.products[i].numberSame > $scope.products[i2]) {
-                  $scope.products[i2].numberSame = $scope.products[i];
-                }
-                $scope.products[i2].numberSame += 1;
-                $scope.products.splice(i, 1);
-                --i;
-                --i2;
-              } else {
-                if ($scope.products[i].numberSame < $scope.products[i2]) {
-                  $scope.products[i].numberSame = $scope.products[i2];
-                }
-                $scope.products[i].numberSame += 1;
-                $scope.products.splice(i2, 1);
-                --i2;
-              }
-            }
+    var parseByType = function () {
+      if ($scope.type != "All") {
+        for (var i = 0; i < $scope.products.length; ++i) {
+          if ($scope.products[i].type != $scope.type) {
+            $scope.products.splice(i, 1);
+            --i;
           }
         }
       }
     };
 
-    var parseByType = function () {
-      if ($scope.type.name != "All") {
+    var parseByStatus = function () {
+      if ($scope.currentStatus.name != "All") {
         for (var i = 0; i < $scope.products.length; ++i) {
-          if ($scope.products[i].type.name != $scope.type.name) {
+          if ($scope.products[i].available != $scope.currentStatus.value) {
             $scope.products.splice(i, 1);
             --i;
           }
@@ -78,30 +46,13 @@ angular.module('BibalouApp')
     };
 
     $scope.parseUnparsedProducts = function () {
-      $scope.products = CloneUtilsCustom.cloneArray($scope.unparsedProducts);
+      $scope.products = CloneUtilsCustom.cloneArray($scope.marketPlace.productList);
 
-      for (var i = 0; i < $scope.products.length; ++i) {
-        $scope.products[i].numberSame = 0;
-      }
-      filterUnparsedProducts();
       parseByType();
+      parseByStatus();
       parseByName();
       $scope.sortParsedProducts();
     };
-
-    function compareProductsPriceUp(a, b) {
-      if (a.price < b.price)
-        return -1;
-      else
-        return 1;
-    }
-
-    function compareProductsPriceDown(a, b) {
-      if (a.price < b.price)
-        return 1;
-      else
-        return -1;
-    }
 
     function compareName(a, b) {
       if (a.name < b.name)
@@ -111,11 +62,6 @@ angular.module('BibalouApp')
     }
 
     $scope.sortParsedProducts = function () {
-      if ($scope.filter.price == "UP") {
-        $scope.products.sort(compareProductsPriceUp);
-      } else {
-        $scope.products.sort(compareProductsPriceDown);
-      }
       if ($scope.filter.name) {
         $scope.products.sort(compareName);
       }
@@ -123,60 +69,60 @@ angular.module('BibalouApp')
 
     /** FUNCTION **/
 
-    $scope.addProduct = function() {
+    $scope.addProduct = function () {
       var modalInstance = $uibModal.open({
         templateUrl: 'views/products/AddProductModal.html',
         controller: 'AddProductModalCtrl',
         size: 'lg',
         resolve: {
-          ParentProduct: function () {
-            return {saved: null};
+          Parent: function () {
+            return {product: null, marketPlace: $scope.marketPlace, finishAction: $scope.reloadProducts};
           }
         }
       });
     };
 
-    $scope.editProduct = function(product) {
+    $scope.editProduct = function (product) {
       var modalInstance = $uibModal.open({
-        templateUrl: 'views/products/editProductModal.html',
-        controller: 'EditProductModalCtrl',
+        templateUrl: 'views/products/AddProductModal.html',
+        controller: 'AddProductModalCtrl',
         size: 'lg',
         resolve: {
-          ParentProduct: function () {
-            return {saved: product};
+          Parent: function () {
+            return {product: product, marketPlace: $scope.marketPlace, finishAction: $scope.reloadProducts};
           }
         }
       });
     };
 
-    $scope.available = function(product) {
+    $scope.available = function (product) {
       product.available = !product.available;
-      RequestAPI.DELETE("/products", product, SubmitResult.submitSuccess(function (response) {
+      RequestAPI.PUT("/products", product, SubmitResult.submitSuccess(function (response) {
         }),
         SubmitResult.submitFailure(), {token: User.getToken()});
     };
 
-    $scope.deleteProduct = function(id) {
+    $scope.delete = function (id) {
       RequestAPI.DELETE("/products", SubmitResult.submitSuccess(function (response) {
+          $scope.reloadProducts();
         }),
         SubmitResult.submitFailure(), {token: User.getToken(), id: id});
     };
 
     /** LOAD **/
     $scope.loadProducts = function () {
-      $scope.unparsedProducts = [];
-      $scope.products = [];
-      RequestAPI.GET("/products", SubmitResult.submitSuccess(function (response) {
-          $scope.unparsedProducts = response.data;
-          $scope.parseUnparsedProducts();
-        }),
-        SubmitResult.submitFailure(), {token: User.getToken()});
+      $scope.parseUnparsedProducts();
     };
 
     $scope.loadParser = function () {
       $scope.types = [];
       $scope.type = "All";
-      $scope.filter = {"price": "UP", "bestPrice": true, "name": true};
+      $scope.status = [{name: "All", value: true}, {name: "Available", value: true}, {
+        name: "Unavailable",
+        value: false
+      }];
+      $scope.currentStatus = $scope.status[0];
+      $scope.filter = {"name": true};
 
       RequestAPI.GET("/types", SubmitResult.submitSuccess(function (response) {
           $scope.types = response.data.types;
@@ -186,16 +132,24 @@ angular.module('BibalouApp')
         SubmitResult.submitFailure(), {token: User.getToken()});
     };
 
-    $scope.init = function () {
+    $scope.reloadProducts = function () {
+      console.log("reload products")
+      RequestAPI.GET("/products/byMarketName", SubmitResult.submitSuccess(function (response) {
+          console.log(response.data)
+          $scope.marketPlace.productList = response.data.products;
+          $scope.busy = false;
+          $scope.loadProducts();
+        }),
+        SubmitResult.submitFailure(function () {
+        }), {token: User.getToken(), marketName: $scope.marketPlace.name});
+    };
+
+    $scope.initMpProduct = function () {
       $scope.loadParser();
       $scope.loadProducts();
     };
 
-    $scope.refresh = function () {
-      $scope.init();
-    };
-
-    $scope.init();
+    $scope.initMpProduct();
 
     // Instantiate these variables outside the watch
     var tempo = 400;
@@ -208,10 +162,10 @@ angular.module('BibalouApp')
       }
       tempFilterText = val;
       filterTextTimeout = $timeout(function () {
-        if (!$scope.searchProduct) {
+        if (!$scope.searchProduct && $scope.searchProduct != "") {
           return;
         }
-        $scope.parseProducts();
+        $scope.parseUnparsedProducts();
       }, tempo); // delay in ms
     })
   });

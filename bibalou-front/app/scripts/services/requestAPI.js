@@ -112,7 +112,7 @@ angular.module('BibalouApp')
         updateUser(parameters);
         withData("PUT", url, data, success, failure, parameters);
       },
-      DELETE: function (url, data, success, failure, parameters) {
+      DELETE: function (url, success, failure, parameters) {
         updateUser(parameters);
         noData("DELETE", url, success, failure, parameters);
       }

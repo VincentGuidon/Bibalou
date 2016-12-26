@@ -6,12 +6,12 @@ var productSchema = new Schema({
   description : String,
   price : Number,
   stock : Number,
+  sill: Number,
   available : Boolean,
   image : String,
   type : String,
   promotion : Schema.Types.Mixed,
-  type : String,
-  marketPlace : String,
+  marketPlace : String
 });
 
 var Product = mongoose.model('Product', productSchema);

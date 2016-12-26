@@ -41,7 +41,8 @@
                                     </ins>
                                     <br/>
                                     <span data-ng-if="product.promotion.brut != 0">-{{product.promotion.brut | currency}}</span>
-                                    <span data-ng-if="product.promotion.percent != 0">-{{product.promotion.percent}}%</span>
+                                    <span
+                                      data-ng-if="product.promotion.percent != 0">-{{product.promotion.percent}}%</span>
                                 </span>
               </div>
             </h4>
@@ -55,7 +56,7 @@
             <div class="row">
               <div class="col-md-3 text-center">
                 <a href="#/product/{{product.id}}"><img class="img-responsive"
-                                                               src="{{product.image}}"/></a>
+                                                        src="{{product.image}}"/></a>
               </div>
               <div class="col-md-6">
                 <div class="description">{{product.baseProduct.description}}</div>
