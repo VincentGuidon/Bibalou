@@ -1,12 +1,97 @@
-<h3>{{marketPlace.name}} {{marketPlace.date}}</h3>
+<div>
+  <div class="modal-header">
+    <div class="col-md-3 text-center">
+      <img class="img-responsive" src="{{marketPlace.image}}"/>
+    </div>
 
-<br><h4>Ingredients</h4>
-<div ng-repeat="ingredient in marketPlace.ingredients_ids">
+    <h1>{{marketPlace.name}}</h1>
+
+
+    <p class="lead text-align">Welcome in the MarketPlace</p>
+    <hr style="border-color:#E6E6E6;">
+
+    <div class="rating pull-right">
+      <span class="stars hidden" title="{{marketPlace.rating}}">{{marketPlace.rating}}</span>
+    </div>
+    <div class="pull-right">
+      <span>Rating</span> :
+    </div>
+
+    <button class="btn btn-primary" data-ng-click="changeMode(1)" data-ng-if="mode == 0">
+      <span>Products&nbsp;</span>
+    </button>
+    <button class="btn btn-primary" data-ng-click="changeMode(0)" data-ng-if="mode == 1">
+      <span>MarketPlace&nbsp;</span>
+    </button>
+
+  </div>
+
+  <div class="modal-body">
+    <div data-ng-if="mode==0">
+      <h3>
+        <span>Description :</span>
+      </h3>
+      <br>
+      <span>{{marketPlace.description}}</span>
+      <br>
+      <hr>
+      <h3>News :</h3>
+
+      <table class="table" id="allNews">
+        <tbody>
+        <tr data-ng-repeat="news in marketPlace.news">
+          <td class="news">
+            <div class="news">
+              <h4>
+                <span style="font-size: 130%;">{{news.title}}</span>
+              </h4>
+              <span class="date">{{news.date | date:'medium'}}</span>
+              <br>
+              <span>{{news.content}}</span>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div data-ng-if="mode==1">
+      <ul id="allProducts" data-ng-if="marketPlace.productList.length > 0">
+        <li data-ng-repeat="product in marketPlace.productList" class="productList">
+          <div class="item" style="background-image: url('{{product.image}}');">
+            <h4 class="product-name">{{product.name}} </h4>
+
+            <div class="product-price">
+              <span data-ng-if="!product.promotion || (product.promotion.percent == 0 && product.promotion.brut == 0)">{{product.price | currency}}</span>
+              <span data-ng-if="product.promotion && (product.promotion.percent != 0 || product.promotion.brut != 0)">
+              <del>{{product.price | currency}}</del>
+              <ins>{{product.price - product.promotion.brut - product.price * product.promotion.percent / 100 | currency}}</ins>
+              <span data-ng-if="product.promotion.brut != 0">-{{product.promotion.brut | currency}}</span>
+              <span data-ng-if="product.promotion.percent != 0">-{{product.promotion.percent}}%</span>
+            </span>
+            </div>
+
+            <div class="product-stock">
+              <span>Stock: {{product.stock}}</span>
+            </div>
+
+
+            <a href="#/product/{{product.id}}" class="product-link"></a>
+
+            <div class="addToCart">
+              <button class="btn btn-primary" data-ng-click="addToCart(product, 1)">
+                <span class="glyphicon glyphicon-plus-sign"></span> Add
+              </button>
+            </div>
+
+            <a href="#/product/{{product.id}}/list" class="product-sellers">
+              <span>Sold by: {{product.numberSame}} marketplaces</span>
+            </a>
+        </li>
+      </ul>
+    </div>
+    <div class="clearfix"></div>
+    </div>
+  </div>
+  <div class="modal-footer">
+  </div>
 </div>
-
-<br><h4>Process</h4>
-<div ng-repeat="process in marketPlace.processes_ids">
-</div>
-
-<br><h4>Description</h4>
-<p>{{marketPlace.description}}</p>

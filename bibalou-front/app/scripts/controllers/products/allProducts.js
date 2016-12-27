@@ -55,6 +55,15 @@ angular.module('BibalouApp')
       }
     };
 
+    var parseByAvailable = function () {
+      for (var i = 0; i < $scope.products.length; ++i) {
+        if (!$scope.products[i].available) {
+          $scope.products.splice(i, 1);
+          --i;
+        }
+      }
+    };
+
     var parseByType = function () {
       if ($scope.type != "All") {
         for (var i = 0; i < $scope.products.length; ++i) {
@@ -83,6 +92,7 @@ angular.module('BibalouApp')
       for (var i = 0; i < $scope.products.length; ++i) {
         $scope.products[i].numberSame = 0;
       }
+      parseByAvailable();
       filterUnparsedProducts();
       parseByType();
       parseByName();
@@ -121,7 +131,7 @@ angular.module('BibalouApp')
       }
     };
 
-    $scope.addToCart = function(product, quantity) {
+    $scope.addToCart = function (product, quantity) {
       CartManager.addProduct(product, quantity);
     };
 
@@ -144,7 +154,7 @@ angular.module('BibalouApp')
       RequestAPI.GET("/types", SubmitResult.submitSuccess(function (response) {
           $scope.types = response.data.types;
           $scope.types.splice(0, 0, "All");
-        console.log($scope.types);
+          console.log($scope.types);
         }),
         SubmitResult.submitFailure(), {token: User.getToken()});
     };

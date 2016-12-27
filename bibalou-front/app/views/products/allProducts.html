@@ -32,7 +32,7 @@
   <div class="modal-body">
     <ul id="allProducts" ng-if="products.length > 0">
       <li data-ng-repeat="product in products" class="productList">
-        <div class="item" style="background: url({{product.image}}); background-size: cover;">
+        <div class="item" style="background-image: url('{{product.image}}');">
           <h4 class="product-name">{{product.name}} </h4>
 
           <div class="product-price">
@@ -59,7 +59,7 @@
           </div>
 
           <a href="#/product/{{product.id}}/list" class="product-sellers">
-            <span>Sold by: {{product.numberSame}} marketplaces</span>
+            <span>Sold by: 1 marketplaces</span>
           </a>
         </li>
       </ul>

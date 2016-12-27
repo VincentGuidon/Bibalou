@@ -258,6 +258,9 @@ Product list
   float: left;
   text-align: center;
   position: relative;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 #allProducts .productList .item .product-name {
