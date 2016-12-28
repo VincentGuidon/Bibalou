@@ -1,0 +1,45 @@
+<div>
+  <h2>All Marketplaces</h2>
+
+  <div class="form-group">
+    <div class="parser">
+      <div class="col-md-4">
+        <label class="sr-only" for="searchMarketPlace">Search: </label>
+        <input type="text" class="form-control" id="searchMarketPlace" placeholder="name"
+               data-ng-model="searchMarketPlace">
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <div class="modal-body">
+    <table class="table" id="allMarketplaces" style="table-layout: fixed;">
+      <tbody>
+      <tr data-ng-repeat="marketPlace in marketPlaces">
+        <td class="marketPlace">
+          <div class="item">
+            <h4><a href="#/marketPlace/{{marketPlace._id}}">{{marketPlace.name}}</a></h4>
+            <hr/>
+            <div class="row">
+              <div class="col-md-3 text-center">
+                <a href="#/marketPlace/{{marketPlace._id}}">
+                  <img class="img-responsive" src="{{marketPlace.image}}"/>
+                </a>
+              </div>
+              <div class="col-md-6">
+                <div class="description">{{marketPlace.description}}</div>
+              </div>
+            </div>
+            &nbsp;
+            <div class="row">
+              <div class="col-md-6">
+                <span>Rating</span> : {{marketPlace.rating}}
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
