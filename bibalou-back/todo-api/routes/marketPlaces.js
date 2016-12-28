@@ -108,13 +108,13 @@ router.put('/', function (req, res, next) {
 });
 
 function getAllMarket(ret, res, market) {
-    Product.find({_id: {$in: market[0].productList}}, function (err, products) {
+    Product.find({_id: {$in: market.productList}}, function (err, products) {
         if (err) {
             res.send({success: false, message: 'No marketPlace with that name', errcode: 4});
         }
         else {
             ret.marketPlace.productList = products;
-            Promotion.find({_id: {$in: market[0].promotions}}, function (err, promo) {
+            Promotion.find({_id: {$in: market.promotions}}, function (err, promo) {
                 if (err) {
                     res.send({success: false, message: 'No marketPlace with that name', errcode: 4});
                 }
@@ -166,7 +166,7 @@ router.get('/byName', function (req, res, next) {
             ret.success = true;
             ret.marketPlace = market[0];
 //market, ret, res
-            getAllMarket(ret, res, market);
+            getAllMarket(ret, res, market[0]);
         }
     });
 });
@@ -189,7 +189,7 @@ router.get('/byId', function (req, res, next) {
         }
         else {
             ret.success = true;
-            ret.market = market;
+            ret.marketPlace = market;
             getAllMarket(ret, res, market);
         }
     });
@@ -238,7 +238,7 @@ router.get('/byOwner', function (req, res, next) {
         else {
             ret.success = true;
             ret.marketPlace = market[0];
-            getAllMarket(ret, res, market);
+            getAllMarket(ret, res, market[0]);
         }
     });
 });
