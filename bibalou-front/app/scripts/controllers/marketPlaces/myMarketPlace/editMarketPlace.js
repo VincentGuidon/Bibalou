@@ -34,7 +34,7 @@ angular.module('BibalouApp')
     /** TOOLS **/
 
     $scope.back = function() {
-      $location.url("/myMarketPlace");
+      $location.path("/myMarketPlace");
     };
 
     function clear() {
@@ -42,7 +42,7 @@ angular.module('BibalouApp')
     }
 
     function exit() {
-      $location.url("/");
+      $location.path("/");
     }
 
     function edit() {

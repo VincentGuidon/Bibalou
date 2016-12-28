@@ -33,12 +33,12 @@ angular.module('BibalouApp')
           $scope.busy = false;
         }),
         SubmitResult.submitFailure(function () {
-          $location.url("/myMarketPlace/edit");
+          $location.path("/myMarketPlace/edit");
         }), {token: User.getToken(), owner: User.getId()});
     };
 
     $scope.edit = function () {
-      $location.url("/myMarketPlace/edit");
+      $location.path("/myMarketPlace/edit");
     };
 
     $scope.init();

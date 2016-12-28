@@ -3,10 +3,9 @@ var Schema = mongoose.Schema;
 
 var orderSchema = new Schema({
   date : { type : Date, default : Date.now},
-  products : [Schema.Types.Mixed],
-  payment : String,
-  owner : String,
-  market : String,
+  products : String,
+  payment: String,
+  total : Number,
   buyer  : String
 });
 

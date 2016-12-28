@@ -19,12 +19,11 @@ function createFullOrder(res, orderList)
       orderList[i] = {};
       orderList[i].payment = tmp;
       orderList[i]._id = orders._id;
-      orderList[i].owner = orders.owner;
-      orderList[i].market = orders.market;
       orderList[i].buyer = orders.buyer;
       orderList[i].__v = orders.__v;
       orderList[i].products = orders.products;
       orderList[i].date = orders.date;
+      orderList[i].total = orders.total;
         i = i + 1;
         if (i == max)
         {
@@ -45,7 +44,7 @@ function createFullOrder(res, orderList)
     callback(); // Alternatively: callback(new Error());
   });
 }
-
+/*
 router.get('/byMarket', function(req, res, next) {
   Order.find({ market : req.query.marketId }, function(err, orderList)
   {
@@ -57,7 +56,7 @@ router.get('/byMarket', function(req, res, next) {
       createFullOrder(res, orderList);
     }
   });
-});
+});*/
 
 router.get('/byUser', function(req, res, next) {
   Order.find({ buyer : req.query.userId}, function(err, orderList)
@@ -74,13 +73,15 @@ router.get('/byUser', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 
-  newOrder = new Order({
-    products : JSON.parse(req.body.products),
+  console.log(req.body);
+  var newOrder = new Order({
+    products : req.body.products,
     payment : req.body.payment,
-    owner : req.body.owner,
-    market : req.body.market,
-    buyer  : req.body.buyer
+    buyer  : req.body.buyer,
+    total: req.body.total,
+    date: new Date()
   });
+  console.log(newOrder);
   newOrder.save(function(err) {
     if (err)
     {

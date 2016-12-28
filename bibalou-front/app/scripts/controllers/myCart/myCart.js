@@ -8,7 +8,7 @@
  * Controller of the BibalouApp
  */
 angular.module('BibalouApp')
-  .controller('MyCartCtrl', function ($scope, $location, CartManager) {
+  .controller('MyCartCtrl', function ($scope, $uibModal, $location, CartManager) {
 
     $scope.changeQuantity = function(product, quantity) {
       CartManager.editProduct(product._id, quantity);
@@ -21,7 +21,11 @@ angular.module('BibalouApp')
     };
 
     $scope.proceedOrder = function() {
-
+        var modalInstance = $uibModal.open({
+          templateUrl: 'views/order/proceedOrderModal.html',
+          controller: 'ProceedOrderModalCtrl',
+          size: 'lg'
+        });
     };
 
     $scope.clearAll = function() {

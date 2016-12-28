@@ -20,7 +20,6 @@ angular
     'ngTouch',
     'ui.router',
     'ui.bootstrap',
-    'flow',
     'toaster',
     'angularFileUpload',
     'selector',

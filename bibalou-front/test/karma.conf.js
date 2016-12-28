@@ -37,8 +37,6 @@ module.exports = function(config) {
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.js',
       'bower_components/angular-file-upload/dist/angular-file-upload.min.js',
-      'bower_components/flow.js/dist/flow.js',
-      'bower_components/ng-flow/dist/ng-flow.js',
       'bower_components/angular-selector/dist/angular-selector.js',
       'bower_components/moment/moment.js',
       'bower_components/angular-moment/angular-moment.js',

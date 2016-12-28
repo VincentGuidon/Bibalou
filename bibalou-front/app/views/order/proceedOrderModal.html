@@ -1,0 +1,31 @@
+<form name="editForm" role="form" novalidate>
+  <div class="modal-header">
+    <h2 class="modal-title" id="myOrderLabel">Order: Select payment</h2>
+  </div>
+  <div class="modal-body" style="display: flex">
+    <form name="selectPayment">
+      <table class="table" id="payments">
+        <tbody>
+        <tr data-ng-repeat="payment in payments">
+          <td class="payment">
+              <label for="payment"></label>
+              <input type="radio" id="payment" name="payment" data-ng-click="selectPayment(payment)">
+              <img class="img-responsive" src="{{payment.image}}"/>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-disabled="isBusy"
+            data-ng-click="quit()">
+      <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+    </button>
+    <button type="submit" formnovalidate data-ng-disabled="editForm.$invalid || isBusy" class="btn btn-primary"
+            data-ng-click="create()">
+      <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Create</span>
+    </button>
+  </div>
+</form>
