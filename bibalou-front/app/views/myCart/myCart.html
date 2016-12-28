@@ -12,10 +12,10 @@
                 <span style="font-size: 130%;">{{productContainer.product.name}}</span>
               </a>
               <span class="price"
-                    data-ng-if="productContainer.product.promotion.percent == 0 && productContainer.product.promotion.reduction == 0">{{productContainer.product.price | currency}}
+                    data-ng-if="productContainer.product.pomotion == null || (productContainer.product.promotion.percent == 0 && productContainer.product.promotion.reduction == 0)">{{productContainer.product.price | currency}}
               </span>
               <span class="price"
-                    data-ng-if="productContainer.product.promotion.percent != 0 || productContainer.product.promotion.reduction != 0">
+                    data-ng-if="productContainer.product.pomotion && (productContainer.product.promotion.percent != 0 || productContainer.product.promotion.reduction != 0)">
                 <del>{{productContainer.product.price | currency}}</del>
                 <ins>{{productContainer.product.price - productContainer.product.promotion.reduction
                   - productContainer.product.price * productContainer.product.promotion.percent /
