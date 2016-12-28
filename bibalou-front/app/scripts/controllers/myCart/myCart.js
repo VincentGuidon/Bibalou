@@ -35,7 +35,6 @@ angular.module('BibalouApp')
 
     $scope.init = function() {
       $scope.products = CartManager.getProducts();
-      console.log($scope.products);
     };
 
     $scope.getTotal = function() {

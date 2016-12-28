@@ -19,7 +19,6 @@ angular.module('BibalouApp')
     };
 
     $scope.doLogin = function () {
-      console.log("login: ", $scope.data.email, $scope.data.password);
       $scope.isBusy = true;
       RequestAPI.POST("/authenticate/auth", $scope.data,
         SubmitResult.submitSuccess(function (response) {

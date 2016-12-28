@@ -10,5 +10,4 @@
 angular.module('BibalouApp')
   .controller('ManageMpPromotionsCtrl', function () {
 
-    console.log("salut salut")
   });

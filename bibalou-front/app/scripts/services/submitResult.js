@@ -19,7 +19,7 @@ angular.module('BibalouApp')
       },
       submitSuccess: function(optionalTask, optionalMessage) {
         return function(response) {
-          console.log("Success:", response);
+          //console.log("Success:", response);
           if (!(optionalMessage == null)) {
             toaster.success({'body': (optionalMessage == "" ? "Done" : optionalMessage)});
           }
@@ -35,8 +35,7 @@ angular.module('BibalouApp')
       },
       submitFailure : function(optionalTask, optionalMessage) {
         return function(response) {
-          console.log("Fail:", response);
-
+          //console.log("Fail:", response);
           if (!(optionalTask == null)) {
             if ((typeof optionalTask === "function")) {
               optionalTask(response);

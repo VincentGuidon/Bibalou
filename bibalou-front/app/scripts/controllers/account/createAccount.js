@@ -13,7 +13,6 @@ angular.module('BibalouApp')
     $scope.isBusy = false;
 
     $scope.register = function () {
-      console.log("register", $scope.name, $scope.email, $scope.password);
       $scope.data = {
         name: $scope.name,
         email: $scope.email,

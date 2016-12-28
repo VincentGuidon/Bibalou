@@ -77,7 +77,7 @@ angular
         controller: 'EditMarketPlaceCtrl',
         controllerAs: 'editMarketPlace'
       })
-      .when('/marketPlace/:id', {
+      .when('/marketPlace/:name', {
         templateUrl: 'views/marketPlaces/marketPlace/marketPlace.html',
         controller: 'MarketPlaceCtrl',
         controllerAs: 'marketPlace'

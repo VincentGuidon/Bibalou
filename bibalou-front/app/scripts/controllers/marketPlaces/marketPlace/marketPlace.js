@@ -22,18 +22,16 @@ angular.module('BibalouApp')
         newNews.push(JSON.parse($scope.marketPlace.news[i]));
       }
       $scope.marketPlace.news = newNews;
-      console.log($scope.marketPlace.news);
     };
 
     $scope.init = function () {
-      console.log($routeParams)
-      RequestAPI.GET("/marketPlaces/byId", SubmitResult.submitSuccess(function (response) {
+      RequestAPI.GET("/marketPlaces/byName", SubmitResult.submitSuccess(function (response) {
           $scope.marketPlace = response.data.marketPlace;
           $scope.parseNews();
           $scope.busy = false;
         }),
         SubmitResult.submitFailure(function () {
-        }), {token: User.getToken(), id: $routeParams.id});
+        }), {token: User.getToken(), name: $routeParams.name});
     };
 
     $scope.init();

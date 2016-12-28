@@ -1,122 +1,127 @@
-<h3>{{product.title}} {{product.date}}</h3><br>
-<p>{{product.content}}</p>
-
-
-<div>
-  <div class="row">
-    <!-- Contenedor Principal -->
-    <div class="comments-container">
-      <h2>Comments</h2>
-
-      <ul id="comments-list" class="comments-list">
-        <li>
-          <div class="comment-main-level">
-            <!-- Avatar -->
-            <div class="comment-avatar"><img
-              src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
-            <!-- Contenedor del Comentario -->
-            <div class="comment-box">
-              <div class="comment-head">
-                <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
-                <span>hace 20 minutos</span>
-                <i class="fa fa-reply"></i>
-                <i class="fa fa-heart"></i>
-              </div>
-              <div class="comment-content">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae,
-                praesentium optio, sapiente distinctio illo?
-              </div>
-            </div>
-          </div>
-          <!-- Respuestas de los comentarios -->
-          <ul class="comments-list reply-list">
-            <li>
-              <!-- Avatar -->
-              <div class="comment-avatar"><img
-                src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg" alt=""></div>
-              <!-- Contenedor del Comentario -->
-              <div class="comment-box">
-                <div class="comment-head">
-                  <h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a></h6>
-                  <span>hace 10 minutos</span>
-                  <i class="fa fa-reply"></i>
-                  <i class="fa fa-heart"></i>
-                </div>
-                <div class="comment-content">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae,
-                  praesentium optio, sapiente distinctio illo?
-                </div>
-              </div>
-            </li>
-
-            <li>
-              <!-- Avatar -->
-              <div class="comment-avatar"><img
-                src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
-              <!-- Contenedor del Comentario -->
-              <div class="comment-box">
-                <div class="comment-head">
-                  <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
-                  <span>hace 10 minutos</span>
-                  <i class="fa fa-reply"></i>
-                  <i class="fa fa-heart"></i>
-                </div>
-                <div class="comment-content">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae,
-                  praesentium optio, sapiente distinctio illo?
-                </div>
-              </div>
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <div class="comment-main-level">
-            <!-- Avatar -->
-            <div class="comment-avatar"><img
-              src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg" alt=""></div>
-            <!-- Contenedor del Comentario -->
-            <div class="comment-box">
-              <div class="comment-head">
-                <h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a></h6>
-                <span>hace 10 minutos</span>
-                <i class="fa fa-reply"></i>
-                <i class="fa fa-heart"></i>
-              </div>
-              <div class="comment-content">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae,
-                praesentium optio, sapiente distinctio illo?
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <div class="col-md-12">
-        <div class="row">
-          <div data-ng-show="!isReplyingToProduct">
-            <button type="button" class="btn btn btn-info pull-right"
-                    data-ng-click="isReplyingToProduct = true">Reply
-            </button>
-          </div>
-
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="page-header">{{product.name}}</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-9">
+    <div class="row">
+      <div class="col-md-4">
+        <img
+          src="{{product.image}}"
+          alt="{{product.name}}" class="img-responsive"/>
+      </div>
+      <div class="col-md-8">
+        <div class="product-price">
+          <h4>
+          <span data-ng-if="!product.promotion || (product.promotion.percent == 0 && product.promotion.brut == 0)">{{product.price | currency}}</span>
+          <span data-ng-if="product.promotion && (product.promotion.percent != 0 || product.promotion.brut != 0)">
+              <del>{{product.price | currency}}</del>
+              <ins>{{product.price - product.promotion.brut - product.price * product.promotion.percent / 100 | currency}}</ins>
+              <span data-ng-if="product.promotion.brut != 0">-{{product.promotion.brut | currency}}</span>
+              <span data-ng-if="product.promotion.percent != 0">-{{product.promotion.percent}}%</span>
+            </span>
+          </h4>
         </div>
-        <div class="row" data-ng-if="isReplyingToProduct">
-          <div class="pull-right" style="width:70%">
-            <div style="position:relative;">
-            <textarea class="form-control" name="content" id="field_content"
-                      style="resize: vertical; margin-top: 10px; margin-bottom: 5px;"
-                      data-ng-model="comment.content"
-                      placeholder="content..."
-                      required></textarea>
-              <i class="fa fa-remove" style="position:absolute;top:10px;right:10px;color:#33333380" data-ng-click="closeReply()"></i>
-            </div>
+        <hr/>
 
-            <button type="button" class="btn btn btn-success pull-right"
-                    data-ng-click="sendReply()">Send message
-            </button>
+        <div class="col-md-4 hidden-xs hidden-sm">
+          <a href="#/marketPlace/{{product.marketPlace}}" title="{{product.marketPlace.name}}">
+            <img src="{{product.marketPlace.image}}" alt="{{product.marketPlace.name}}"
+                 class="img-responsive"/>
+          </a>
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-xs-8">
+              <span>Sold on : </span><a
+              href="#/marketPlace/{{product.marketPlace}}"
+              title="{{product.marketPlace.name}}">{{product.marketPlace.name}}</a>
+            </div>
+            <div class="col-xs-4 text-right">
+              <div class="rating pull-right">
+												<span class="stars hidden" title="{{product.marketPlace.rating}}">
+													{{product.marketPlace.rating}}
+												</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-8">
+              <span>Sold by : </span>
+              <span>{{product.marketPlace.owner.name}}</span>
+            </div>
+            <div class="col-xs-4 text-right">
+              <a href="mailto:{{product.marketPlace.owner.email}}" class="btn btn-sm btn-info">
+                <span class="glyphicon glyphicon-envelope"></span>
+                <span >Contact me</span></a>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <hr/>
+    <div class="row">
+      <div class="col-md-12">
+        <span>{{product.description}}</span>
+      </div>
+    </div>
   </div>
+  <div class="col-md-3">
+    <div class="well">
+      <!--<p class="lead">
+        <span translate="jwebApp.marketPlace.action.rating">Rating :</span>
+        <small>
+          <select name="myrating" id="myrating" data-ng-change="updateRating()" data-ng-model="myrating">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </small>
+      </p>-->
+      <div class="rating">
+        <span class="stars hidden" title="4">4</span>
+      </div>
+      </div>
+
+      <p class="lead">
+        <span>Stock :</span>
+        <br/>
+        {{product.stock}}
+      </p>
+
+      <form>
+        <div class="form-group">
+          <label for="quantity">Quantity :</label>
+          <input class="form-control" type="number" min="1" max="{{product.stock}}" step="1" value="1"
+                 name="quantity"
+                 data-ng-model="quantity"
+                 id="quantity"/>
+        </div>
+        <div class="form-group">
+          <div class="addToCart">
+            <button class="btn btn-primary" data-ng-click="addToCart(product, quantity)">
+              <span class="glyphicon glyphicon-plus-sign"></span> Add
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script type="text/javascript">
+    $.fn.stars = function () {
+      return $(this).each(function () {
+        $(this).html($('<span />').width(Math.max(0, (Math.min(5, parseFloat($(this).html())))) * 16));
+      });
+    };
+
+    $(function () {
+      window.setTimeout(function () {
+        $('span.stars').stars().removeClass('hidden');
+      }, 500);
+    });
+  </script>
+
 </div>

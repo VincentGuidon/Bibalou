@@ -22,11 +22,9 @@ angular.module('BibalouApp')
         newNews.push(JSON.parse($scope.marketPlace.news[i]));
       }
       $scope.marketPlace.news = newNews;
-      console.log($scope.marketPlace.news);
     };
 
     $scope.init = function () {
-      console.log("init");
       RequestAPI.GET("/marketPlaces/byOwner", SubmitResult.submitSuccess(function (response) {
           $scope.marketPlace = response.data.marketPlace;
           $scope.parseNews();

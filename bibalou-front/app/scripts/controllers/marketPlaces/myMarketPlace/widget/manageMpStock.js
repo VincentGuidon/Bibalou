@@ -48,15 +48,12 @@ angular.module('BibalouApp')
     };
 
     $scope.parseUnparsedProducts = function () {
-      console.log("salut", $scope.marketPlace)
       $scope.products = CloneUtilsCustom.cloneArray($scope.marketPlace.productList);
 
-      console.log($scope.products);
       parseByType();
       parseByStatus();
       parseByName();
       $scope.sortParsedProducts();
-      console.log("end", $scope.products);
     };
 
     function compareName(a, b) {
@@ -133,7 +130,6 @@ angular.module('BibalouApp')
     };
 
     $scope.loadParser = function () {
-      console.log("init types: ", $scope.types);
       $scope.types = [];
       $scope.type = "All";
       $scope.currentStatus = $scope.states[0];
@@ -174,7 +170,6 @@ angular.module('BibalouApp')
       }
       tempFilterText = val;
       filterTextTimeout = $timeout(function () {
-        console.log("check product search")
         if (!$scope.searchProduct) {
           return;
         }

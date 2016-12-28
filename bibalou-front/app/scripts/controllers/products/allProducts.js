@@ -154,7 +154,6 @@ angular.module('BibalouApp')
       RequestAPI.GET("/types", SubmitResult.submitSuccess(function (response) {
           $scope.types = response.data.types;
           $scope.types.splice(0, 0, "All");
-          console.log($scope.types);
         }),
         SubmitResult.submitFailure(), {token: User.getToken()});
     };

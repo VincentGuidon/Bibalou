@@ -50,9 +50,8 @@ angular.module('BibalouApp')
     };
 
     $scope.init = function () {
-      console.log(User.isConnected())
       if (!User.isConnected()) {
-        $location.path("/login")
+        $location.path("/login");
         return;
       }
       $scope.loadMarketPlaces();

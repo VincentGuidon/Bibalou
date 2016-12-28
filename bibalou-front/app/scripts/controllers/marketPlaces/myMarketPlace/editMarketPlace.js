@@ -23,13 +23,6 @@ angular.module('BibalouApp')
       {title: "Create your MarketPlace", btnCancel: {title: "Cancel", action: exit}, btnValid: {title: "Create", action: create}}
     ];
 
-    /** FLOW **/
-
-    $scope.successLoad = function($file, $message, $flow) {
-      console.log($file);
-      console.log($flow);
-    };
-
 
     /** TOOLS **/
 
