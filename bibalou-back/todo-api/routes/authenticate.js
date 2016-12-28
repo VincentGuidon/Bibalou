@@ -45,12 +45,22 @@ router.post('/auth', function(req, res, next) {
     else
     {
         var token = randomToken.genRandomToken(20, req.body.email, user[0]._id);
+      console.log("NEW RANDOM TOKEN: ", token)
         ret.success = true;
         ret.token = token;
         ret.id = user[0]._id;
         res.send(ret);
     }
   });
+});
+
+router.post('/disconnect', function(req, res, next) {
+
+  if (randomToken.removeToken(req.query.token)) {
+    res.send({success: true, message: 'User disconnect.', errcode: 10});
+  } else {
+    res.send({success: false, message: 'No user find.', errcode: 10});
+  }
 });
 
 module.exports = router;

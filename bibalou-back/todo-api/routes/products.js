@@ -68,11 +68,15 @@ router.delete('/', function (req, res, next) {
 });
 
 router.put('/', function (req, res, next) {
+    console.log(req.body);
+    console.log("****ID: ", req.body._id);
     Product.findByIdAndUpdate(req.body._id, req.body, function (err) {
         if (err) {
-            res.send({success: false, message: 'No product with that name', errcode: 4});
+            console.log("fail")
+            res.send({success: false, message: 'No product find', errcode: 4});
         }
         else {
+            console.log("success")
             res.send({success: true});
         }
     });

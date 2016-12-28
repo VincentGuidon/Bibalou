@@ -92,6 +92,11 @@ angular
         controller: 'MyDeliveriesCtrl',
         controllerAs: 'myDeliveries'
       })
+      .when('/myDeliveries/:id', {
+        templateUrl: 'views/myDeliveries/deliveryDetail.html',
+        controller: 'DeliveryDetailCtrl',
+        controllerAs: 'deliveryDetail'
+      })
       .otherwise({
         redirectTo: '/'
       });

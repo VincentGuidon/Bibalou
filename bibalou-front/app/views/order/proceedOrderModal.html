@@ -23,7 +23,7 @@
             data-ng-click="quit()">
       <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
     </button>
-    <button type="submit" formnovalidate data-ng-disabled="editForm.$invalid || isBusy" class="btn btn-primary"
+    <button type="submit" formnovalidate data-ng-disabled="editForm.$invalid || isBusy || !paymentSelected" class="btn btn-primary"
             data-ng-click="create()">
       <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Create</span>
     </button>

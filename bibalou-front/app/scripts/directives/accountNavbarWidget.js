@@ -14,7 +14,7 @@ angular.module('BibalouApp')
       controller: "AccountNavbarWidgetCtrl"
     }
   })
-  .controller('AccountNavbarWidgetCtrl', function ($scope, $location, User) {
+  .controller('AccountNavbarWidgetCtrl', function ($scope, $location, User, RequestAPI, SubmitResult) {
 
     $scope.userCtrl = User;
     $scope.myAccount = function() {
@@ -30,6 +30,13 @@ angular.module('BibalouApp')
     };
 
     $scope.disconnect = function() {
-      $scope.userCtrl.disconnect();
+      User.disconnect();/*
+      RequestAPI.POST("/authenticate/disconnect", {token: User.getToken()},
+      SubmitResult.submitSuccess(function (response) {
+        $location.path("/");
+      }, "Disconnected"),
+      SubmitResult.submitFailure(function (response) {
+        $scope.isBusy = false;
+      }, "Disconnexion Failed"));*/
     }
   });

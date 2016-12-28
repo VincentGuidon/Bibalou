@@ -1,0 +1,77 @@
+<div>
+  <div class="modal-header">
+    <div style="display: flex">
+      <h2>Order n°</h2>
+      <h3>{{order._id}}</h3>
+    </div>
+    <div style="display: flex; margin-top: 10px">
+      <h4>Payment: {{order.payment.name}}</h4>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="cartContainer">
+      <div data-ng-repeat="limit in [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30]">
+        <ul class="nav nav-pills nav-justified products">
+          <li data-ng-repeat="productContainer in order.products | limitTo:3:limit">
+            <div class="productContainer">
+              <h4>
+                <a href="#/product/{{product._id}}">
+                  <span style="font-size: 130%;">{{productContainer.product.name}}</span>
+                </a>
+                <span class="price"
+                      data-ng-if="!productContainer.product.pomotion || (productContainer.product.promotion.percent == 0 && productContainer.product.promotion.reduction == 0)">{{productContainer.product.price | currency}}
+              </span>
+                <span class="price"
+                      data-ng-if="productContainer.product.pomotion && (productContainer.product.promotion.percent != 0 || productContainer.product.promotion.reduction != 0)">
+                <del>{{productContainer.product.price | currency}}</del>
+                <ins>{{productContainer.product.price - productContainer.product.promotion.reduction
+                  - productContainer.product.price * productContainer.product.promotion.percent /
+                  100 | currency}}
+                </ins>
+                <br/>
+                <span data-ng-if="productContainer.product.promotion.reduction != 0">-{{productContainer.product.promotion.reduction | currency}}</span>
+                <span data-ng-if="productContainer.product.promotion.percent != 0">-{{productContainer.product.promotion.percent}}%</span>
+              </span>
+              </h4>
+
+              <img class="img-responsive" src="{{productContainer.product.image}}"/>
+              <hr/>
+
+              <div class="description">{{productContainer.product.description}}</div>
+
+              <hr/>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="field_quantity"></label>
+                  <input class="form-control" type="number" name="quantity" min="1"
+                         step="1"
+                         id="field_quantity"
+                         data-ng-model="productContainer.quantity"
+                         data-ng-change="changeQuantity(productContainer.product, productContainer.quantity)">
+                </div>
+                <div class="col-md-3">
+                  <button data-ng-click="removeProduct(productContainer.product)"
+                          class="btn btn-danger btn-sm">
+                    <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;
+                    <span>Delete</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <div class="total">
+      <h3>
+        <span class="pull-right">Total : {{order.total}} $</span>
+      </h3>
+    </div>
+    <br>
+    <br>
+  </div>
+</div>

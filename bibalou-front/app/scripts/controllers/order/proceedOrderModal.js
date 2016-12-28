@@ -10,6 +10,7 @@
 angular.module('BibalouApp')
   .controller('ProceedOrderModalCtrl', function ($scope, $uibModalInstance, $location, RequestAPI, SubmitResult, User, CartManager) {
 
+    $scope.paymentSelected = false;
     $scope.isBusy = false;
 
     $scope.order = {
@@ -20,6 +21,7 @@ angular.module('BibalouApp')
     };
 
     $scope.selectPayment = function (payment) {
+      $scope.paymentSelected = true;
       $scope.order.payment = payment.id;
     };
 
@@ -27,13 +29,33 @@ angular.module('BibalouApp')
       $uibModalInstance.dismiss('cancel');
     };
 
+    function removeQuantityFromProduct() {
+      var products = CartManager.getProducts();
+      var max = products.length;
+      var count = 0;
+
+      for (var i = 0; i < products.length; ++i) {
+        products[i].product.stock -= products[i].quantity;
+        var product = {_id: products[i].product._id, stock: products[i].product.stock};
+        RequestAPI.PUT("/products", product, SubmitResult.submitSuccess(function (response) {
+            count += 1;
+            if (count == max) {
+              $scope.isBusy = false;
+              CartManager.clear();
+              $scope.quit();
+              $location.path("/myDeliveries");
+            }
+          }),
+          SubmitResult.submitFailure(function (response) {
+            $scope.isBusy = false;
+          }, {token: User.getToken()}));
+      }
+    }
+
     $scope.create = function () {
       $scope.isBusy = true;
       RequestAPI.POST("/orders", $scope.order, SubmitResult.submitSuccess(function (response) {
-          $scope.isBusy = false;
-          CartManager.clear();
-          $scope.quit();
-          $location.path("/myDeliveries")
+          removeQuantityFromProduct();
         }, "Order created!"),
         SubmitResult.submitFailure(function () {
           $scope.isBusy = false;

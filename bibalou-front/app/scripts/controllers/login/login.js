@@ -26,8 +26,13 @@ angular.module('BibalouApp')
           $location.path("/");
           $scope.isBusy = false;
         }, "Connected"),
-        SubmitResult.submitFailure(function(response) {
+        SubmitResult.submitFailure(function (response) {
           $scope.isBusy = false;
         }, "Connexion Failed"));
     };
+
+    $scope.init = function () {
+    };
+
+    $scope.init();
   });
