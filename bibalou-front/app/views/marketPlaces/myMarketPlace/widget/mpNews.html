@@ -15,10 +15,12 @@
                 </button>
             </span>
       </div>
-      <div class="col-md-5">
-        <label for="name">Search: </label>
-        <input type="text" name="path" id="name"
-               value="" data-data-ng-model="searchNews">
+      <div class="col-md-3">
+        <div class="form-inline">
+          <label for="name">Search: </label>
+          <input type="text" name="path" id="name" class="form-control"
+                 value="" data-ng-model="searchNews">
+        </div>
       </div>
       <button type="submit"
               data-ng-click="addNews()"
@@ -41,10 +43,10 @@
       </tr>
       </thead>
       <tbody>
-      <tr data-ng-repeat="news in marketPlace.news track by news.id">
-        <td>{{news.date}}</td>
-        <td>{{news.title}}</td>
-        <td>{{news.content}}</td>
+      <tr data-ng-repeat="current in news track by $index">
+        <td>{{current.date}}</td>
+        <td>{{current.title}}</td>
+        <td>{{current.content}}</td>
         <!--
         <td>
           <button type="submit"

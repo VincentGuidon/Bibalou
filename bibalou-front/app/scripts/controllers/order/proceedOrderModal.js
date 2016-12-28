@@ -8,7 +8,7 @@
  * Controller of the BibalouApp
  */
 angular.module('BibalouApp')
-  .controller('ProceedOrderModalCtrl', function ($scope, moment, $uibModalInstance, RequestAPI, SubmitResult, User, CartManager) {
+  .controller('ProceedOrderModalCtrl', function ($scope, $uibModalInstance, $location, RequestAPI, SubmitResult, User, CartManager) {
 
     $scope.isBusy = false;
 
@@ -32,6 +32,7 @@ angular.module('BibalouApp')
       RequestAPI.POST("/orders", $scope.order, SubmitResult.submitSuccess(function (response) {
           $scope.isBusy = false;
           CartManager.clear();
+          $scope.quit();
           $location.path("/myDeliveries")
         }, "Order created!"),
         SubmitResult.submitFailure(function () {

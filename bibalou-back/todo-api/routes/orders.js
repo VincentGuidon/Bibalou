@@ -59,6 +59,7 @@ router.get('/byMarket', function(req, res, next) {
 });*/
 
 router.get('/byUser', function(req, res, next) {
+  console.log(req.query);
   Order.find({ buyer : req.query.userId}, function(err, orderList)
   {
     if (err)

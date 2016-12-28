@@ -25,7 +25,6 @@ angular.module('BibalouApp')
 
     var parseByTitle = function() {
       if ($scope.searchNews && $scope.searchNews != "") {
-        console.log("parse: ", $scope.searchNews);
         for (var i = 0; i < $scope.news.length; ++i) {
           if (!$scope.news[i].title.includes($scope.searchNews)) {
             $scope.news.splice(i, 1);
@@ -49,8 +48,6 @@ angular.module('BibalouApp')
 
     $scope.parseUnparsedNews = function () {
       $scope.news = CloneUtilsCustom.cloneArray($scope.marketPlace.news);
-      console.log($scope.news);
-
 
       parseByTitle();
       parseByDate();
@@ -129,7 +126,6 @@ angular.module('BibalouApp')
       }
       tempFilterText = val;
       filterTextTimeout = $timeout(function () {
-        console.log("toto");
         if (!$scope.searchNews) {
           return;
         }

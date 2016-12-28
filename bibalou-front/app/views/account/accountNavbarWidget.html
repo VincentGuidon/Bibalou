@@ -7,17 +7,24 @@
         <div class="row">
           <div class="col-md-12">
             <div class="form-group">
-              <button class="btn btn-primary btn-block btn-invisible" data-ng-click="myAccount()"><b>My Account</b></button>
+              <button class="btn btn-primary btn-block btn-invisible" data-ng-click="myAccount()">
+                <b>My Account</b>
+              </button>
             </div>
             <div class="form-group">
-              <button class="btn btn-primary btn-block btn-invisible" data-ng-click="myMarketPlace()"><b>My MarketPlace</b></button>
+              <button class="btn btn-primary btn-block btn-invisible" data-ng-click="myMarketPlace()">
+                <b>My MarketPlace</b>
+              </button>
             </div>
             <div class="form-group">
-              <button class="btn btn-primary btn-block btn-invisible" data-ng-click="myDeliveries()"><b>My Deliveries</b></button>
+              <button class="btn btn-primary btn-block btn-invisible navbarItem" data-ng-click="myDeliveries()">
+                <span class="glyphicon glyphicon-send"></span><b>My Deliveries</b>
+              </button>
             </div>
           </div>
           <div class="bottom text-center">
-            <a href="#/" data-ng-click="disconnect()"><b>Disconnect</b></a>
+            <a href="#/" data-ng-click="disconnect()" class="navbarItem"><span
+              class="glyphicon glyphicon-log-out"></span><b>Disconnect</b></a>
           </div>
         </div>
       </li>

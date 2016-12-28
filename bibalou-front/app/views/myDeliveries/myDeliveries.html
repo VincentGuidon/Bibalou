@@ -1,0 +1,57 @@
+<div>
+  <h2>My Deliveries</h2>
+
+  <div class="modal-header">
+    <div class="col-md-2">
+      <label class="sr-only" for="selectPayment"></label>
+      <select name="selectPayment" id="selectPayment" class="form-control"
+              data-ng-options="payment as payment.name for payment in payments"
+              data-ng-model="payment"
+              data-ng-change="parseUnparsedDeliveries()">
+      </select>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-inline">
+          <label for="name">Search: </label>
+          <input type="text" name="path" id="name" class="form-control"
+                 value="" data-ng-model="searchDelivery">
+        </div>
+    </div>
+  </div>
+
+  <div class="modal-body">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th class="col-md-4">Command Number</th>
+          <th class="col-md-2">Payment</th>
+          <th class="col-md-2">Total</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="delivery in deliveries track by $index">
+          <td>
+            {{delivery._id}}
+          </td>
+          <td>
+            {{delivery.payment.name}}
+          </td>
+          <td>
+            {{delivery.total | currency}}
+          </td>
+          <td>
+            <button type="submit"
+                    data-ng-click="detail(delivery)"
+                    class="btn btn-info btn-sm pull-right">
+              <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span>View</span>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
