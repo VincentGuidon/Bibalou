@@ -1,0 +1,35 @@
+This is the installation guide for the project Bibalou.
+
+#Install the Bibalou-Back
+
+cd bibalou-back/todo-api
+npm installationnpm install mongoose
+npm install -g node nodemon
+npm install base64url
+
+#Install the Bibalou-Front
+
+cd bibalou-front
+npm install
+npm install grunt
+npm install bower-cli
+npm install grunt-cli
+bower install
+
+#Install the DB
+
+Create a folder Data in Bibalou/Bibalou-Back
+"PathToOurMongo\MongoDB\Server\3.2\bin\mongod.exe" --dbpath PathToBibalou\Bibalou\bibalou-back\data\
+Open Mongochef or RoboMongo
+Create a new Connection - I use to call it Bibalou
+Then add the database call bibalou.
+
+#Launch the Application:
+
+##
+cd bibalou-back/todo-api
+nodemon app.js or node app.js
+
+##
+cd bibalou-front
+grunt serve
